@@ -1,0 +1,10 @@
+RootDirectory
+    -assets (this will mainly hold fonts, icons and other assets)
+    -Components (individual element for building a web page(e.g. a custom button))
+    -Constants (constants that will be repetitively used(e.g. a theme color))
+    -Data (Dummy data for testing, constant data that can be loaded, etc.)
+    -Doc (Documentations)
+    -Models (classes and other useful design)
+    -Navigation (Navigator for the whole system)
+    -screens (individual web pages)
+    -web-build (this shall be automatically created during build and can be ignored)

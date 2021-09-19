@@ -1,12 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import MainPage from './screens/MainPage';
+import { NavigationContainer } from '@react-navigation/native';
+import RootNavigator from './Navigation/RootNavigator';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <MainPage/>
+      <NavigationContainer>
+        <RootNavigator/>
+      </NavigationContainer>
     </View>
   );
 }

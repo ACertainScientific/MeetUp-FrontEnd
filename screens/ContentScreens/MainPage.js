@@ -9,7 +9,10 @@ import {
 import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
 
-const MainPage = (params) => {
+const MainPage = (param) => {
+
+
+
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -41,6 +44,7 @@ const MainPage = (params) => {
         };
     });
 
+
     const MainContent = () => {
         return (
             <View>
@@ -57,6 +61,9 @@ const MainPage = (params) => {
                         <Button
                             title="Another Button"
                             style={styles.btn}
+                            onPress={()=>{
+                                param.navigation.navigate("AnotherPage")
+                            }}
                         ></Button>
                     </View>
                 </View>
@@ -108,18 +115,26 @@ const MainPage = (params) => {
     };
 
     if (myWindowWidth >= 800) {
-        return <View style={{width:'800px'}}>{MainContent()}</View>;
+        return (
+            <View style={styles.container}>
+                <View style={{ width: '800px' }}>{MainContent()}</View>
+            </View>
+        );
     }
-    else{
-        return <View style={{width:myWindowWidth*0.9}}>{MainContent()}</View>;
+    else {
+        return (
+            <View style={styles.container}>
+                <View style={{ width: myWindowWidth * 0.9 }}>{MainContent()}</View>;
+            </View>
+        )
     }
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: "column",
-        justifyContent: "flex-start",
+        justifyContent: "center",
+        alignItems: "center"
     },
 
     toolbar: {
