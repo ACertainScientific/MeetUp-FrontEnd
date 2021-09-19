@@ -4,6 +4,10 @@ import SomeComponent from "../../Components/SomeComponents";
 
 
 const AnotherPage = param => {
+
+    let fetched_param = param.route.params.this_param
+    console.log(fetched_param)
+
     return (
         <View style={styles.centered}>
             <Button
@@ -14,6 +18,8 @@ const AnotherPage = param => {
             />
             <View style={{width:'500px', alignItems:"center"}}>
                 <Text>This is another Page</Text>
+                <Text>Info passed from last page:</Text>
+                <Text>{fetched_param}</Text>
             </View>
             
             <SomeComponent/>

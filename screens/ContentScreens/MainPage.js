@@ -51,7 +51,7 @@ const MainPage = (param) => {
                 {/* The tool bar at the very top */}
                 <View style={styles.toolbar}>
                     {/* Icon view, insert our logo here */}
-                    <View>
+                    <View style={styles.toolbarTitle}>
                         <Text>MeetUp</Text>
                     </View>
 
@@ -59,10 +59,11 @@ const MainPage = (param) => {
                     <View style={styles.btnpanel}>
                         <Button title="A Button" style={styles.btn}></Button>
                         <Button
-                            title="Another Button"
+                            title="GOTO Another Page"
                             style={styles.btn}
                             onPress={()=>{
-                                param.navigation.navigate("AnotherPage")
+                                param.navigation.
+                                navigate("AnotherPage",{this_param:"HI!"})
                             }}
                         ></Button>
                     </View>
@@ -144,12 +145,15 @@ const styles = StyleSheet.create({
         borderColor: "Black",
         justifyContent: "space-between",
     },
+    toolbarTitle:{
+        flex:2
+    },
     btnpanel: {
         flexDirection: "row",
         paddingTop: "10px",
         paddingBottom: "2px",
         justifyContent: "space-between",
-        width: "30%",
+        flex:1
     },
     btn: {
         height: "20px",
