@@ -15,18 +15,21 @@ const AutoResizableWindow = (param) => {
 
     // Resizing percentile, max width
     const resizing_fraction =
-        param.resizing_fraction !== undefined ? Number.parseFloat(param.resizing_fraction) : 0.9;
+        param.resizing_fraction !== undefined
+            ? Number.parseFloat(param.resizing_fraction)
+            : 0.9;
 
     const resizing_max_width =
-        param.resizing_max_width !== undefined ? Number.parseFloat(param.resizing_max_width) : 800;
+        param.resizing_max_width !== undefined
+            ? Number.parseFloat(param.resizing_max_width)
+            : 800;
 
     // Auto resizing
     useEffect(() => {
         const handleResize = () => {
-            console.log("resizing");
+            // console.log("resizing");
             setMyWindowWidth(Dimensions.get("window").width);
             setMyWindowHeight(Dimensions.get("window").height);
-            console.log("resizing");
         };
 
         Dimensions.addEventListener("change", handleResize);
@@ -36,15 +39,11 @@ const AutoResizableWindow = (param) => {
         };
     });
 
-    if (myWindowWidth >= resizing_max_width) {
+
+    if (myWindowWidth >= resizing_max_width / resizing_fraction) {
         return (
             <View style={styles.container}>
-                <View
-                    style={{
-                        width:
-                            "" + resizing_max_width / resizing_fraction + "px",
-                    }}
-                >
+                <View style={{ width: "" + resizing_max_width + "px" }}>
                     {param.children}
                 </View>
             </View>
@@ -55,7 +54,6 @@ const AutoResizableWindow = (param) => {
                 <View style={{ width: myWindowWidth * resizing_fraction }}>
                     {param.children}
                 </View>
-                ;
             </View>
         );
     }
