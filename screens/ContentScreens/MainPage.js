@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
+import AutoResizableWindow from "../../Components/AutoResizableWindow";
 
 const MainPage = (param) => {
 
@@ -115,20 +116,29 @@ const MainPage = (param) => {
         );
     };
 
-    if (myWindowWidth >= 800) {
-        return (
-            <View style={styles.container}>
-                <View style={{ width: '800px' }}>{MainContent()}</View>
-            </View>
-        );
-    }
-    else {
-        return (
-            <View style={styles.container}>
-                <View style={{ width: myWindowWidth * 0.9 }}>{MainContent()}</View>;
-            </View>
-        )
-    }
+    // if (myWindowWidth >= 889) {
+    //     return (
+    //         <View style={styles.container}>
+    //             <View style={{ width: '800px' }}>{MainContent()}</View>
+    //         </View>
+    //     );
+    // }
+    // else {
+    //     return (
+    //         <View style={styles.container}>
+    //             <View style={{ width: myWindowWidth * 0.9 }}>{MainContent()}</View>;
+    //         </View>
+    //     )
+    // }
+
+    return (
+        <AutoResizableWindow
+        resizing_max_width="800"
+        >
+            {MainContent()}
+        </AutoResizableWindow>
+    )
+
 };
 
 const styles = StyleSheet.create({
