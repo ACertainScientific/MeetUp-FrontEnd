@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
+import ImageButton from "../../Components/ImageButton";
 import SomeComponent from "../../Components/SomeComponents";
 
 
@@ -10,7 +11,7 @@ const AnotherPage = param => {
 
     return (
         <View style={styles.centered}>
-            <Button
+            {/* <Button
                 title="GoBack!"
                 onPress={() => {
                     param.navigation.goBack()
@@ -22,7 +23,9 @@ const AnotherPage = param => {
                 <Text>{fetched_param}</Text>
             </View>
             
-            <SomeComponent/>
+            <SomeComponent/> */}
+
+            <ImageButton/>
         </View>
     )
 }
