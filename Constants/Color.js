@@ -1,5 +1,5 @@
 const THEME_COLOR = {
-    main:"rgb(252, 28, 28)"
+    main:"#dc143c"
 }
 
 export default THEME_COLOR
