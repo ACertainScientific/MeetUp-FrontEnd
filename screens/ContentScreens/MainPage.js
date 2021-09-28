@@ -133,7 +133,7 @@ const MainPage = (param) => {
 
     return (
         <AutoResizableWindow
-        resizing_max_width="500"
+        resizing_max_width="800"
         >
             {MainContent()}
         </AutoResizableWindow>
