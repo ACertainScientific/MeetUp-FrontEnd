@@ -1,11 +1,18 @@
-import React from 'react';
-import { Text, View, StyleSheet, TouchableOpacity, Image, Alert, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, Image, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const ImageButton = () => {
   const navigation = useNavigation();
+  const [buttonTitle, setbuttonTitle] = useState('');
+  
   return (
     <View>
+      <TextInput style={styles.buttonText}
+        placeholder="Type here to Name the Button!"
+        onChangeText={buttonTitle => setbuttonTitle(buttonTitle)}
+        defaultValue={buttonTitle}
+      />
       <TouchableOpacity onPress={() => navigation.navigate("MainPage")}>
         <Image
           source={{
@@ -16,7 +23,7 @@ const ImageButton = () => {
         />
       </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("MainPage")}>
-        <Text style={styles.buttonText}>Click Me or the Image Above to Go Home</Text>
+        <Text style={styles.buttonText}>{buttonTitle}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -40,7 +47,8 @@ const styles = StyleSheet.create({
     borderRadius: 75
   },
   buttonText: {
-    fontFamily: "Cochin"
+    fontFamily: "Cochin",
+    padding: 10
   }
 })
 
