@@ -3,21 +3,22 @@ import {
     View,
     StyleSheet,
     Text,
-    Button,
     Dimensions,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
+import NavBar from "../../Components/NavBar";
 import AutoResizableWindow from "../../Components/AutoResizableWindow";
 
 const MainPage = (param) => {
-
-
 
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
         { label: "DCC308", value: "DCC308" },
+        { label: "DCC308", value: "DCC330" },
+        { label: "LOW4510", value: "LOW4510" },
+        { label: "SAGE3303", value: "SAGE3303" },
         { label: "SAGE3510", value: "SAGE3510" },
         { label: "WESTAUD", value: "WESTAUD" },
     ]);
@@ -50,30 +51,12 @@ const MainPage = (param) => {
         return (
             <View>
                 {/* The tool bar at the very top */}
-                <View style={styles.toolbar}>
-                    {/* Icon view, insert our logo here */}
-                    <View style={styles.toolbarTitle}>
-                        <Text>MeetUp</Text>
-                    </View>
-
-                    {/* Btn panel for the right hand side */}
-                    <View style={styles.btnpanel}>
-                        <Button title="A Button" style={styles.btn}></Button>
-                        <Button
-                            title="GOTO Another Page"
-                            style={styles.btn}
-                            onPress={()=>{
-                                param.navigation.
-                                navigate("AnotherPage",{this_param:"HI!"})
-                            }}
-                        ></Button>
-                    </View>
-                </View>
+                <NavBar navigation={param.navigation}></NavBar>
                 {/* End of the tool bar */}
 
                 {/* The slogan bar */}
                 <View style={styles.infoBar}>
-                    <Text>The info panel, enter some text here!</Text>
+                    <Text>Which room would you like to use today?</Text>
                 </View>
                 {/* End of the slogan bar */}
 
@@ -142,35 +125,46 @@ const MainPage = (param) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center"
-    },
-
     toolbar: {
         width: "100%",
         flexDirection: "row",
-        borderBottomWidth: 2,
-        borderColor: "Black",
+        borderBottomWidth: 3,
+        borderColor: "#dc143c",
         justifyContent: "space-between",
     },
     toolbarTitle:{
-        flex:2
+        flex: 5
     },
     btnpanel: {
         flexDirection: "row",
-        paddingTop: "10px",
-        paddingBottom: "2px",
+        paddingTop: "5px",
+        paddingBottom: "5px",
         justifyContent: "space-between",
-        flex:1
+        flex: 2
     },
     btn: {
         height: "20px",
         // width: "20px",
         margin: "10px",
         marginVertical: "10px",
-        marginHorizontal: "20px",
+        marginHorizontal: "20px"
+    },
+    titleTextMeet: {
+        color: '#808080',
+        fontSize: 35,
+        fontStyle: "italic",
+        fontWeight: "bold"
+    },
+    titleTextUp: {
+        color: '#dc143c',
+        fontSize: 35,
+        fontStyle: "italic",
+        fontWeight: "bold"
+    },
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
     },
     infoBar: {
         width: "100%",
@@ -184,6 +178,9 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: "gray",
     },
+    space: {
+        width: 10
+    }
 });
 
 export default MainPage;

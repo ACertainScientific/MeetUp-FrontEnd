@@ -3,6 +3,7 @@ import { Button, View, Text, StyleSheet } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import MainPage from "../screens/ContentScreens/MainPage";
 import AnotherPage from "../screens/ContentScreens/AnotherPage";
+import RegisterPage from "../screens/ContentScreens/RegisterPage";
 
 const ContentNavigator = param => {
     const ContantStack = createNativeStackNavigator()
@@ -23,6 +24,11 @@ const ContentNavigator = param => {
                 styles={styles.centered}
                 name="AnotherPage"
                 component={AnotherPage}          
+            />
+            <ContantStack.Screen
+                styles={styles.centered}
+                name="RegisterPage"
+                component={RegisterPage}          
             />
 
         </ContantStack.Navigator>
