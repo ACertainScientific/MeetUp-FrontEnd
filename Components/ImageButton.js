@@ -4,15 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 
 const ImageButton = () => {
   const navigation = useNavigation();
-  const [buttonTitle, setbuttonTitle] = useState('');
+  const [buttonTitle, setbuttonTitle] = useState('Click Me or the Image Above to Go Back!');
   
   return (
     <View>
-      <TextInput style={styles.buttonText}
-        placeholder="Type here to Name the Button!"
-        onChangeText={buttonTitle => setbuttonTitle(buttonTitle)}
-        defaultValue={buttonTitle}
-      />
       <TouchableOpacity onPress={() => navigation.navigate("MainPage")}>
         <Image
           source={{
@@ -22,6 +17,11 @@ const ImageButton = () => {
           style={styles.image}
         />
       </TouchableOpacity>
+      <TextInput style={styles.buttonText}
+        placeholder="Type here to Change the Name of the Button below!"
+        onChangeText={buttonTitle => setbuttonTitle(buttonTitle)}
+        defaultValue={buttonTitle}
+      />
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("MainPage")}>
         <Text style={styles.buttonText}>{buttonTitle}</Text>
       </TouchableOpacity>
@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontFamily: "Cochin",
-    padding: 10
+    padding: 10,
+    marginVertical: 12
   }
 })
 

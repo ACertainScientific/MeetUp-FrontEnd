@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import {
     View,
     StyleSheet,
@@ -9,6 +9,10 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
 import NavBar from "../../Components/NavBar";
 import AutoResizableWindow from "../../Components/AutoResizableWindow";
+
+import { useDispatch, useSelector } from "react-redux";
+import { RoomSanitized, RoomOccupied, RoomUnsanitized } from "../../redux_store/actions/roomStatus";
+import { Button } from "react-native";
 
 const MainPage = (param) => {
 
@@ -29,6 +33,23 @@ const MainPage = (param) => {
     const [myWindowHeight, setMyWindowHeight] = useState(
         Dimensions.get("window").height
     );
+
+    {/* Test Redux */}
+    // state.roomStatus from App.js 
+    const currentRoomStatus = useSelector(state=>state.roomStatus.room_status)
+
+    const dispatch = useDispatch()
+    const roomSanitizedHandler = useCallback(()=>{
+        dispatch(RoomSanitized())
+    }, [dispatch])
+
+    const roomOccupiedHandler = useCallback(()=>{
+        dispatch(RoomOccupied())
+    }, [dispatch])
+
+    const roomUnsanitizedHandler = useCallback(()=>{
+        dispatch(RoomUnsanitized())
+    }, [dispatch])
 
     // Auto resizing
     useEffect(() => {
@@ -57,6 +78,34 @@ const MainPage = (param) => {
                 {/* The slogan bar */}
                 <View style={styles.infoBar}>
                     <Text>Which room would you like to use today?</Text>
+                    {/* Test Redux */}
+                    <View style={{marginTop: 16}}>
+                        <Text style={{fontFamily: "Cochin", fontSize: 16}}>CURRENT ROOM STATUS: </Text>
+                        <View style={styles.roomStatusDisplay}> {currentRoomStatus} </View>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Button
+                        color='#FFD580'
+                        title="Click To Leave the Room"
+                        onPress={()=>{
+                            roomOccupiedHandler()
+                        }}
+                        />
+                        <Button 
+                        color='#FF2400'
+                        title="Click To Occupy the Room"
+                        onPress={()=>{
+                            roomSanitizedHandler()
+                        }}
+                        />
+                        <Button
+                        color='#AFE1AF'
+                        title="Click To Sanitize the Room"
+                        onPress={()=>{
+                            roomUnsanitizedHandler()
+                        }}
+                        />
+                    </View>
                 </View>
                 {/* End of the slogan bar */}
 
@@ -180,6 +229,19 @@ const styles = StyleSheet.create({
     },
     space: {
         width: 10
+    },
+    buttonContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    roomStatusDisplay: {
+        fontSize: 18, 
+        borderWidth: 1, 
+        borderRadius: 6,
+        paddingHorizontal: 12,
+        marginVertical: 12,
+        alignSelf: "center"
     }
 });
 
