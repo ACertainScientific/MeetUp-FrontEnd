@@ -15,31 +15,8 @@ const NavBar = param => {
             </View>
 
             {/* Btn panel for the right hand side */}
-
             <View style={styles.btnpanel}>
-                <Button
-                    color="grey"
-                    title="SIGN UP"
-                    style={styles.btn}
-                    onPress={()=>{
-                        param.navigation.
-                        navigate("RegisterPage",
-                            {this_param:"SIGN UP!"}
-                        )
-                    }}
-                ></Button>
-                {/*<View style={styles.space} />*/}
-                <Button
-                    color={THEME_COLOR.main}
-                    title="SIGN IN"
-                    style={styles.btn}
-                    onPress={()=>{
-                        param.navigation.
-                        navigate("AnotherPage",
-                            {this_param:"HI!"}
-                        )
-                    }}
-                ></Button>
+                {param.children}
             </View>
             
         </View>
@@ -51,7 +28,7 @@ const styles = StyleSheet.create({
         width: "100%",
         flexDirection: "row",
         borderBottomWidth: 3,
-        borderColor: "#dc143c",
+        borderColor: THEME_COLOR.main,
         justifyContent: "space-between",
     },
     toolbarTitle:{
@@ -72,13 +49,13 @@ const styles = StyleSheet.create({
         marginHorizontal: "20px"
     },
     titleTextMeet: {
-        color: '#808080',
+        color: THEME_COLOR.subcolor,
         fontSize: 35,
         fontStyle: "italic",
         fontWeight: "bold"
     },
     titleTextUp: {
-        color: '#dc143c',
+        color: THEME_COLOR.main,
         fontSize: 35,
         fontStyle: "italic",
         fontWeight: "bold"

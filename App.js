@@ -2,8 +2,9 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import RootNavigator from "./Navigation/RootNavigator";
-import { createStore, combineReducers } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
+import ReduxThunk from "redux-thunk"
 import loginStatusReducer from "./redux_store/reducers/loginStatus";
 
 
@@ -12,7 +13,7 @@ export default function App() {
         loginStatus: loginStatusReducer,
     });
 
-    const store = createStore(rootReducer);
+    const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
     return (
         <View style={styles.container}>

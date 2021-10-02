@@ -1,14 +1,14 @@
 import React from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
-import SomeComponent from "../../Components/SomeComponents";
+import SomeComponent from "../../Components/SampleComponents/SomeComponents";
 import NavBar from "../../Components/NavBar";
-import AutoResizableWindow from "../../Components/AutoResizableWindow";
+import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 
 
 const RegisterPage = param => {
 
     let fetched_param = param.route.params.this_param
-    console.log(fetched_param)
+    console.log(fetched_param)  
 
     const MainContent = () => {
         return (
