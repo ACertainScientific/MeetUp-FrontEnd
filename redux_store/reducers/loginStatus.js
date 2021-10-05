@@ -11,7 +11,8 @@ const loginStatusReducer = (state = initialState, action) => {
             return { ...state, logged_in: action.loginStatus };
 
         case FETCH_AND_UPDATE_LOGIN_STATUS:
-            return { ...state, logged_in: action.loginStatus };
+            return state
+            // return { ...state, logged_in: action.loginStatus };
 
         default:
             return state;
