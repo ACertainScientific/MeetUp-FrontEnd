@@ -1,9 +1,9 @@
 import React, { useCallback } from "react";
 import { Text, View, StyleSheet, Button, Alert } from "react-native";
-import SomeComponent from "../../Components/SomeComponents";
+import SomeComponent from "../../Components/SampleComponents/SomeComponents";
 import { useDispatch, useSelector } from "react-redux";
 import ImageButton from "../../Components/ImageButton";
-import CustomizedButton from "../../Components/CustomizedButton";
+import CustomizedButton from "../../Components/SampleComponents/CustomizedButton";
 import { toggleLoginStatus } from "../../redux_store/actions/loginStatus";
 
 const AnotherPage = param => {

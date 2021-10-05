@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, View, Text, StyleSheet } from "react-native";
-import THEME_COLOR from "../Constants/Color";
+import THEME_COLOR from "../../Constants/Color";
 
 const SomeComponent = param => {
     return (
