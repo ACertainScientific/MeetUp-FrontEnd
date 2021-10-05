@@ -6,13 +6,19 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import ReduxThunk from "redux-thunk";
 import loginStatusReducer from "./redux_store/reducers/loginStatus";
-
-const rootReducer = combineReducers({
-    loginStatus: loginStatusReducer,
-});
-const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+import roomStatusReducer from "./redux_store/reducers/roomStatus";
 
 export default function App() {
+    const rootReducer = combineReducers({
+        loginStatus: loginStatusReducer,
+        roomStatus: roomStatusReducer,
+    });
+
+    // Create a new Redux store with the `createStore` function,
+    // and use the `loginStatusReducer` and `roomStatusReducer` 
+    // for the update logic
+    const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
+  
     return (
         <View style={styles.container}>
             <Provider store={store}>

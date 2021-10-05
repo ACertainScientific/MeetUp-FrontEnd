@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { Text, View, StyleSheet, Button, Alert } from "react-native";
 import SomeComponent from "../../Components/SampleComponents/SomeComponents";
 import { useDispatch, useSelector } from "react-redux";
+import ImageButton from "../../Components/ImageButton";
 import CustomizedButton from "../../Components/SampleComponents/CustomizedButton";
 import { toggleLoginStatus } from "../../redux_store/actions/loginStatus";
 import { fetchLoginStatus } from "../../redux_store/actions/loginStatus";
@@ -24,7 +25,7 @@ const AnotherPage = param => {
 
     return (
         <View style={styles.centered}>
-            <Button
+            {/* <Button
                 title="GoBack!"
                 onPress={() => {
                     param.navigation.goBack()
@@ -39,7 +40,13 @@ const AnotherPage = param => {
                 <Text>CurrentLoginStatus: </Text>
                 <View>{currentLoginStatus}</View>
             </View>
-            
+            <SomeComponent/> */}
+
+            <ImageButton/>
+            <View>
+                <Text>CurrentLoginStatus: </Text>
+                <View>{currentLoginStatus}</View>
+            </View>
             <SomeComponent/>
             <Button
             title="ToggleLogin"
