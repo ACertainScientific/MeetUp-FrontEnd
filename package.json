@@ -10,9 +10,11 @@
   "dependencies": {
     "@react-navigation/native": "^6.0.2",
     "@react-navigation/native-stack": "^6.1.0",
+    "bootstrap": "^5.1.1",
     "expo": "~42.0.1",
     "expo-status-bar": "~1.0.4",
     "react": "16.13.1",
+    "react-bootstrap": "^2.0.0-rc.0",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
     "react-native-dropdown-picker": "^5.1.27",

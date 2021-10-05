@@ -87,7 +87,7 @@ const MainPage = (param) => {
                         title="SIGN IN"
                         style={styles.btn}
                         onPress={() => {
-                            param.navigation.navigate("AnotherPage", {
+                            param.navigation.navigate("SignInPage", {
                                 this_param: "HI!",
                             });
                         }}
@@ -244,13 +244,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         marginVertical: 12,
         alignSelf: "center"
-    },
-    btn: {
-        height: "20px",
-        // width: "20px",
-        margin: "10px",
-        marginVertical: "10px",
-        marginHorizontal: "20px"
     }
 });
 
