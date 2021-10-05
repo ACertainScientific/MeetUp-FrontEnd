@@ -50,7 +50,7 @@ const AutoResizableWindow = (param) => {
         );
     } else {
         return (
-            <View style={styles.container}>
+            <View style={{...param.style} ,styles.container}>
                 <View style={{ width: myWindowWidth * resizing_fraction }}>
                     {param.children}
                 </View>
