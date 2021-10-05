@@ -4,8 +4,10 @@ import SomeComponent from "../../Components/SampleComponents/SomeComponents";
 import { useDispatch, useSelector } from "react-redux";
 import CustomizedButton from "../../Components/SampleComponents/CustomizedButton";
 import { toggleLoginStatus } from "../../redux_store/actions/loginStatus";
+import { fetchLoginStatus } from "../../redux_store/actions/loginStatus";
 
 const AnotherPage = param => {
+
 
     let fetched_param = param.route.params.this_param
     console.log(fetched_param)
@@ -15,6 +17,10 @@ const AnotherPage = param => {
     const toggleLoginStatusHandler = useCallback(()=>{
         dispatch(toggleLoginStatus("Now Logged In"))
     }, [dispatch])
+
+    const fetchBuildingHandler = async () => {
+        await dispatch(fetchLoginStatus());
+    };
 
     return (
         <View style={styles.centered}>
@@ -45,6 +51,7 @@ const AnotherPage = param => {
                 title="SomeButton"
                 onPress={()=>{
                     console.log('pressed')
+                    fetchBuildingHandler()
                 }}
                 style={{backgroundColor:"red"}}
             />
