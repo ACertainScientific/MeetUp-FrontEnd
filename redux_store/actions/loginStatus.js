@@ -13,11 +13,14 @@ export const fetchLoginStatus = () => {
         try {
             console.log("Before response");
             const response = await fetch(
-                "http://us-or-cera-2.natfrp.cloud:23553/list_building?page=1&page_size=10&name=",
+                "http://us-or-cera-2.natfrp.cloud:23553/list-building?page=1&page-size=10&name=",
                 // DATABASE_GET_BUILDING_INFO_URL,
                 {
                     mode: "cors",
                     method: "GET",
+                    headers:{
+                        'Content-Type': 'application/json',
+                    }
                 }
             );
             console.log("After response");

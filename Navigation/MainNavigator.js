@@ -5,16 +5,18 @@ import MainPage from "../screens/ContentScreens/MainPage";
 import AnotherPage from "../screens/ContentScreens/AnotherPage";
 import RegisterPage from "../screens/ContentScreens/RegisterPage";
 import SignInPage from "../screens/ContentScreens/SignInPage";
+
 import ForgotPasswordPage from "../screens/ContentScreens/ForgotPasswordPage";
 
-const ContentNavigator = param => {
-    const ContantStack = createNativeStackNavigator()
+import RoomStatusPage from "../screens/ContentScreens/RoomStatusPage";
+
+const ContentNavigator = (param) => {
+    const ContantStack = createNativeStackNavigator();
 
     return (
         <ContantStack.Navigator
             screenOptions={{
                 headerShown: false,
-
             }}
         >
             <ContantStack.Screen
@@ -25,34 +27,38 @@ const ContentNavigator = param => {
             <ContantStack.Screen
                 styles={styles.centered}
                 name="AnotherPage"
-                component={AnotherPage}          
+                component={AnotherPage}
             />
             <ContantStack.Screen
                 styles={styles.centered}
                 name="RegisterPage"
-                component={RegisterPage}          
+                component={RegisterPage}
             />
             <ContantStack.Screen
                 styles={styles.centered}
                 name="SignInPage"
-                component={SignInPage}          
+                component={SignInPage}
             />
             <ContantStack.Screen
                 styles={styles.centered}
                 name="ForgotPasswordPage"
-                component={ForgotPasswordPage}          
+                component={ForgotPasswordPage}
+            />
+            <ContantStack.Screen
+                styles={styles.centered}
+                name="RoomStatusPage"
+                component={RoomStatusPage}
             />
         </ContantStack.Navigator>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     centered: {
         flex: 1,
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
     },
-})
+});
 
-
-export default ContentNavigator
+export default ContentNavigator;

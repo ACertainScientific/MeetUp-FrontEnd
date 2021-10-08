@@ -1,14 +1,21 @@
-import React, {useState, useEffect} from "react";
-import { Text, View, StyleSheet, Button, TextInput, TouchableOpacity, Dimensions } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+    Text,
+    View,
+    StyleSheet,
+    Button,
+    TextInput,
+    TouchableOpacity,
+    Dimensions,
+} from "react-native";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
+import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import THEME_COLOR from "../../Constants/Color";
 
-
-const SignInPage = param => {
-
-    let fetched_param = param.route.params.this_param
-    console.log(fetched_param) 
+const SignInPage = (param) => {
+    let fetched_param = param.route.params.this_param;
+    console.log(fetched_param);
 
     const [myWindowWidth, setMyWindowWidth] = useState(
         Dimensions.get("window").width
@@ -16,7 +23,7 @@ const SignInPage = param => {
     const [myWindowHeight, setMyWindowHeight] = useState(
         Dimensions.get("window").height
     );
-    
+
     // Auto resizing
     useEffect(() => {
         const handleResize = () => {
@@ -33,9 +40,8 @@ const SignInPage = param => {
         };
     });
 
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
     function validateForm() {
         return username.length > 0 && password.length > 0;
@@ -50,11 +56,12 @@ const SignInPage = param => {
             <View>
                 <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
                 <View style={styles.centered}>
-                    <Text style={{fontSize: 30}}>Please sign-in</Text>
+                    <Text style={{ fontSize: 30 }}>Please sign-in</Text>
                     <View>
-                        <TextInput style={styles.userInput}
+                        <TextInput
+                            style={styles.userInput}
                             placeholder="Username"
-                            onChangeText={username => setUsername(username)}
+                            onChangeText={(username) => setUsername(username)}
                             defaultValue={username}
                         />
                     </View>
@@ -67,41 +74,45 @@ const SignInPage = param => {
                         />
                     </View>
 
-                    <TouchableOpacity onPress={() => param.navigation.navigate("ForgotPasswordPage")}>
-                        <Text style={styles.forgot_button}>Forgot Password?</Text>
+                    <TouchableOpacity
+                        onPress={() =>
+                            param.navigation.navigate("ForgotPasswordPage")
+                        }
+                    >
+                        <Text style={styles.forgot_button}>
+                            Forgot Password?
+                        </Text>
                     </TouchableOpacity>
 
                     <View style={styles.backbtn}>
-                        <Button 
+                        <Button
                             title="GO"
                             color={THEME_COLOR.main}
                             onPress={() => {
-                                param.navigation.goBack()
+                                param.navigation.goBack();
                             }}
                         />
                     </View>
-                        
+
                     <View style={styles.backbtn}>
-                        <Button 
+                        <Button
                             title="BACK"
                             onPress={() => {
-                                param.navigation.goBack()
+                                param.navigation.goBack();
                             }}
                         />
                     </View>
                 </View>
             </View>
-        )
-    }
+        );
+    };
 
     return (
-        <AutoResizableWindow
-        resizing_max_width="800"
-        >
+        <AutoResizableWindow resizing_max_width="800">
             {MainContent()}
         </AutoResizableWindow>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     centered: {
@@ -117,17 +128,17 @@ const styles = StyleSheet.create({
         marginTop: 12,
         padding: 10,
         alignSelf: "center",
-        width: '150%'
+        width: "150%",
     },
     backbtn: {
         marginTop: 30,
-        width: '25%'
+        width: "25%",
     },
     forgot_button: {
         height: 30,
         marginTop: 12,
-        textDecorationLine: 'underline'
+        textDecorationLine: "underline",
     },
-})
+});
 
-export default SignInPage
+export default SignInPage;
