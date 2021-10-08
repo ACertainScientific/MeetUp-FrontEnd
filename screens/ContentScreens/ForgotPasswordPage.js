@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { Text, View, StyleSheet, Button, TextInput, TouchableOpacity } from "react-native";
-import NavBar from "../../Components/NavBar";
+import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import THEME_COLOR from "../../Constants/Color";
 
@@ -20,7 +20,7 @@ const ForgotPasswordPage = param => {
     const MainContent = () => {
         return (
             <View>
-                <NavBar navigation={param.navigation}></NavBar>
+                <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
                 <View style={styles.centered}>
                     <View>
                         <TextInput style={styles.userInput}
