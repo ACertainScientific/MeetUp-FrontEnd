@@ -32,14 +32,14 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     toolbarTitle:{
-        flex: 5
+        flex: 4
     },
     btnpanel: {
         flexDirection: "row",
         paddingTop: "5px",
         paddingBottom: "5px",
         justifyContent: "space-between",
-        flex: 2
+        flex: 1
     },
     btn: {
         height: "20px",
