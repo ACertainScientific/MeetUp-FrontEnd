@@ -8,7 +8,7 @@ import ImageButton from "../../Components/ImageButton";
 import CustomizedButton from "../../Components/SampleComponents/CustomizedButton";
 import { toggleLoginStatus, fetchLoginStatus } from "../../redux_store/actions/loginStatus";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
-import NavBar from "../../Components/NavBar";
+import MeetUpNavBar from "../../Components/MeetUpNavBar";
 
 const AnotherPage = param => {
 
@@ -54,7 +54,7 @@ const AnotherPage = param => {
     const MainContent = () => {
         return (
             <View>
-                <NavBar navigation={param.navigation}></NavBar>
+                <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
                 <View style={styles.centered}>
                 {/* <Button
                     title="GoBack!"

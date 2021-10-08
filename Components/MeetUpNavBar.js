@@ -3,7 +3,7 @@ import { Button, View, Text, StyleSheet } from "react-native";
 import THEME_COLOR from "../Constants/Color";
 import { useState } from "react";
 
-const NavBar = param => {
+const MeetUpNavBar = param => {
     const [shouldShow, setShouldShow] = useState(true);
     return (
         <View style={styles.toolbar}>
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default NavBar
+export default MeetUpNavBar

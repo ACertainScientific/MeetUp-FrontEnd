@@ -1,7 +1,7 @@
 import React, { useEffect, useCallback } from "react";
 import { Text, View, StyleSheet, Button, Dimensions } from "react-native";
 import SomeComponent from "../../Components/SampleComponents/SomeComponents";
-import NavBar from "../../Components/NavBar";
+import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import { useState } from "react";
 
@@ -37,7 +37,7 @@ const RegisterPage = param => {
     const MainContent = () => {
         return (
             <View>
-                <NavBar navigation={param.navigation}></NavBar>
+                <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
                 <View style={styles.centered}>
                 <Button
                     title="GoBack!"
