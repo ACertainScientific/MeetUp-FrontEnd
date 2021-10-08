@@ -43,7 +43,7 @@ const SignInPage = param => {
                         />
                     </View>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => param.navigation.navigate("ForgotPasswordPage")}>
                         <Text style={styles.forgot_button}>Forgot Password?</Text>
                     </TouchableOpacity>
 
@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
     forgot_button: {
         height: 30,
         marginTop: 12,
+        textDecorationLine: 'underline'
     },
 })
 
