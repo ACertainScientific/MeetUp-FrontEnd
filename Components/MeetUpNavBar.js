@@ -3,7 +3,7 @@ import { Button, View, Text, StyleSheet } from "react-native";
 import THEME_COLOR from "../Constants/Color";
 import { useState } from "react";
 
-const NavBar = param => {
+const MeetUpNavBar = param => {
     const [shouldShow, setShouldShow] = useState(true);
     return (
         <View style={styles.toolbar}>
@@ -32,14 +32,14 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
     },
     toolbarTitle:{
-        flex: 5
+        flex: 4
     },
     btnpanel: {
         flexDirection: "row",
         paddingTop: "5px",
         paddingBottom: "5px",
         justifyContent: "space-between",
-        flex: 2
+        flex: 1
     },
     btn: {
         height: "20px",
@@ -62,4 +62,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default NavBar
+export default MeetUpNavBar

@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
-import NavBar from "../../Components/NavBar";
+import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import THEME_COLOR from "../../Constants/Color";
 
@@ -71,7 +71,7 @@ const MainPage = (param) => {
         return (
             <View>
                 {/* The tool bar at the very top */}
-                <NavBar navigation={param.navigation}>
+                <MeetUpNavBar navigation={param.navigation}>
                     <Button
                         color={THEME_COLOR.subcolor}
                         title="SIGN UP"
@@ -92,7 +92,7 @@ const MainPage = (param) => {
                             });
                         }}
                     ></Button>
-                </NavBar>
+                </MeetUpNavBar>
                 {/* End of the tool bar */}
 
                 {/* The slogan bar */}
