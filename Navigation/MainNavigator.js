@@ -5,6 +5,7 @@ import MainPage from "../screens/ContentScreens/MainPage";
 import AnotherPage from "../screens/ContentScreens/AnotherPage";
 import RegisterPage from "../screens/ContentScreens/RegisterPage";
 import SignInPage from "../screens/ContentScreens/SignInPage";
+import ForgotPasswordPage from "../screens/ContentScreens/ForgotPasswordPage";
 
 const ContentNavigator = param => {
     const ContantStack = createNativeStackNavigator()
@@ -36,7 +37,11 @@ const ContentNavigator = param => {
                 name="SignInPage"
                 component={SignInPage}          
             />
-
+            <ContantStack.Screen
+                styles={styles.centered}
+                name="ForgotPasswordPage"
+                component={ForgotPasswordPage}          
+            />
         </ContantStack.Navigator>
     )
 }
