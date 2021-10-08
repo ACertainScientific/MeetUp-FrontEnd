@@ -8,7 +8,7 @@ import THEME_COLOR from "../../Constants/Color";
 const SignInPage = param => {
 
     let fetched_param = param.route.params.this_param
-    console.log(fetched_param)  
+    console.log(fetched_param) 
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -26,6 +26,7 @@ const SignInPage = param => {
             <View>
                 <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
                 <View style={styles.centered}>
+                    <Text style={{fontSize: 30}}>Please login</Text>
                     <View>
                         <TextInput style={styles.userInput}
                             placeholder="Username"
@@ -48,7 +49,7 @@ const SignInPage = param => {
 
                     <View style={styles.backbtn}>
                         <Button 
-                            title="GO!"
+                            title="GO"
                             color={THEME_COLOR.main}
                             onPress={() => {
                                 param.navigation.goBack()
@@ -58,7 +59,7 @@ const SignInPage = param => {
                         
                     <View style={styles.backbtn}>
                         <Button 
-                            title="GO Back!"
+                            title="BACK"
                             onPress={() => {
                                 param.navigation.goBack()
                             }}

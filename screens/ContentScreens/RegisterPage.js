@@ -40,12 +40,12 @@ const RegisterPage = param => {
                 <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
                 <View style={styles.centered}>
                 <Button
-                    title="GoBack!"
+                    title="BACK"
                     onPress={() => {
                         param.navigation.goBack()
                     }}
                 />
-                <View style={{width:'500px', alignItems:"center"}}>
+                <View style={{width:'800px', alignItems:"center"}}>
                     <Text>This is register page</Text>
                     <Text>Info passed from last page:</Text>
                     <Text>{fetched_param}</Text>
