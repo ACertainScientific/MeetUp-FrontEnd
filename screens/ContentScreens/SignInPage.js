@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { Text, View, StyleSheet, Button, TextInput, TouchableOpacity } from "react-native";
+import React, {useState, useEffect} from "react";
+import { Text, View, StyleSheet, Button, TextInput, TouchableOpacity, Dimensions } from "react-native";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import THEME_COLOR from "../../Constants/Color";
@@ -8,7 +8,31 @@ import THEME_COLOR from "../../Constants/Color";
 const SignInPage = param => {
 
     let fetched_param = param.route.params.this_param
-    console.log(fetched_param)  
+    console.log(fetched_param) 
+
+    const [myWindowWidth, setMyWindowWidth] = useState(
+        Dimensions.get("window").width
+    );
+    const [myWindowHeight, setMyWindowHeight] = useState(
+        Dimensions.get("window").height
+    );
+    
+    // Auto resizing
+    useEffect(() => {
+        const handleResize = () => {
+            console.log("resizing");
+            setMyWindowWidth(Dimensions.get("window").width);
+            setMyWindowHeight(Dimensions.get("window").height);
+            console.log("resizing");
+        };
+
+        Dimensions.addEventListener("change", handleResize);
+
+        return () => {
+            Dimensions.removeEventListener("change", handleResize);
+        };
+    });
+
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -26,6 +50,7 @@ const SignInPage = param => {
             <View>
                 <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
                 <View style={styles.centered}>
+                    <Text style={{fontSize: 30}}>Please sign-in</Text>
                     <View>
                         <TextInput style={styles.userInput}
                             placeholder="Username"
@@ -48,7 +73,7 @@ const SignInPage = param => {
 
                     <View style={styles.backbtn}>
                         <Button 
-                            title="GO!"
+                            title="GO"
                             color={THEME_COLOR.main}
                             onPress={() => {
                                 param.navigation.goBack()
@@ -58,7 +83,7 @@ const SignInPage = param => {
                         
                     <View style={styles.backbtn}>
                         <Button 
-                            title="GO Back!"
+                            title="BACK"
                             onPress={() => {
                                 param.navigation.goBack()
                             }}
