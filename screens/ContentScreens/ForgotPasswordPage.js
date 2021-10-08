@@ -5,16 +5,12 @@ import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindo
 import THEME_COLOR from "../../Constants/Color";
 
 
-const SignInPage = param => {
+const ForgotPasswordPage = param => {
 
-    let fetched_param = param.route.params.this_param
-    console.log(fetched_param)  
-
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
 
     function validateForm() {
-        return username.length > 0 && password.length > 0;
+        return email.length > 0;
     }
 
     function handleSubmit(event) {
@@ -28,37 +24,16 @@ const SignInPage = param => {
                 <View style={styles.centered}>
                     <View>
                         <TextInput style={styles.userInput}
-                            placeholder="Username"
-                            onChangeText={username => setUsername(username)}
-                            defaultValue={username}
+                            placeholder="Email"
+                            onChangeText={email => setEmail(email)}
+                            defaultValue={email}
                         />
                     </View>
-                    <View>
-                        <TextInput
-                            style={styles.userInput}
-                            placeholder="Password"
-                            secureTextEntry={true}
-                            onChangeText={(password) => setPassword(password)}
-                        />
-                    </View>
-
-                    <TouchableOpacity onPress={() => param.navigation.navigate("ForgotPasswordPage")}>
-                        <Text style={styles.forgot_button}>Forgot Password?</Text>
-                    </TouchableOpacity>
 
                     <View style={styles.backbtn}>
                         <Button 
-                            title="GO!"
+                            title="Send Temporary Password via Email"
                             color={THEME_COLOR.main}
-                            onPress={() => {
-                                param.navigation.goBack()
-                            }}
-                        />
-                    </View>
-                        
-                    <View style={styles.backbtn}>
-                        <Button 
-                            title="GO Back!"
                             onPress={() => {
                                 param.navigation.goBack()
                             }}
@@ -95,14 +70,8 @@ const styles = StyleSheet.create({
         width: '150%'
     },
     backbtn: {
-        marginTop: 30,
-        width: '25%'
-    },
-    forgot_button: {
-        height: 30,
-        marginTop: 12,
-        textDecorationLine: 'underline'
+        marginTop: 30
     },
 })
 
-export default SignInPage
+export default ForgotPasswordPage
