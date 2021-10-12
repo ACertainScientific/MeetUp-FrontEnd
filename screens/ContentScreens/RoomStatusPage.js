@@ -8,7 +8,9 @@ import THEME_COLOR from "../../Constants/Color";
 const RoomStatusPage = (param) => {
     return (
         <AutoResizableWindow>
-            <MeetUpNavBar navigation={param.navigation}>
+            <MeetUpNavBar navigation={param.navigation} navigateTo={() => {
+                param.navigation.navigate("MainPage")
+            }}>
                 <Button
                     color={THEME_COLOR.subcolor}
                     title="SIGN UP"
