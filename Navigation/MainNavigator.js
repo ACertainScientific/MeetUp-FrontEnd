@@ -5,9 +5,7 @@ import MainPage from "../screens/ContentScreens/MainPage";
 import AnotherPage from "../screens/ContentScreens/AnotherPage";
 import RegisterPage from "../screens/ContentScreens/RegisterPage";
 import SignInPage from "../screens/ContentScreens/SignInPage";
-
 import ForgotPasswordPage from "../screens/ContentScreens/ForgotPasswordPage";
-
 import RoomStatusPage from "../screens/ContentScreens/RoomStatusPage";
 
 const ContentNavigator = (param) => {

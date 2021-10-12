@@ -1,26 +1,36 @@
 import React, { useEffect, useCallback, useState } from "react";
-import { Text, View, StyleSheet, Button, Alert, Dimensions } from "react-native";
+import {
+    Text,
+    View,
+    StyleSheet,
+    Button,
+    Alert,
+    Dimensions,
+} from "react-native";
 
 import { useDispatch, useSelector } from "react-redux";
 
 import SomeComponent from "../../Components/SampleComponents/SomeComponents";
 import ImageButton from "../../Components/ImageButton";
 import CustomizedButton from "../../Components/SampleComponents/CustomizedButton";
-import { toggleLoginStatus, fetchLoginStatus } from "../../redux_store/actions/loginStatus";
+import {
+    toggleLoginStatus,
+    fetchLoginStatus,
+} from "../../redux_store/actions/loginStatus";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
 
-const AnotherPage = param => {
+const AnotherPage = (param) => {
+    let fetched_param = param.route.params.this_param;
+    console.log(fetched_param);
+    const currentLoginStatus = useSelector(
+        (state) => state.loginStatus.logged_in
+    );
 
-
-    let fetched_param = param.route.params.this_param
-    console.log(fetched_param)
-    const currentLoginStatus = useSelector(state=>state.loginStatus.logged_in)
-    
-    const dispatch = useDispatch()
-    const toggleLoginStatusHandler = useCallback(()=>{
-        dispatch(toggleLoginStatus("Now Logged In"))
-    }, [dispatch])
+    const dispatch = useDispatch();
+    const toggleLoginStatusHandler = useCallback(() => {
+        dispatch(toggleLoginStatus("Now Logged In"));
+    }, [dispatch]);
 
     const fetchBuildingHandler = async () => {
         await dispatch(fetchLoginStatus());
@@ -49,14 +59,12 @@ const AnotherPage = param => {
         };
     });
 
-
-
     const MainContent = () => {
         return (
             <View>
                 <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
                 <View style={styles.centered}>
-                {/* <Button
+                    {/* <Button
                     title="GoBack!"
                     onPress={() => {
                         param.navigation.goBack()
@@ -72,39 +80,37 @@ const AnotherPage = param => {
                     <View>{currentLoginStatus}</View>
                 </View>
                 <SomeComponent/> */}
-    
-                <ImageButton/>
-                <View>
-                    <Text>CurrentLoginStatus: </Text>
-                    <View>{currentLoginStatus}</View>
-                </View>
-                <SomeComponent/>
-                <Button
-                title="ToggleLogin"
-                onPress={()=>{
-                    toggleLoginStatusHandler()
-                }}
-                />
-                <CustomizedButton
-                    title="SomeButton"
-                    onPress={()=>{
-                        console.log('pressed')
-                        fetchBuildingHandler()
-                    }}
-                    style={{backgroundColor:"red"}}
-                />
+
+                    <ImageButton />
+                    <View>
+                        <Text>CurrentLoginStatus: </Text>
+                        <View>{currentLoginStatus}</View>
+                    </View>
+                    <SomeComponent />
+                    <Button
+                        title="ToggleLogin"
+                        onPress={() => {
+                            toggleLoginStatusHandler();
+                        }}
+                    />
+                    <CustomizedButton
+                        title="SomeButton"
+                        onPress={() => {
+                            console.log("pressed");
+                            fetchBuildingHandler();
+                        }}
+                        style={{ backgroundColor: "red" }}
+                    />
                 </View>
             </View>
-            
-        )
+        );
     };
     return (
         <AutoResizableWindow resizing_max_width="800">
             {MainContent()}
         </AutoResizableWindow>
     );
-    
-}
+};
 
 const styles = StyleSheet.create({
     centered: {
@@ -112,6 +118,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-})
+});
 
-export default AnotherPage
+export default AnotherPage;
