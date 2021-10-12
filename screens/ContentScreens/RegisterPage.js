@@ -54,7 +54,9 @@ const RegisterPage = param => {
     const MainContent = () => {
         return (
             <View>
-                <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
+                <MeetUpNavBar navigation={param.navigation} navigateTo={() => {
+                    param.navigation.navigate("MainPage")
+                }}></MeetUpNavBar>
                 
                 <View
                 style = {{

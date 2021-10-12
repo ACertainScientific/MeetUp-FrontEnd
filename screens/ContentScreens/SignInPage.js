@@ -54,7 +54,9 @@ const SignInPage = (param) => {
     const MainContent = () => {
         return (
             <View>
-                <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
+                <MeetUpNavBar navigation={param.navigation} navigateTo={() => {
+                param.navigation.navigate("MainPage")
+                }}></MeetUpNavBar>
                 <View style = {{
                     marginTop: "20px",
                     paddingBottom: "20px"

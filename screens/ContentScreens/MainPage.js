@@ -73,7 +73,9 @@ const MainPage = (param) => {
         return (
             <View>
                 {/* The tool bar at the very top */}
-                <MeetUpNavBar navigation={param.navigation}>
+                <MeetUpNavBar navigation={param.navigation} navigateTo={() => {
+                    param.navigation.navigate("MainPage")
+                }}>
                     <Button
                         color={THEME_COLOR.subcolor}
                         title="AnotherPage"
