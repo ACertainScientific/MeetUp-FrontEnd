@@ -84,16 +84,7 @@ const MainPage = (param) => {
                             });
                         }}
                     ></Button>
-                    <Button
-                        color={THEME_COLOR.subcolor}
-                        title="SIGN UP"
-                        style={styles.btn}
-                        onPress={() => {
-                            param.navigation.navigate("RegisterPage", {
-                                this_param: "SIGN UP!",
-                            });
-                        }}
-                    ></Button>
+                    
                     <Button
                         color={THEME_COLOR.main}
                         title="SIGN IN"
