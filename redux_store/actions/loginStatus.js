@@ -1,6 +1,7 @@
 export const TOGGLE_LOGIN_STATUS = "TOGGLE_LOGIN_STATUS";
 export const FETCH_AND_UPDATE_LOGIN_STATUS = "FETCH_AND_UPDATE_LOGIN_STATUS";
-import DATABASE_GET_BUILDING_INFO_URL from "../../Constants/DatabaseConfig";
+import DATABASE_GET_BUILDING_INFO_URL, { DATABASE_GET_BUILDING_INFO_URL_GENERATOR } from "../../Constants/DatabaseConfig";
+
 
 export const toggleLoginStatus = (input_str) => {
     return { type: TOGGLE_LOGIN_STATUS, loginStatus: input_str };
@@ -12,10 +13,15 @@ export const fetchLoginStatus = () => {
         // any async code you want!
         try {
             console.log("Before response");
+
+            let defaultPageSize = 10
+            let defaultPageNum =1
+
             const response = await fetch(
-                "http://us-or-cera-2.natfrp.cloud:23553/list-building?page=1&page-size=10&name=",
+                DATABASE_GET_BUILDING_INFO_URL_GENERATOR()
+                // `http://us-la-cn2-1.natfrp.cloud:23553/list-building?page=${defaultPageNum}&page-size=${defaultPageSize}&name=`,
                 // DATABASE_GET_BUILDING_INFO_URL,
-                {
+                ,{
                     mode: "cors",
                     method: "GET",
                     headers:{
