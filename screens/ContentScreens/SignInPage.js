@@ -84,6 +84,18 @@ const SignInPage = (param) => {
                         </Text>
                     </TouchableOpacity>
 
+                    <TouchableOpacity
+                        onPress={() =>
+                            param.navigation.navigate("RegisterPage", {
+                                this_param: "Sign Up!",
+                            })
+                        }
+                    >
+                        <Text style={styles.forgot_button}>
+                            Not registered yet?
+                        </Text>
+                    </TouchableOpacity>
+
                     <View style={styles.backbtn}>
                         <Button
                             title="GO"
