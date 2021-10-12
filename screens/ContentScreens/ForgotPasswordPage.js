@@ -20,7 +20,9 @@ const ForgotPasswordPage = param => {
     const MainContent = () => {
         return (
             <View>
-                <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
+                <MeetUpNavBar navigation={param.navigation} navigateTo={() => {
+                    param.navigation.navigate("MainPage")
+                }}></MeetUpNavBar>
                 <View style={styles.centered}>
                     <View>
                         <TextInput style={styles.userInput}

@@ -54,8 +54,14 @@ const SignInPage = (param) => {
     const MainContent = () => {
         return (
             <View>
-                <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
-                <View style={styles.centered}>
+                <MeetUpNavBar navigation={param.navigation} navigateTo={() => {
+                param.navigation.navigate("MainPage")
+                }}></MeetUpNavBar>
+                <View style = {{
+                    marginTop: "20px",
+                    paddingBottom: "20px"
+                }}>
+                    <ElevatedCard>
                     <Text style={{ fontSize: 30 }}>Please sign-in</Text>
                     <View>
                         <TextInput
@@ -75,6 +81,9 @@ const SignInPage = (param) => {
                     </View>
 
                     <TouchableOpacity
+                        style={{
+                            marginTop: "30px"
+                        }}
                         onPress={() =>
                             param.navigation.navigate("ForgotPasswordPage")
                         }
@@ -105,7 +114,6 @@ const SignInPage = (param) => {
                             }}
                         />
                     </View>
-
                     <View style={styles.backbtn}>
                         <Button
                             title="BACK"
@@ -114,6 +122,8 @@ const SignInPage = (param) => {
                             }}
                         />
                     </View>
+                    </ElevatedCard>
+                    
                 </View>
             </View>
         );
@@ -143,7 +153,7 @@ const styles = StyleSheet.create({
         width: "150%",
     },
     backbtn: {
-        marginTop: 30,
+        marginTop: 12,
         width: "25%",
     },
     forgot_button: {
