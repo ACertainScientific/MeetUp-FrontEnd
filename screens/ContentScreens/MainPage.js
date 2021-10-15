@@ -81,7 +81,7 @@ const MainPage = (param) => {
                         title="AnotherPage"
                         style={styles.btn}
                         onPress={() => {
-                            param.navigation.navigate("RoomStatusPage", {
+                            param.navigation.navigate("AnotherPage", {
                                 this_param: "AnotherPage",
                             });
                         }}
