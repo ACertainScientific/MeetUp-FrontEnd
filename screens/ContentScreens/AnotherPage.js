@@ -19,6 +19,8 @@ import {
 } from "../../redux_store/actions/loginStatus";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
+import GeneralDBHelper from "../../Models/DatabaseRelated/GeneralDBHelper";
+import BuildingDBHandler from "../../Models/DatabaseRelated/BuildingDBHandler";
 
 const AnotherPage = (param) => {
     let fetched_param = param.route.params.this_param;
@@ -101,6 +103,13 @@ const AnotherPage = (param) => {
                         }}
                         style={{ backgroundColor: "red" }}
                     />
+                    <Button title="CheckDBACtion"
+                    onPress={()=>{
+                        console.log("DB")
+                        // console.log(GeneralDBHelper.GET_REQUEST())
+                        console.log(BuildingDBHandler.get_all_building())
+                    }}
+                    ></Button>
                 </View>
             </View>
         );
