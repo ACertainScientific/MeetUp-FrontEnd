@@ -107,7 +107,7 @@ const AnotherPage = (param) => {
                     onPress={()=>{
                         console.log("DB")
                         // console.log(GeneralDBHelper.GET_REQUEST())
-                        console.log(BuildingDBHandler.get_all_building())
+                        console.log(BuildingDBHandler.list_all_buildings_like('d',"WanNeng"))
                     }}
                     ></Button>
                 </View>

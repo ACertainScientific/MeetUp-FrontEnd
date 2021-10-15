@@ -1,5 +1,5 @@
 class GeneralDBHelper {
-    static async GET_REQUEST(url = "", data = {}, authToken = "WanNeng") {
+    static async GET_REQUEST(url = "", authToken = "WanNeng") {
         // Default options are marked with *
         try {
             const response = await fetch(

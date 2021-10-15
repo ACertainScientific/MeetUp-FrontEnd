@@ -1,16 +1,22 @@
-import { DATABASE_GET_LIST_ALL_BUILDINGS } from "../../Constants/DatabaseConfig";
+import {
+    DATABASE_GET_LIST_ALL_BUILDINGS,
+} from "../../Constants/DatabaseConfig";
 import GeneralDBHelper from "./GeneralDBHelper";
 
 class BuildingDBHandler {
-    constructor() {
-      
+    constructor() {}
+    static async list_all_buildings(authToken = "WanNeng") {
+        return GeneralDBHelper.GET_REQUEST(
+            DATABASE_GET_LIST_ALL_BUILDINGS,
+            authToken
+        );
     }
-    static async get_all_building(){
-      return GeneralDBHelper.GET_REQUEST(DATABASE_GET_LIST_ALL_BUILDINGS)
+    static async list_all_buildings_like(pattern, authToken = "WanNeng") {
+        return GeneralDBHelper.GET_REQUEST(
+          DATABASE_GET_LIST_ALL_BUILDINGS + pattern,
+            authToken
+        );
     }
-    
-    
-  }
-  
-  export default BuildingDBHandler;
- 
+}
+
+export default BuildingDBHandler;
