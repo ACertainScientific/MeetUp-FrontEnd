@@ -1,3 +1,13 @@
+// https://koprowski.it/react-native-form-validation-with-react-hook-form-usecontroller/
+
+/*
+    *** Please run
+            npm install --save styled-components
+            npm install react-hook-form
+            npm install --save prop-types
+        before expo
+ */
+
 import React, { useState, useEffect } from "react";
 import {
     Text,
@@ -9,9 +19,16 @@ import {
     Dimensions,
 } from "react-native";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
-import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import THEME_COLOR from "../../Constants/Color";
+
+import { FormProvider, useForm } from 'react-hook-form'
+import styled from 'styled-components/native'
+import { FormInput } from '../../Components/SignInHelpers/FormInput'
+
+const Wrapper = styled.View`
+  padding: 5px;
+`
 
 const SignInPage = (param) => {
     let fetched_param = param.route.params.this_param;
@@ -40,15 +57,22 @@ const SignInPage = (param) => {
         };
     });
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
+    // const [username, setUsername] = useState("");
+    // const [password, setPassword] = useState("");
 
-    function validateForm() {
-        return username.length > 0 && password.length > 0;
+    const LOGIN_FIELDS = {
+        username: "username",
+        password: 'password',
+    };
+      
+    const formMethods = useForm()
+
+    const onSubmit = (form) => {
+      console.log(form)
     }
-
-    function handleSubmit(event) {
-        event.preventDefault();
+  
+    const onErrors = (errors) => {
+      console.warn(errors)
     }
 
     const MainContent = () => {
@@ -56,55 +80,76 @@ const SignInPage = (param) => {
             <View>
                 <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
                 <View style={styles.centered}>
-                    <Text style={{ fontSize: 30 }}>Please sign-in</Text>
-                    <View>
+                    <Text style={{ fontFamily: "Cochin", fontSize: 22 }}>Let's Sign In!</Text>
+                    <Wrapper style={styles.centered}> 
+                        <FormProvider {...formMethods}>
+                            <FormInput
+                                name={LOGIN_FIELDS.username}
+                                rules={{ 
+                                    required: 'Username can NOT be empty!',
+                                    minLength: {
+                                        message: 'Use at least 3 characters.',
+                                        value: 3,
+                                        },
+                                }}
+                                placeholder="Username"
+                            />
+                            <FormInput
+                                name={LOGIN_FIELDS.password}
+                                rules={{
+                                    required: 'Password can NOT be empty!',
+                                    minLength: {
+                                    message: 'Use at least 8 characters.',
+                                    value: 8,
+                                    },
+                                }}
+                                placeholder="Password"
+                            />
+                        </FormProvider>
+                        <TouchableOpacity onPress={() =>
+                                param.navigation.navigate("ForgotPasswordPage")
+                            }>
+                            <Text style={styles.forgot_button}>
+                                Forgot Password?
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={() =>
+                                param.navigation.navigate("RegisterPage", {
+                                    this_param: "Sign Up!",
+                                })
+                            }>
+                            <Text style={styles.forgot_button}>
+                                Not Registered Yet?
+                            </Text>
+                        </TouchableOpacity>
+                        {/* <Button
+                            title='Login'
+                            onPress={formMethods.handleSubmit(onSubmit, onErrors)}
+                        /> */}
+                        <View style={styles.backbtn}>
+                            <Button
+                                title="GO"
+                                color={THEME_COLOR.main}
+                                onPress={formMethods.handleSubmit(onSubmit, onErrors)}
+                            />
+                        </View>
+                    </Wrapper>
+                    {/* <View>
                         <TextInput
                             style={styles.userInput}
                             placeholder="Username"
                             onChangeText={(username) => setUsername(username)}
-                            defaultValue={username}
                         />
-                    </View>
-                    <View>
+
                         <TextInput
                             style={styles.userInput}
                             placeholder="Password"
                             secureTextEntry={true}
                             onChangeText={(password) => setPassword(password)}
+                            // onEndEditing={(input) => handleValidUsername(e.nativeEvent.text)}
                         />
-                    </View>
-
-                    <TouchableOpacity
-                        onPress={() =>
-                            param.navigation.navigate("ForgotPasswordPage")
-                        }
-                    >
-                        <Text style={styles.forgot_button}>
-                            Forgot Password?
-                        </Text>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity
-                        onPress={() =>
-                            param.navigation.navigate("RegisterPage", {
-                                this_param: "Sign Up!",
-                            })
-                        }
-                    >
-                        <Text style={styles.forgot_button}>
-                            Not registered yet?
-                        </Text>
-                    </TouchableOpacity>
-
-                    <View style={styles.backbtn}>
-                        <Button
-                            title="GO"
-                            color={THEME_COLOR.main}
-                            onPress={() => {
-                                param.navigation.goBack();
-                            }}
-                        />
-                    </View>
+                    </View> */}
 
                     <View style={styles.backbtn}>
                         <Button
@@ -114,6 +159,7 @@ const SignInPage = (param) => {
                             }}
                         />
                     </View>
+
                 </View>
             </View>
         );
