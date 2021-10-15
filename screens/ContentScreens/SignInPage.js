@@ -25,6 +25,7 @@ import THEME_COLOR from "../../Constants/Color";
 import { FormProvider, useForm } from 'react-hook-form'
 import styled from 'styled-components/native'
 import { FormInput } from '../../Components/SignInHelpers/FormInput'
+import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 
 const Wrapper = styled.View`
   padding: 5px;
@@ -78,88 +79,80 @@ const SignInPage = (param) => {
     const MainContent = () => {
         return (
             <View>
-                <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
-                <View style={styles.centered}>
-                    <Text style={{ fontFamily: "Cochin", fontSize: 22 }}>Let's Sign In!</Text>
-                    <Wrapper style={styles.centered}> 
-                        <FormProvider {...formMethods}>
-                            <FormInput
-                                name={LOGIN_FIELDS.username}
-                                rules={{ 
-                                    required: 'Username can NOT be empty!',
-                                    minLength: {
-                                        message: 'Use at least 3 characters.',
-                                        value: 3,
-                                        },
-                                }}
-                                placeholder="Username"
-                            />
-                            <FormInput
-                                name={LOGIN_FIELDS.password}
-                                rules={{
-                                    required: 'Password can NOT be empty!',
-                                    minLength: {
-                                    message: 'Use at least 8 characters.',
-                                    value: 8,
-                                    },
-                                }}
-                                placeholder="Password"
-                            />
-                        </FormProvider>
-                        <TouchableOpacity onPress={() =>
-                                param.navigation.navigate("ForgotPasswordPage")
-                            }>
-                            <Text style={styles.forgot_button}>
-                                Forgot Password?
-                            </Text>
-                        </TouchableOpacity>
+                <MeetUpNavBar navigation={param.navigation} navigateTo={() => {
+                param.navigation.navigate("MainPage")
+                }}></MeetUpNavBar>
+                <View style = {{
+                    marginTop: "20px",
+                    paddingBottom: "20px"
+                }}>
 
-                        <TouchableOpacity onPress={() =>
-                                param.navigation.navigate("RegisterPage", {
-                                    this_param: "Sign Up!",
-                                })
-                            }>
-                            <Text style={styles.forgot_button}>
-                                Not Registered Yet?
-                            </Text>
-                        </TouchableOpacity>
-                        {/* <Button
-                            title='Login'
-                            onPress={formMethods.handleSubmit(onSubmit, onErrors)}
-                        /> */}
+                    <ElevatedCard>
+
+                    <View style={styles.centered}>
+                        <Text style={{ fontFamily: "Cochin", fontSize: 22 }}>Let's Sign In!</Text>
+                        <Wrapper style={styles.centered}> 
+                            <FormProvider {...formMethods}>
+                                <FormInput
+                                    name={LOGIN_FIELDS.username}
+                                    rules={{ 
+                                        required: 'Username can NOT be empty!',
+                                        minLength: {
+                                            message: 'Use at least 3 characters.',
+                                            value: 3,
+                                            },
+                                    }}
+                                    placeholder="Username"
+                                />
+                                <FormInput
+                                    name={LOGIN_FIELDS.password}
+                                    rules={{
+                                        required: 'Password can NOT be empty!',
+                                        minLength: {
+                                        message: 'Use at least 8 characters.',
+                                        value: 8,
+                                        },
+                                    }}
+                                    placeholder="Password"
+                                />
+                            </FormProvider>
+                            <TouchableOpacity onPress={() =>
+                                    param.navigation.navigate("ForgotPasswordPage")
+                                }>
+                                <Text style={styles.forgot_button}>
+                                    Forgot Password?
+                                </Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity onPress={() =>
+                                    param.navigation.navigate("RegisterPage", {
+                                        this_param: "Sign Up!",
+                                    })
+                                }>
+                                <Text style={styles.forgot_button}>
+                                    Not Registered Yet?
+                                </Text>
+                            </TouchableOpacity>
+
+                            <View style={styles.backbtn}>
+                                <Button
+                                    title="GO"
+                                    color={THEME_COLOR.main}
+                                    onPress={formMethods.handleSubmit(onSubmit, onErrors)}
+                                />
+                            </View>
+                        </Wrapper>
+                        <Text style={{ fontSize: 30 }}>Please sign-in</Text>
+                    </View>
                         <View style={styles.backbtn}>
                             <Button
-                                title="GO"
-                                color={THEME_COLOR.main}
-                                onPress={formMethods.handleSubmit(onSubmit, onErrors)}
+                                title="BACK"
+                                onPress={() => {
+                                    param.navigation.goBack();
+                                }}
                             />
                         </View>
-                    </Wrapper>
-                    {/* <View>
-                        <TextInput
-                            style={styles.userInput}
-                            placeholder="Username"
-                            onChangeText={(username) => setUsername(username)}
-                        />
-
-                        <TextInput
-                            style={styles.userInput}
-                            placeholder="Password"
-                            secureTextEntry={true}
-                            onChangeText={(password) => setPassword(password)}
-                            // onEndEditing={(input) => handleValidUsername(e.nativeEvent.text)}
-                        />
-                    </View> */}
-
-                    <View style={styles.backbtn}>
-                        <Button
-                            title="BACK"
-                            onPress={() => {
-                                param.navigation.goBack();
-                            }}
-                        />
-                    </View>
-
+                    </ElevatedCard>
                 </View>
             </View>
         );
@@ -189,7 +182,7 @@ const styles = StyleSheet.create({
         width: "150%",
     },
     backbtn: {
-        marginTop: 30,
+        marginTop: 12,
         width: "25%",
     },
     forgot_button: {

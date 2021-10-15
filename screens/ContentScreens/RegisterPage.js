@@ -4,6 +4,8 @@ import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import THEME_COLOR from "../../Constants/Color";
 
+import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
+
 const RegisterPage = param => {
 
     let fetched_param = param.route.params.this_param
@@ -52,61 +54,80 @@ const RegisterPage = param => {
     const MainContent = () => {
         return (
             <View>
-                <MeetUpNavBar navigation={param.navigation}></MeetUpNavBar>
-                <View style={styles.centered}>
-                <Text style={{fontSize: 30}}>Please sign-up</Text>
-                <View>
-                    <TextInput style={styles.userInput}
-                        placeholder="Email"
-                        onChangeText={email => setEmail(email)}
-                        defaultValue={email}
-                    />
-                </View>
-                <View>
-                    <TextInput style={styles.userInput}
-                        placeholder="Username"
-                        onChangeText={username => setUsername(username)}
-                        defaultValue={username}
-                    />
-                </View>
-                <View>
-                    <TextInput
-                        style={styles.userInput}
-                        placeholder="Password"
-                        secureTextEntry={true}
-                        onChangeText={(password) => setPassword(password)}
-                    />
-                </View>
-                <View>
-                    <TextInput
-                        style={styles.userInput}
-                        placeholder="Re-enter password"
-                        secureTextEntry={true}
-                        onChangeText={(re_enter_password) => setReEnterPassword(re_enter_password)}
-                    />
-                </View>
-                <TouchableOpacity onPress={() => param.navigation.navigate("ForgotPasswordPage")}>
-                    <Text style={styles.forgot_button}>Terms and conditions</Text>
-                </TouchableOpacity>
+                <MeetUpNavBar navigation={param.navigation} navigateTo={() => {
+                    param.navigation.navigate("MainPage")
+                }}></MeetUpNavBar>
+                
+                <View
+                style = {{
+                    marginTop: "20px",
+                    paddingBottom: "20px"
+                }}
+                >
+                    <ElevatedCard>
+                    <Text style={{fontSize: 30}}>Please sign-up</Text>
+                    <View>
+                        <TextInput style={styles.userInput}
+                            placeholder="Email"
+                            onChangeText={email => setEmail(email)}
+                            defaultValue={email}
+                        />
+                    </View>
 
-                <View style={styles.backbtn}>
-                    <Button 
-                        title="SIGN UP"
-                        color={THEME_COLOR.main}
-                        onPress={() => {
-                            param.navigation.goBack()
+                    <View>
+                        <TextInput style={styles.userInput}
+                            placeholder="Username"
+                            onChangeText={username => setUsername(username)}
+                            defaultValue={username}
+                        />
+                    </View>
+
+                    <View>
+                        <TextInput
+                            style={styles.userInput}
+                            placeholder="Password"
+                            secureTextEntry={true}
+                            onChangeText={(password) => setPassword(password)}
+                        />
+                    </View>
+                    <View>
+                        <TextInput
+                            style={styles.userInput}
+                            placeholder="Re-enter password"
+                            secureTextEntry={true}
+                            onChangeText={(re_enter_password) => setReEnterPassword(re_enter_password)}
+                        />
+                    </View>
+                    <TouchableOpacity 
+                        style={{
+                            marginTop: "30px"
                         }}
-                    />
-                </View>
-                    
-                <View style={styles.backbtn}>
-                    <Button 
-                        title="BACK"
-                        onPress={() => {
-                            param.navigation.goBack()
-                        }}
-                    />
-                </View>
+                        onPress={() => param.navigation.navigate("ForgotPasswordPage")}
+                    >
+                        <Text style={styles.forgot_button}>
+                            Terms and conditions
+                        </Text>
+                    </TouchableOpacity>
+
+                    <View style={styles.backbtn}>
+                        <Button 
+                            title="SIGN UP"
+                            color={THEME_COLOR.main}
+                            onPress={() => {
+                                param.navigation.goBack()
+                            }}
+                        />
+                    </View>
+                        
+                    <View style={styles.backbtn}>
+                        <Button 
+                            title="BACK"
+                            onPress={() => {
+                                param.navigation.goBack()
+                            }}
+                        />
+                    </View>
+                    </ElevatedCard>
                 </View>
             </View>
         )
@@ -136,8 +157,12 @@ const styles = StyleSheet.create({
         width: '150%'
     },
     backbtn: {
-        marginTop: 30,
+        marginTop: 12,
         width: '25%'
+    },
+    cardContainer: {
+        alignItems: "center",
+        justifyContent: "center"
     },
     forgot_button: {
         height: 30,
