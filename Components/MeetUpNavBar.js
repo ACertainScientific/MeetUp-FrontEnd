@@ -13,7 +13,7 @@ import { useState } from "react";
 const MeetUpNavBar = (param) => {
     const [shouldShow, setShouldShow] = useState(true);
     const clickHandler = () => {
-        console.log('Onclick')
+        // console.log('Onclick')
         if (param.navigateTo) {
             param.navigateTo();
         } else {

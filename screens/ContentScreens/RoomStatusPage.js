@@ -4,13 +4,18 @@ import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindo
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 import THEME_COLOR from "../../Constants/Color";
+import RoomStatusLabel from "../../Components/PageLineupComponents/RoomStatusLabel";
+import { ROOM_STATUS_OCCUPIED, ROOM_STATUS_SANITIZED } from "../../Constants/RoomStatusConstants";
 
 const RoomStatusPage = (param) => {
     return (
         <AutoResizableWindow>
-            <MeetUpNavBar navigation={param.navigation} navigateTo={() => {
-                param.navigation.navigate("MainPage")
-            }}>
+            <MeetUpNavBar
+                navigation={param.navigation}
+                navigateTo={() => {
+                    param.navigation.navigate("MainPage");
+                }}
+            >
                 <Button
                     color={THEME_COLOR.subcolor}
                     title="SIGN UP"
@@ -36,6 +41,7 @@ const RoomStatusPage = (param) => {
             <View style={{ alignItems: "center", justifyContent: "center" }}>
                 <ElevatedCard>
                     <Text>Test CARD</Text>
+                    <RoomStatusLabel currentStatus={ROOM_STATUS_OCCUPIED}></RoomStatusLabel>
                 </ElevatedCard>
             </View>
         </AutoResizableWindow>
