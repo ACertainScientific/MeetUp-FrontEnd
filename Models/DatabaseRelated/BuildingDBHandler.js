@@ -8,9 +8,7 @@ class BuildingDBHandler {
     static async get_all_building(){
       return GeneralDBHelper.GET_REQUEST(DATABASE_GET_LIST_ALL_BUILDINGS)
     }
-    
-    
-  }
-  
+
+  }  
+
   export default BuildingDBHandler;
- 
