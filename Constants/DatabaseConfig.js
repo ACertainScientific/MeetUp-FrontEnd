@@ -11,7 +11,10 @@ export const DATABASE_GET_LIST_BUILDING = (
     pageNum = 1,
     pageSize = 10
 ) => {
-    return DATABASE_HOST + `/list-building?page=${pageNum}&page-size=${pageSize}&name=${buildingName}`
+    return (
+        DATABASE_HOST +
+        `/list-building?page=${pageNum}&page-size=${pageSize}&name=${buildingName}`
+    );
 };
 
 export const DATABASE_GET_DETAIL_BUILDINGS =
@@ -28,3 +31,20 @@ export const DATABASE_GET_BUILDING_INFO_URL_GENERATOR = (
     return `http://us-la-cn2-1.natfrp.cloud:23553/list-building?page=${pageNum}&page-size=${pageSize}&name=${buildingName}`;
 };
 
+// The Room Section
+
+export const DATABASE_GET_LIST_ROOM = (
+    roomName = "",
+    buildingId,
+    floor,
+    pageNum = 1,
+    pageSize = 10
+) => {
+    return (
+        DATABASE_HOST +
+        `/list-room?page=${pageNum}&page-size=${pageSize}&building-id=${buildingId}&floor=${floor}&room-name=${roomName}`
+    );
+};
+
+export const DATABASE_GET_DETAIL_ROOM =
+    DATABASE_HOST + "/detail-room?id=";

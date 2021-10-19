@@ -21,6 +21,7 @@ import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindo
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import GeneralDBHelper from "../../Models/DatabaseRelated/GeneralDBHelper";
 import BuildingDBHandler from "../../Models/DatabaseRelated/BuildingDBHandler";
+import RoomDBHandler from "../../Models/DatabaseRelated/RoomDBHandler";
 
 const AnotherPage = (param) => {
     let fetched_param = param.route.params.this_param;
@@ -107,7 +108,8 @@ const AnotherPage = (param) => {
                     onPress={()=>{
                         console.log("DB")
                         // console.log(GeneralDBHelper.GET_REQUEST())
-                        console.log(BuildingDBHandler.detail_building(4,'WanNeng'))
+                        // console.log(RoomDBHandler.list_room('',3,4,1,10,"WanNeng"))
+                        console.log(RoomDBHandler.detail_room(2,'WanNeng'))
                     }}
                     ></Button>
                 </View>
