@@ -14,7 +14,6 @@ export const DATABASE_GET_LIST_USER =
     DATABASE_HOST + "/list-user?page=1&page_size=10&name="
 
 
-
 export const DATABASE_GET_BUILDING_INFO_URL_GENERATOR = (
     pageNum = 1,
     pageSize = 10,
