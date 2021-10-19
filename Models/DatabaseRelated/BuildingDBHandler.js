@@ -22,6 +22,7 @@ class BuildingDBHandler {
         return result;
     }
 
+
     static list_building(
         buildingName,
         pageNum,
@@ -45,3 +46,4 @@ class BuildingDBHandler {
 }
 
 export default BuildingDBHandler;
+
