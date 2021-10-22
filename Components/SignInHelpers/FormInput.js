@@ -23,25 +23,18 @@ export const FormInput = (props) => {
     // The connection between the field and form is established by 
     // providing the control object to the controller
     // control is a central point of the form, “the form’s brain
-    const { field } = useController({ name, control, rules, defaultValue })
+    const { field } = useController({ name, rules, defaultValue })
     // Input now is controlled by field object
 
-    console.log(control)
     return (
         <Input
             {...inputProps}
             // check whether there is an error message for our field errors[name]. 
             // If there are no errors then errors[name] is undefined
-            error={control?.errors}
+            error={control._formState?.errors.hasOwnProperty(name)? control._formState?.errors[name].message : ''}
             onChangeText={field.onChange} // get string instead of event from input field
             onBlur={field.onBlur}
             value={field.value}
         />
       )
-}
-
-FormInput.propTypes = {
-    name: PropTypes.string.isRequired,
-    rules: PropTypes.object,
-    defaultValue: PropTypes.any,
 }

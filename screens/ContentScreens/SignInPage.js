@@ -118,6 +118,7 @@ const SignInPage = (param) => {
                                         },
                                     }}
                                     placeholder="Password"
+                                    secureTextEntry={true}
                                 />
                             </FormProvider>
                             <TouchableOpacity onPress={() =>
@@ -152,7 +153,6 @@ const SignInPage = (param) => {
                                 />
                             </View>
                         </Wrapper>
-                        <Text style={{ fontSize: 30 }}>Please sign-in</Text>
                     </View>
                         <View style={styles.backbtn}>
                             <Button
