@@ -36,6 +36,9 @@ const Error = styled.Text`
 `
 
 export const Input = ({ label, error, ...textInputProps }) => {
+    /* Use spread operator to assign all Input props 
+        (except label and error) to object named textInputProps */
+    
     const isError = Boolean(error)
   
     return (
@@ -44,6 +47,8 @@ export const Input = ({ label, error, ...textInputProps }) => {
         // a string, React element or array.
         <Wrapper>
         {Boolean(label) && <Label>{label}</Label>}
+        {/* pass object to StyledInput which is a styled version of 
+            standard React Native TextInput component */}
         <StyledInput isError={isError} {...textInputProps} />
         {isError && <Error>{error}</Error>}
         </Wrapper>
