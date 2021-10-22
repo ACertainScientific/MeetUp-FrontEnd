@@ -14,7 +14,6 @@ import {
     View,
     StyleSheet,
     Button,
-    TextInput,
     TouchableOpacity,
     Dimensions,
 } from "react-native";
@@ -61,19 +60,23 @@ const SignInPage = (param) => {
     // const [username, setUsername] = useState("");
     // const [password, setPassword] = useState("");
 
+    // keep all constants in variables
     const LOGIN_FIELDS = {
-        username: "username",
+        username: 'username',
         password: 'password',
     };
-      
+
+    /* form will live inside an object returned by useForm() hook */
     const formMethods = useForm()
 
     const onSubmit = (form) => {
-      console.log(form)
+        // takes a whole form as an argument when it is valid
+        console.log(form)
     }
   
     const onErrors = (errors) => {
-      console.warn(errors)
+        // handle errors in the form
+        return console.warn(errors)
     }
 
     const MainContent = () => {
@@ -92,6 +95,7 @@ const SignInPage = (param) => {
                     <View style={styles.centered}>
                         <Text style={{ fontFamily: "Cochin", fontSize: 22 }}>Let's Sign In!</Text>
                         <Wrapper style={styles.centered}> 
+                            {/* pass everything from formMethods to FormProvider using object spread operator */}
                             <FormProvider {...formMethods}>
                                 <FormInput
                                     name={LOGIN_FIELDS.username}
@@ -134,10 +138,16 @@ const SignInPage = (param) => {
                                 </Text>
                             </TouchableOpacity>
 
+                            {/* Not wrapping Button as a child of the FormProvider
+                                Pressing GO Button will submit the whole form interact 
+                                with a button using good old props so it doesn’t have 
+                                to know everything that happens inside the form  */}
                             <View style={styles.backbtn}>
                                 <Button
                                     title="GO"
                                     color={THEME_COLOR.main}
+                                    // handleSubmit function takes two callbacks as 
+                                    // arguments — onSubmit and onError
                                     onPress={formMethods.handleSubmit(onSubmit, onErrors)}
                                 />
                             </View>
