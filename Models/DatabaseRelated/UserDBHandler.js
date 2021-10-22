@@ -4,14 +4,24 @@ import GeneralDBHelper from "./GeneralDBHelper";
 class UserDBHandler {
     constructor() {}
 
-    static get_user(){
-      const result = GeneralDBHelper.GET_REQUEST(
-        DATABASE_GET_LIST_USER
-        )
-      return result;
+    static list_user(
+        name,
+        pageNum,
+        pageSize,
+        authToken = "WanNeng"
+    ){
+        const result = GeneralDBHelper.GET_REQUEST(
+            DATABASE_GET_LIST_USER(
+                name,
+                pageNum,
+                pageSize
+            ),
+            authToken
+        );
+        return result;
     }
     
-  }
+}
   
-  export default UserDBHandler;
+export default UserDBHandler;
  

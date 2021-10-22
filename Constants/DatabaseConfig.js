@@ -51,3 +51,16 @@ export const DATABASE_GET_LIST_ROOM = (
 export const DATABASE_GET_DETAIL_ROOM =
     DATABASE_HOST + "/detail-room?id=";
 
+// The User Section
+
+export const DATABASE_GET_LIST_USER = (
+    name = "",
+    pageNum = 1,
+    pageSize = 10
+) => {
+    return (
+        DATABASE_HOST + 
+        `/list-user?page=${pageNum}&page-size=${pageSize}&name=${name}`
+    );
+}
+
