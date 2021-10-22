@@ -61,7 +61,7 @@ const RegisterPage = param => {
                 <View
                 style = {{
                     marginTop: "20px",
-                    paddingBottom: "20px"
+                    paddingBottom: "20px",
                 }}
                 >
                     <ElevatedCard>

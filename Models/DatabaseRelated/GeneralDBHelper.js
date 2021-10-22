@@ -17,7 +17,8 @@ class GeneralDBHelper {
             if (!response.ok) {
                 throw new Error("Something went wrong!");
             }
-            return response.json(); // parses JSON response into native JavaScript objects
+            const resdata = await response.json()
+            return resdata['data']
         } catch {
             console.log("Failed in GET request, check DB status");
         }

@@ -5,13 +5,8 @@ import { useState } from "react";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import THEME_COLOR from "../../Constants/Color";
-
-import { useDispatch, useSelector } from "react-redux";
-import {
-    RoomSanitized,
-    RoomOccupied,
-    RoomUnsanitized,
-} from "../../redux_store/actions/roomStatus";
+import SearchableDropdown from "react-native-searchable-dropdown";
+import BuildingDBHandler from "../../Models/DatabaseRelated/BuildingDBHandler";
 
 const MainPage = (param) => {
     const [open, setOpen] = useState(false);
@@ -25,57 +20,28 @@ const MainPage = (param) => {
         { label: "WESTAUD", value: "WESTAUD" },
     ]);
 
-    const [myWindowWidth, setMyWindowWidth] = useState(
-        Dimensions.get("window").width
-    );
-    const [myWindowHeight, setMyWindowHeight] = useState(
-        Dimensions.get("window").height
-    );
-
-    {
-        /* Test Redux */
-    }
-    // state.roomStatus from App.js
-    const currentRoomStatus = useSelector(
-        (state) => state.roomStatus.room_status
-    );
-
-    const dispatch = useDispatch();
-    const roomSanitizedHandler = useCallback(() => {
-        dispatch(RoomSanitized());
-    }, [dispatch]);
-
-    const roomOccupiedHandler = useCallback(() => {
-        dispatch(RoomOccupied());
-    }, [dispatch]);
-
-    const roomUnsanitizedHandler = useCallback(() => {
-        dispatch(RoomUnsanitized());
-    }, [dispatch]);
-
-    // Auto resizing
-    useEffect(() => {
-        const handleResize = () => {
-            console.log("resizing");
-            setMyWindowWidth(Dimensions.get("window").width);
-            setMyWindowHeight(Dimensions.get("window").height);
-            console.log("resizing");
-        };
-
-        Dimensions.addEventListener("change", handleResize);
-
-        return () => {
-            Dimensions.removeEventListener("change", handleResize);
-        };
-    });
-
     const MainContent = () => {
+        const [serverData, setServerData] = useState([]);
+
+        useEffect(() => {
+            let buildingList = BuildingDBHandler.list_all_buildings("WanNeng")
+            buildingList.then((data)=>{
+                console.log(data)
+                setServerData(data);
+            })
+            
+            
+        }, []);
+
         return (
             <View>
                 {/* The tool bar at the very top */}
-                <MeetUpNavBar navigation={param.navigation} navigateTo={() => {
-                    param.navigation.navigate("MainPage")
-                }}>
+                <MeetUpNavBar
+                    navigation={param.navigation}
+                    navigateTo={() => {
+                        param.navigation.navigate("MainPage");
+                    }}
+                >
                     <Button
                         color={THEME_COLOR.subcolor}
                         title="AnotherPage"
@@ -86,7 +52,7 @@ const MainPage = (param) => {
                             });
                         }}
                     ></Button>
-                    
+
                     <Button
                         color={THEME_COLOR.main}
                         title="SIGN IN"
@@ -103,72 +69,53 @@ const MainPage = (param) => {
                 {/* The slogan bar */}
                 <View style={styles.infoBar}>
                     <Text>Which room would you like to use today?</Text>
-                    {/* Test Redux */}
-                    <View style={{ marginTop: 16 }}>
-                        <Text style={{ fontFamily: "Cochin", fontSize: 16 }}>
-                            CURRENT ROOM STATUS:{" "}
-                        </Text>
-                        <View style={styles.roomStatusDisplay}>
-                            {" "}
-                            {currentRoomStatus}{" "}
-                        </View>
-                    </View>
-                    <View style={styles.buttonContainer}>
-                        <Button
-                            color="#FFD580"
-                            title="Click To Leave the Room"
-                            onPress={() => {
-                                roomOccupiedHandler();
-                            }}
-                        />
-                        <Button
-                            color="#FF2400"
-                            title="Click To Occupy the Room"
-                            onPress={() => {
-                                roomSanitizedHandler();
-                            }}
-                        />
-                        <Button
-                            color="#AFE1AF"
-                            title="Click To Sanitize the Room"
-                            onPress={() => {
-                                roomUnsanitizedHandler();
-                            }}
-                        />
-                    </View>
                 </View>
                 {/* End of the slogan bar */}
 
                 {/* The selection bar */}
                 <View style={styles.selectionBar}>
                     <View style={{ width: "20%" }}>
-                        <DropDownPicker
-                            open={open}
-                            value={value}
-                            items={items}
-                            setOpen={setOpen}
-                            setValue={setValue}
-                            setItems={setItems}
-                        />
-                    </View>
-                    <View style={{ width: "20%" }}>
-                        <DropDownPicker
-                            open={open}
-                            value={value}
-                            items={items}
-                            setOpen={setOpen}
-                            setValue={setValue}
-                            setItems={setItems}
-                        />
-                    </View>
-                    <View style={{ width: "20%" }}>
-                        <DropDownPicker
-                            open={open}
-                            value={value}
-                            items={items}
-                            setOpen={setOpen}
-                            setValue={setValue}
-                            setItems={setItems}
+                        <SearchableDropdown
+                            onTextChange={(text) => console.log(text)}
+                            //On text change listner on the searchable input
+                            onItemSelect={(item) => alert(JSON.stringify(item))}
+                            //onItemSelect called after the selection from the dropdown
+                            containerStyle={{ padding: 5 }}
+                            //suggestion container style
+                            textInputStyle={{
+                                //inserted text style
+                                padding: 12,
+                                borderWidth: 1,
+                                borderColor: "#ccc",
+                                backgroundColor: "#FAF7F6",
+                            }}
+                            itemStyle={{
+                                //single dropdown item style
+                                padding: 10,
+                                marginTop: 2,
+                                backgroundColor: "#FAF9F8",
+                                borderColor: "#bbb",
+                                borderWidth: 1,
+                            }}
+                            itemTextStyle={{
+                                //text style of a single dropdown item
+                                color: "#222",
+                            }}
+                            itemsContainerStyle={{
+                                //items container style you can pass maxHeight
+                                //to restrict the items dropdown hieght
+                                maxHeight: "50%",
+                            }}
+                            items={serverData}
+                            //mapping of item array
+                            defaultIndex={2}
+                            //default selected item index
+                            placeholder="placeholder"
+                            //place holder for the search input
+                            resetValue={false}
+                            //reset textInput Value with true and false state
+                            underlineColorAndroid="transparent"
+                            //To remove the underline from the android input
                         />
                     </View>
 
