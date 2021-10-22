@@ -57,9 +57,6 @@ const SignInPage = (param) => {
         };
     });
 
-    // const [username, setUsername] = useState("");
-    // const [password, setPassword] = useState("");
-
     // keep all constants in variables
     const LOGIN_FIELDS = {
         username: 'username',
@@ -76,7 +73,7 @@ const SignInPage = (param) => {
   
     const onErrors = (errors) => {
         // handle errors in the form
-        return console.warn(errors)
+        console.warn(errors)
     }
 
     const MainContent = () => {
@@ -180,16 +177,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         justifyContent: "center",
         alignItems: "center",
-    },
-    userInput: {
-        borderRadius: 10,
-        borderColor: THEME_COLOR.subcolor,
-        borderWidth: 1,
-        height: 45,
-        marginTop: 12,
-        padding: 10,
-        alignSelf: "center",
-        width: "150%",
     },
     backbtn: {
         marginTop: 12,
