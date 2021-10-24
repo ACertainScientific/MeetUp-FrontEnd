@@ -1,20 +1,62 @@
-import React, {useState} from "react";
-import { Text, View, StyleSheet, Button, TextInput, TouchableOpacity } from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+    Text,
+    View,
+    StyleSheet,
+    Button,
+    TouchableOpacity,
+    Dimensions,
+} from "react-native";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import THEME_COLOR from "../../Constants/Color";
 
+import { FormProvider, useForm } from 'react-hook-form'
+import styled from 'styled-components/native'
+import { FormInput } from '../../Components/SignInHelpers/FormInput'
+import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 
-const ForgotPasswordPage = param => {
+const ForgotPasswordPage = (param) => {
 
-    const [email, setEmail] = useState('');
+    const [myWindowWidth, setMyWindowWidth] = useState(
+        Dimensions.get("window").width
+    );
+    const [myWindowHeight, setMyWindowHeight] = useState(
+        Dimensions.get("window").height
+    );
 
-    function validateForm() {
-        return email.length > 0;
+    // Auto resizing
+    useEffect(() => {
+        const handleResize = () => {
+            console.log("resizing");
+            setMyWindowWidth(Dimensions.get("window").width);
+            setMyWindowHeight(Dimensions.get("window").height);
+            console.log("resizing");
+        };
+
+        Dimensions.addEventListener("change", handleResize);
+
+        return () => {
+            Dimensions.removeEventListener("change", handleResize);
+        };
+    });
+
+    // keep all constants in variables
+    const LOGIN_FIELDS = {
+        email: 'email'
+    };
+
+    /* form will live inside an object returned by useForm() hook */
+    const formMethods = useForm()
+
+    const onSubmit = (form) => {
+        // takes a whole form as an argument when it is valid
+        console.log(form)
     }
-
-    function handleSubmit(event) {
-        event.preventDefault();
+  
+    const onErrors = (errors) => {
+        // handle errors in the form
+        console.warn(errors)
     }
 
     const MainContent = () => {
@@ -23,37 +65,63 @@ const ForgotPasswordPage = param => {
                 <MeetUpNavBar navigation={param.navigation} navigateTo={() => {
                     param.navigation.navigate("MainPage")
                 }}></MeetUpNavBar>
-                <View style={styles.centered}>
-                    <View>
-                        <TextInput style={styles.userInput}
-                            placeholder="Email"
-                            onChangeText={email => setEmail(email)}
-                            defaultValue={email}
-                        />
-                    </View>
+                <View style = {{
+                    marginTop: "20px",
+                    paddingBottom: "20px"
+                }}>
 
-                    <View style={styles.backbtn}>
-                        <Button 
-                            title="Send Temporary Password via Email"
-                            color={THEME_COLOR.main}
-                            onPress={() => {
-                                param.navigation.goBack()
-                            }}
-                        />
+                    <ElevatedCard>
+
+                    <View style={styles.centered}>
+                        {/* pass everything from formMethods to FormProvider using object spread operator */}
+                        <FormProvider {...formMethods}>
+                            <FormInput
+                                name={LOGIN_FIELDS.email}
+                                rules={{ 
+                                    required: 'Email can NOT be empty!',
+                                    pattern: {
+                                        value: /\b[\w\\.+-]+@[\w\\.-]+\.\w{2,4}\b/,
+                                        message: 'Must be formatted: abc@email.com',
+                                    },
+                                }}
+                                placeholder="Email"
+                            />
+                        </FormProvider>
+
+                        {/* Not wrapping Button as a child of the FormProvider
+                            Pressing GO Button will submit the whole form interact 
+                            with a button using good old props so it doesn’t have 
+                            to know everything that happens inside the form  */}
+                        <View style={styles.backbtn}>
+                            <Button
+                                title="Send Temporary Password via Email"
+                                color={THEME_COLOR.main}
+                                // handleSubmit function takes two callbacks as 
+                                // arguments — onSubmit and onError
+                                onPress={formMethods.handleSubmit(onSubmit, onErrors)}
+                            />
+                        </View>
                     </View>
+                        <View style={styles.backbtn}>
+                            <Button
+                                title="BACK"
+                                onPress={() => {
+                                    param.navigation.goBack();
+                                }}
+                            />
+                        </View>
+                    </ElevatedCard>
                 </View>
             </View>
-        )
-    }
+        );
+    };
 
     return (
-        <AutoResizableWindow
-        resizing_max_width="500"
-        >
+        <AutoResizableWindow resizing_max_width="800">
             {MainContent()}
         </AutoResizableWindow>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     centered: {
@@ -61,19 +129,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    userInput: {
-        borderRadius: 10,
-        borderColor: THEME_COLOR.subcolor,
-        borderWidth: 1,
-        height: 45,
-        marginTop: 12,
-        padding: 10,
-        alignSelf: "center",
-        width: '150%'
-    },
     backbtn: {
-        marginTop: 30
+        marginTop: 12
     },
-})
+});
 
 export default ForgotPasswordPage

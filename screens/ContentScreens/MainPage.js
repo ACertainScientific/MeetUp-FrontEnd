@@ -1,12 +1,28 @@
 import React, { useEffect, useCallback } from "react";
 import { View, StyleSheet, Text, Dimensions, Button } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import THEME_COLOR from "../../Constants/Color";
-import SearchableDropdown from "react-native-searchable-dropdown";
 import BuildingDBHandler from "../../Models/DatabaseRelated/BuildingDBHandler";
+import GroupedSelector from "../../Components/Selectors/GroupedSelector";
+import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard"
+
+const dummyItems = [
+    //name key is must.It is to show the text in front
+    { id: 1, name: 'angellist' },
+    { id: 2, name: 'codepen' },
+    { id: 3, name: 'envelope' },
+    { id: 4, name: 'etsy' },
+    { id: 5, name: 'facebook' },
+    { id: 6, name: 'foursquare' },
+    { id: 7, name: 'github-alt' },
+    { id: 8, name: 'github' },
+    { id: 9, name: 'gitlab' },
+    { id: 10, name: 'instagram' },
+];
+
+
 
 const MainPage = (param) => {
     const [open, setOpen] = useState(false);
@@ -25,12 +41,12 @@ const MainPage = (param) => {
 
         useEffect(() => {
             let buildingList = BuildingDBHandler.list_all_buildings("WanNeng")
-            buildingList.then((data)=>{
+            buildingList.then((data) => {
                 console.log(data)
                 setServerData(data);
             })
-            
-            
+
+
         }, []);
 
         return (
@@ -74,52 +90,10 @@ const MainPage = (param) => {
 
                 {/* The selection bar */}
                 <View style={styles.selectionBar}>
-                    <View style={{ width: "20%" }}>
-                        <SearchableDropdown
-                            onTextChange={(text) => console.log(text)}
-                            //On text change listner on the searchable input
-                            onItemSelect={(item) => alert(JSON.stringify(item))}
-                            //onItemSelect called after the selection from the dropdown
-                            containerStyle={{ padding: 5 }}
-                            //suggestion container style
-                            textInputStyle={{
-                                //inserted text style
-                                padding: 12,
-                                borderWidth: 1,
-                                borderColor: "#ccc",
-                                backgroundColor: "#FAF7F6",
-                            }}
-                            itemStyle={{
-                                //single dropdown item style
-                                padding: 10,
-                                marginTop: 2,
-                                backgroundColor: "#FAF9F8",
-                                borderColor: "#bbb",
-                                borderWidth: 1,
-                            }}
-                            itemTextStyle={{
-                                //text style of a single dropdown item
-                                color: "#222",
-                            }}
-                            itemsContainerStyle={{
-                                //items container style you can pass maxHeight
-                                //to restrict the items dropdown hieght
-                                maxHeight: "50%",
-                            }}
-                            items={serverData}
-                            //mapping of item array
-                            defaultIndex={2}
-                            //default selected item index
-                            placeholder="placeholder"
-                            //place holder for the search input
-                            resetValue={false}
-                            //reset textInput Value with true and false state
-                            underlineColorAndroid="transparent"
-                            //To remove the underline from the android input
-                        />
-                    </View>
+                    <ElevatedCard style={{ height: "80px" }}>
+                        <GroupedSelector />
+                    </ElevatedCard>
 
-                    <Text>ADD more dropdowns accordingly</Text>
                 </View>
             </View>
         );
@@ -183,8 +157,8 @@ const styles = StyleSheet.create({
     },
     selectionBar: {
         flexDirection: "row",
-        borderWidth: 1,
-        borderColor: "gray",
+        justifyContent: "center",
+        alignItems: "center"
     },
     space: {
         width: 10,
