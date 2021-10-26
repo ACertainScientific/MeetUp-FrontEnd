@@ -68,6 +68,16 @@ const MainPage = (param) => {
                             });
                         }}
                     ></Button>
+                    <Button
+                        color={THEME_COLOR.subcolor}
+                        title="RoomStatusPage"
+                        style={styles.btn}
+                        onPress={() => {
+                            param.navigation.navigate("RoomStatusPage", {
+                                this_param: "RoomStatusPage",
+                            });
+                        }}
+                    ></Button>
 
                     <Button
                         color={THEME_COLOR.main}
