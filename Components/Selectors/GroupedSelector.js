@@ -8,6 +8,7 @@ import {
 import DropDownPicker from "react-native-dropdown-picker";
 import THEME_COLOR from "../../Constants/Color";
 import BuildingDBHandler from "../../Models/DatabaseRelated/BuildingDBHandler";
+import RoomDBHandler from "../../Models/DatabaseRelated/RoomDBHandler";
 
 const GroupedSelector = (param) => {
     function range(startAt = 0, endAt = 1) {
@@ -37,16 +38,38 @@ const GroupedSelector = (param) => {
     const [roomListValues, setRoomListValues] = useState([]);
     const [roomListOpen, setRoomListOpen] = useState(false);
 
-    useEffect(() => {
-        // Building fetching
-        var BuildingData = DUMMYDATA_BUILDING;
+    const DUMMY_TOKEN = 'WanNeng'
 
-        setBuildingListItems(
-            BuildingData.map((thisBuilding) => {
-                return { label: thisBuilding.name, value: thisBuilding.id };
-            })
-        );
-        setBuildingFullList(BuildingData);
+    useEffect(() => {
+
+        // TODO: FETCH token from user state
+
+        try {
+            BuildingDBHandler.list_all_buildings(DUMMY_TOKEN).then(
+                (response)=>{
+                    console.log(response)
+                    // Building fetching
+                    var BuildingData = response;
+                    setBuildingListItems(
+                        BuildingData.map((thisBuilding) => {
+                            return { label: thisBuilding.name, value: thisBuilding.id };
+                        })
+                    );
+                    setBuildingFullList(BuildingData);
+                }
+            ).catch(
+                (error)=>{
+                    // Error handeling in promise
+                    console.log("Error in fetching building:")
+                    console.error(error)
+                }
+            )
+
+        } catch {
+            // General error handeling
+            console.log("Failed loading available building.")
+        }
+       
     }, [DUMMYDATA_BUILDING]);
 
     const floorHandler = (value) => {
@@ -61,6 +84,9 @@ const GroupedSelector = (param) => {
     };
 
     const roomHandler = () => {
+
+        
+
         var RoomData = DUMMYDATA_ROOM;
         var roomList = [];
         for (var room of RoomData) {
@@ -141,7 +167,7 @@ const GroupedSelector = (param) => {
                     overflow: "hidden",
                     alignItems: "center",
                     margin: "10px",
-                    width:"10%"
+                    width: "10%",
                 }}
             >
                 <Button
@@ -162,14 +188,14 @@ const GroupedSelector = (param) => {
 
 const styles = StyleSheet.create({
     container: {
-        width:"95%",
-        minWidth:"300px",
+        width: "95%",
+        minWidth: "300px",
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
     },
     box: {
-        width:"30%",
+        width: "30%",
     },
     main: {
         backgroundColor: "#eee",
