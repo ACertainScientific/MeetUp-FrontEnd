@@ -96,7 +96,6 @@ const GroupedSelector = (param) => {
         )
             .then((response) => {
                 var RoomData = response.list;
-                var roomList = [];
 
                 console.log("Fetch room response: ");
                 console.log(response);
@@ -191,11 +190,17 @@ const GroupedSelector = (param) => {
                 <Button
                     title="Submit!"
                     onPress={() => {
+                        if(! roomListValues){
+                            console.log("Must select a room")
+                        }
+                        // TODO: show hint here
                         console.log("Pressed");
                         console.log("BuildingId: ", buildingListValues);
                         console.log("FloorNo: ", floorListValues);
                         console.log("RoomID: ", roomListValues);
-                        param.onSubmit;
+                        param.navigation.navigate("RoomStatusPage", {
+                            roomId: roomListValues,
+                        });
                     }}
                     color={THEME_COLOR.main}
                 />
