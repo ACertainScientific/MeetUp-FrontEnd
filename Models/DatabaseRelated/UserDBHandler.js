@@ -20,6 +20,10 @@ class UserDBHandler {
         );
         return result;
     }
+
+    // Post Handler
+    //username : test1
+    // password: 12345678
     
 }
   
