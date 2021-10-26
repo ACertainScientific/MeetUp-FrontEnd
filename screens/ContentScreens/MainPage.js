@@ -91,7 +91,9 @@ const MainPage = (param) => {
                 {/* The selection bar */}
                 <View style={styles.selectionBar}>
                     <ElevatedCard style={{ height: "80px" }}>
-                        <GroupedSelector />
+                        <GroupedSelector
+                        navigation={param.navigation}                        
+                        />
                     </ElevatedCard>
 
                 </View>

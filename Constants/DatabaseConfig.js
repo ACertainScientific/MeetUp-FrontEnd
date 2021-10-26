@@ -3,10 +3,11 @@
 export const DATABASE_HOST = "http://us-la-cn2-1.natfrp.cloud:23553";
 
 // The Building Section
+
 export const DATABASE_GET_LIST_ALL_BUILDINGS =
-    DATABASE_HOST + "/list-all-buildings?name=";
+    DATABASE_HOST + "/building/list/all?name=";
 
-
+// http://us-la-cn2-1.natfrp.cloud:23553/building/list?page=1&page-size=10&name=name
 export const DATABASE_GET_LIST_BUILDING = (
     buildingName = "",
     pageNum = 1,
@@ -14,12 +15,13 @@ export const DATABASE_GET_LIST_BUILDING = (
 ) => {
     return (
         DATABASE_HOST +
-        `/list-building?page=${pageNum}&page-size=${pageSize}&name=${buildingName}`
+        `/building/list?page=${pageNum}&page-size=${pageSize}&name=${buildingName}`
     );
 };
 
+// http://us-la-cn2-1.natfrp.cloud:23553/building/detail?id=4
 export const DATABASE_GET_DETAIL_BUILDINGS =
-    DATABASE_HOST + "/detail-building?id=";
+    DATABASE_HOST + "/building/detail?id=";
 
 export const DATABASE_GET_BUILDING_INFO_URL =
     DATABASE_HOST + "/list_building?page=1&page_size=10&name=";
@@ -34,7 +36,7 @@ export const DATABASE_GET_BUILDING_INFO_URL_GENERATOR = (
 };
 
 // The Room Section
-
+// http://us-la-cn2-1.natfrp.cloud:23553/room/list?page=1&page-size=2&building-id=3&floor=4
 export const DATABASE_GET_LIST_ROOM = (
     roomName = "",
     buildingId,
@@ -44,12 +46,13 @@ export const DATABASE_GET_LIST_ROOM = (
 ) => {
     return (
         DATABASE_HOST +
-        `/list-room?page=${pageNum}&page-size=${pageSize}&building-id=${buildingId}&floor=${floor}&room-name=${roomName}`
+        `/room/list?page=${pageNum}&page-size=${pageSize}&building-id=${buildingId}&floor=${floor}&room-name=${roomName}`
     );
 };
 
+// http://us-la-cn2-1.natfrp.cloud:23553/room/detail?id=123
 export const DATABASE_GET_DETAIL_ROOM =
-    DATABASE_HOST + "/detail-room?id=";
+    DATABASE_HOST + "/room/detail?id=";
 
 // The User Section
 
