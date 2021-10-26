@@ -38,38 +38,37 @@ const GroupedSelector = (param) => {
     const [roomListValues, setRoomListValues] = useState([]);
     const [roomListOpen, setRoomListOpen] = useState(false);
 
-    const DUMMY_TOKEN = 'WanNeng'
+    const DUMMY_TOKEN = "WanNeng";
 
     useEffect(() => {
-
         // TODO: FETCH token from user state
 
         try {
-            BuildingDBHandler.list_all_buildings(DUMMY_TOKEN).then(
-                (response)=>{
-                    console.log(response)
+            BuildingDBHandler.list_all_buildings(DUMMY_TOKEN)
+                .then((response) => {
+                    console.log("Fetch building response:");
+                    console.log(response);
                     // Building fetching
                     var BuildingData = response;
                     setBuildingListItems(
                         BuildingData.map((thisBuilding) => {
-                            return { label: thisBuilding.name, value: thisBuilding.id };
+                            return {
+                                label: thisBuilding.name,
+                                value: thisBuilding.id,
+                            };
                         })
                     );
                     setBuildingFullList(BuildingData);
-                }
-            ).catch(
-                (error)=>{
+                })
+                .catch((error) => {
                     // Error handeling in promise
-                    console.log("Error in fetching building:")
-                    console.error(error)
-                }
-            )
-
+                    console.log("Error in fetching building:");
+                    console.error(error);
+                });
         } catch {
             // General error handeling
-            console.log("Failed loading available building.")
+            console.log("Failed loading available building.");
         }
-       
     }, [DUMMYDATA_BUILDING]);
 
     const floorHandler = (value) => {
@@ -84,21 +83,40 @@ const GroupedSelector = (param) => {
     };
 
     const roomHandler = () => {
+        console.log("Fetching room with building id and floor:");
+        console.log(buildingListValues, floorListValues);
 
-        
+        RoomDBHandler.list_room(
+            "",
+            buildingListValues,
+            floorListValues,
+            1,
+            100,
+            DUMMY_TOKEN
+        )
+            .then((response) => {
+                var RoomData = response.list;
+                var roomList = [];
 
-        var RoomData = DUMMYDATA_ROOM;
-        var roomList = [];
-        for (var room of RoomData) {
-            if (
-                room.buildingId == buildingListValues &&
-                room.floor == floorListValues
-            ) {
-                roomList.push({ label: room.roomName, value: room.id });
-            }
-        }
-        setRoomListItems(roomList);
-        setRoomListValues([]);
+                console.log("Fetch room response: ");
+                console.log(response);
+                console.log(RoomData);
+                console.log("---------");
+
+                setRoomListItems(
+                    RoomData.map((thisRoom) => {
+                        return {
+                            label: thisRoom.roomName,
+                            value: thisRoom.id,
+                        };
+                    })
+                );
+                setRoomListValues([]);
+            })
+            .catch((error) => {
+                console.error("General Error in room fetching");
+                console.error(error);
+            });
     };
 
     return (
