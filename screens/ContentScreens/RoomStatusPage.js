@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Button, StyleSheet, Text } from "react-native";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
@@ -6,8 +6,38 @@ import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 import THEME_COLOR from "../../Constants/Color";
 import RoomStatusLabel from "../../Components/PageLineupComponents/RoomStatusLabel";
 import { ROOM_STATUS_OCCUPIED, ROOM_STATUS_SANITIZED } from "../../Constants/RoomStatusConstants";
+import RoomDBHandler from "../../Models/DatabaseRelated/RoomDBHandler";
 
 const RoomStatusPage = (param) => {
+    // Fetcing room id by the navigation param
+    const roomId =  param.route.params.roomId
+    console.log("Fetched room id: " + roomId)
+    
+    // Const 
+    const [buildingId, setBuildingId] = useState("")
+    const [buildingName, setBuildingName] = useState("")
+    const [floor, setFloor] = useState("")
+    const [roomName, setRoomName] = useState("")
+
+
+    useEffect(()=>{
+        RoomDBHandler.detail_room(roomId, "WanNeng").then(
+            (response)=>{
+                console.log(response)
+                setBuildingId(response.buildingId)
+                setBuildingName(response.buildingName)
+                setFloor(response.floor)
+                setRoomName(response.name)
+            }
+        ).catch(
+            (error)=>{
+                console.error("Encountered error in fetching room.")
+                console.error(error)
+            }
+        )
+    })
+
+
     return (
         <AutoResizableWindow>
             <MeetUpNavBar

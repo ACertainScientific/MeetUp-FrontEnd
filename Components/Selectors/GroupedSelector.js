@@ -28,6 +28,7 @@ const GroupedSelector = (param) => {
     const [buildingListValues, setBuildingListValues] = useState([]);
     const [buildingListOpen, setBuildingListOpen] = useState(false);
 
+
     // Floor
     const [floorListItems, setFloorListItems] = useState([]);
     const [floorListValues, setFloorListValues] = useState([]);
@@ -37,6 +38,7 @@ const GroupedSelector = (param) => {
     const [roomListItems, setRoomListItems] = useState([]);
     const [roomListValues, setRoomListValues] = useState([]);
     const [roomListOpen, setRoomListOpen] = useState(false);
+
 
     const DUMMY_TOKEN = "WanNeng";
 
@@ -150,7 +152,7 @@ const GroupedSelector = (param) => {
                     setOpen={setFloorListOpens}
                     setValue={setFloorListValues}
                     setItems={setFloorListItems}
-                    onChangeValue={() => {
+                    onChangeValue={(value) => {
                         roomHandler();
                     }}
                     // Searchable
@@ -200,6 +202,7 @@ const GroupedSelector = (param) => {
                         console.log("RoomID: ", roomListValues);
                         param.navigation.navigate("RoomStatusPage", {
                             roomId: roomListValues,
+                            
                         });
                     }}
                     color={THEME_COLOR.main}
