@@ -175,14 +175,15 @@ const SignInPage = (param) => {
                             </View>
                         </Wrapper>
                     </View>
-                        <View style={styles.backbtn}>
-                            <Button
-                                title="BACK"
-                                onPress={() => {
-                                    param.navigation.goBack();
-                                }}
-                            />
-                        </View>
+
+                    <View style={styles.backbtn}>
+                        <Button
+                            title="BACK"
+                            onPress={() => {
+                                param.navigation.goBack();
+                            }}
+                        />
+                    </View>
                     </ElevatedCard>
                 </View>
             </View>
