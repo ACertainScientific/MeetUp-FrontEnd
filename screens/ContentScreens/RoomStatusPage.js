@@ -5,6 +5,7 @@ import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 import THEME_COLOR from "../../Constants/Color";
 import RoomStatusLabel from "../../Components/PageLineupComponents/RoomStatusLabel";
+
 import {
     ROOM_STATUS_OCCUPIED,
     ROOM_STATUS_SANITIZED,
@@ -66,6 +67,7 @@ const RoomStatusPage = (param) => {
                     }}
                 ></Button>
             </MeetUpNavBar>
+
             <View style={styles.roomInfo}>
                 <Text style={styles.roomInfoHint}>Status of Room </Text>
                 <Text style={styles.roomInfoHintHL}>{roomName}</Text>
@@ -82,16 +84,24 @@ const RoomStatusPage = (param) => {
                     ></RoomStatusLabel>
                 </ElevatedCard>
             </View>
+        </View>
+        )
+    }
+
+    return (
+        <AutoResizableWindow resizing_max_width="800">
+            {MainContent()}
         </AutoResizableWindow>
     );
 };
 
 const styles = StyleSheet.create({
     centered: {
-        flex: 1,
-        alignItems: "center",
+        marginTop: 20,
         justifyContent: "center",
+        alignItems: "center",
     },
+
     roomInfo: {
         display: "flex",
         flexDirection: "row",
