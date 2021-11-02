@@ -25,6 +25,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import styled from 'styled-components/native'
 import { FormInput } from '../../Components/SignInHelpers/FormInput'
 import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
+import UserDBHandler from "../../Models/DatabaseRelated/UserDBHandler";
 
 const Wrapper = styled.View`
   padding: 5px;
@@ -32,7 +33,7 @@ const Wrapper = styled.View`
 
 const SignInPage = (param) => {
     let fetched_param = param.route.params.this_param;
-    console.log(fetched_param);
+    // console.log(fetched_param);
 
     const [myWindowWidth, setMyWindowWidth] = useState(
         Dimensions.get("window").width
@@ -63,12 +64,35 @@ const SignInPage = (param) => {
         password: 'password',
     };
 
+    const [loginStatus, setLoginStatus] = useState(false);
+
     /* form will live inside an object returned by useForm() hook */
     const formMethods = useForm()
 
     const onSubmit = (form) => {
         // takes a whole form as an argument when it is valid
         console.log(form)
+        // TO DO: login
+        try {
+            UserDBHandler.post_login(form)
+                .then((response) => {
+                    console.log("Post Login response:");
+                    console.log(response);
+                    var LoginData = response;
+                    if (LoginData.status == 200) {
+                        console.log("Sign in success");
+                        // setLoginStatus(true);
+                    }
+                })
+                .catch((error) => {
+                    // Error handeling in promise
+                    console.log("Error in post login:");
+                    console.error(error);
+                });
+        } catch {
+            // General error handeling
+            console.log("Failed handeling post login");
+        }
     }
   
     const onErrors = (errors) => {
@@ -110,8 +134,8 @@ const SignInPage = (param) => {
                                     rules={{
                                         required: 'Password can NOT be empty!',
                                         minLength: {
-                                        message: 'Use at least 8 characters.',
-                                        value: 8,
+                                        message: 'Use at least 5 characters.',
+                                        value: 5,
                                         },
                                     }}
                                     placeholder="Password"

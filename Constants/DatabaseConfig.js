@@ -67,6 +67,10 @@ export const DATABASE_GET_LIST_USER = (
     );
 }
 
+export const DATABASE_GET_USER_LOGIN = () => {
+    return ( DATABASE_HOST + "/login")
+}
+
 // The Appointment Section
 
 // The Profile Section
