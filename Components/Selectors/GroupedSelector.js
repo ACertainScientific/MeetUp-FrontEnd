@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { View, StyleSheet, Button } from "react-native";
+import { View, StyleSheet, Button, Text } from "react-native";
 import {
     DUMMYDATA,
     DUMMYDATA_BUILDING,
@@ -28,7 +28,6 @@ const GroupedSelector = (param) => {
     const [buildingListValues, setBuildingListValues] = useState([]);
     const [buildingListOpen, setBuildingListOpen] = useState(false);
 
-
     // Floor
     const [floorListItems, setFloorListItems] = useState([]);
     const [floorListValues, setFloorListValues] = useState([]);
@@ -39,6 +38,8 @@ const GroupedSelector = (param) => {
     const [roomListValues, setRoomListValues] = useState([]);
     const [roomListOpen, setRoomListOpen] = useState(false);
 
+    // Hint Bar
+    const [touched, setTouched] = useState(false);
 
     const DUMMY_TOKEN = "WanNeng";
 
@@ -121,92 +122,114 @@ const GroupedSelector = (param) => {
     };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.box}>
-                <DropDownPicker
-                    // Getter and Setters
-                    open={buildingListOpen}
-                    value={buildingListValues}
-                    items={buildingListItems}
-                    setOpen={setBuildingListOpen}
-                    setValue={setBuildingListValues}
-                    setItems={setBuildingListItems}
-                    onChangeValue={(value) => {
-                        console.log(value);
-                        floorHandler(value);
+        <View style={{ width: "100%", display: "flex" }}>
+            <View style={styles.container}>
+                <View style={styles.box}>
+                    <DropDownPicker
+                        // Getter and Setters
+                        open={buildingListOpen}
+                        value={buildingListValues}
+                        items={buildingListItems}
+                        setOpen={setBuildingListOpen}
+                        setValue={setBuildingListValues}
+                        setItems={setBuildingListItems}
+                        onChangeValue={(value) => {
+                            if (value.length != 0) {
+                                setTouched(true);
+                            }
+                            console.log("Changing value to", value);
+                            floorHandler(value);
+                        }}
+                        // Searchable
+                        searchable={true}
+                        // Styles
+                        style={styles.main}
+                        textStyle={styles.textStyle}
+                        placeholder={"Select Building"}
+                    />
+                </View>
+                <View style={styles.box}>
+                    <DropDownPicker
+                        // Getter and Setters
+                        open={floorListOpens}
+                        value={floorListValues}
+                        items={floorListItems}
+                        setOpen={setFloorListOpens}
+                        setValue={setFloorListValues}
+                        setItems={setFloorListItems}
+                        onChangeValue={(value) => {
+                            if (value.length != 0) {
+                                setTouched(true);
+                            }
+                            console.log("Changing value to", value);
+                            roomHandler();
+                        }}
+                        // Searchable
+                        searchable={true}
+                        // Styles
+                        style={styles.main}
+                        textStyle={styles.textStyle}
+                        placeholder={"Select Floor"}
+                    />
+                </View>
+                <View style={styles.box}>
+                    <DropDownPicker
+                        // Getter and Setters
+                        open={roomListOpen}
+                        value={roomListValues}
+                        items={roomListItems}
+                        setOpen={setRoomListOpen}
+                        setValue={setRoomListValues}
+                        setItems={setRoomListItems}
+                        // Searchable
+                        searchable={true}
+                        // Styles
+                        style={styles.main}
+                        textStyle={styles.textStyle}
+                        placeholder={"Select Room"}
+                        onChangeValue={(value) => {
+                            if (value.length != 0) {
+                                setTouched(true);
+                            }
+                        }}
+                    />
+                </View>
+                <View
+                    style={{
+                        borderRadius: "10px",
+                        overflow: "hidden",
+                        alignItems: "center",
+                        margin: "10px",
+                        width: "10%",
                     }}
-                    // Searchable
-                    searchable={true}
-                    // Styles
-                    style={styles.main}
-                    textStyle={styles.textStyle}
-                    placeholder={"Select Building"}
-                />
+                >
+                    <Button
+                        title="Submit!"
+                        onPress={() => {
+                            if (roomListValues.length == 0) {
+                                setTouched(true)
+                                console.log("Must select a room");
+                                return;
+                            }
+                            // TODO: show hint here
+                            console.log("Pressed");
+                            console.log("BuildingId: ", buildingListValues);
+                            console.log("FloorNo: ", floorListValues);
+                            console.log("RoomID: ", roomListValues);
+                            param.navigation.navigate("RoomStatusPage", {
+                                roomId: roomListValues,
+                            });
+                        }}
+                        color={THEME_COLOR.main}
+                    />
+                </View>
             </View>
-            <View style={styles.box}>
-                <DropDownPicker
-                    // Getter and Setters
-                    open={floorListOpens}
-                    value={floorListValues}
-                    items={floorListItems}
-                    setOpen={setFloorListOpens}
-                    setValue={setFloorListValues}
-                    setItems={setFloorListItems}
-                    onChangeValue={(value) => {
-                        roomHandler();
-                    }}
-                    // Searchable
-                    searchable={true}
-                    // Styles
-                    style={styles.main}
-                    textStyle={styles.textStyle}
-                    placeholder={"Select Floor"}
-                />
-            </View>
-            <View style={styles.box}>
-                <DropDownPicker
-                    // Getter and Setters
-                    open={roomListOpen}
-                    value={roomListValues}
-                    items={roomListItems}
-                    setOpen={setRoomListOpen}
-                    setValue={setRoomListValues}
-                    setItems={setRoomListItems}
-                    // Searchable
-                    searchable={true}
-                    // Styles
-                    style={styles.main}
-                    textStyle={styles.textStyle}
-                    placeholder={"Select Room"}
-                />
-            </View>
-            <View
-                style={{
-                    borderRadius: "10px",
-                    overflow: "hidden",
-                    alignItems: "center",
-                    margin: "10px",
-                    width: "10%",
-                }}
-            >
-                <Button
-                    title="Submit!"
-                    onPress={() => {
-                        if(! roomListValues){
-                            console.log("Must select a room")
-                        }
-                        // TODO: show hint here
-                        console.log("Pressed");
-                        console.log("BuildingId: ", buildingListValues);
-                        console.log("FloorNo: ", floorListValues);
-                        console.log("RoomID: ", roomListValues);
-                        param.navigation.navigate("RoomStatusPage", {
-                            roomId: roomListValues,
-                            
-                        });
-                    }}
-                    color={THEME_COLOR.main}
-                />
+            <View>
+                {touched && roomListValues.length == 0 ? (
+                    <View style={{ color: THEME_COLOR.gray }}>
+                        <Text>Must Select a room to continue!</Text>
+                    </View>
+                ) : null}
             </View>
         </View>
     );
