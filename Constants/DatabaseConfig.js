@@ -2,6 +2,7 @@
 
 export const DATABASE_HOST = "http://us-la-cn2-1.natfrp.cloud:23553";
 
+
 // The Building Section
 
 export const DATABASE_GET_LIST_ALL_BUILDINGS =

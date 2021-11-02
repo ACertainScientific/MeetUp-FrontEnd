@@ -1,45 +1,45 @@
-import React, { useState, useEffect } from "react";
-import {
-    View, Button, StyleSheet, Text, Dimensions
-} from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Button, StyleSheet, Text } from "react-native";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 import THEME_COLOR from "../../Constants/Color";
 import RoomStatusLabel from "../../Components/PageLineupComponents/RoomStatusLabel";
-import { ROOM_STATUS_OCCUPIED, ROOM_STATUS_SANITIZED, ROOM_STATUS_VACANT } from "../../Constants/RoomStatusConstants";
+
+import {
+    ROOM_STATUS_OCCUPIED,
+    ROOM_STATUS_SANITIZED,
+} from "../../Constants/RoomStatusConstants";
+import RoomDBHandler from "../../Models/DatabaseRelated/RoomDBHandler";
 
 const RoomStatusPage = (param) => {
+    // Fetcing room id by the navigation param
+    const roomId = param.route.params.roomId;
+    console.log("Fetched room id: " + roomId);
 
-    let fetched_param = param.route.params.this_param;
-    console.log(fetched_param);
+    // Const
+    const [buildingId, setBuildingId] = useState("");
+    const [buildingName, setBuildingName] = useState("");
+    const [floor, setFloor] = useState("");
+    const [roomName, setRoomName] = useState("");
 
-    const [myWindowWidth, setMyWindowWidth] = useState(
-        Dimensions.get("window").width
-    );
-    const [myWindowHeight, setMyWindowHeight] = useState(
-        Dimensions.get("window").height
-    );
-
-    // Auto resizing
     useEffect(() => {
-        const handleResize = () => {
-            console.log("resizing");
-            setMyWindowWidth(Dimensions.get("window").width);
-            setMyWindowHeight(Dimensions.get("window").height);
-            console.log("resizing");
-        };
-
-        Dimensions.addEventListener("change", handleResize);
-
-        return () => {
-            Dimensions.removeEventListener("change", handleResize);
-        };
+        RoomDBHandler.detail_room(roomId, "WanNeng")
+            .then((response) => {
+                console.log(response);
+                setBuildingId(response.buildingId);
+                setBuildingName(response.buildingName);
+                setFloor(response.floor);
+                setRoomName(response.name);
+            })
+            .catch((error) => {
+                console.error("Encountered error in fetching room.");
+                console.error(error);
+            });
     });
 
-    const MainContent = () => {
-        return (
-        <View>
+    return (
+        <AutoResizableWindow>
             <MeetUpNavBar
                 navigation={param.navigation}
                 navigateTo={() => {
@@ -68,16 +68,20 @@ const RoomStatusPage = (param) => {
                 ></Button>
             </MeetUpNavBar>
 
-
-            <View style = {{
-                    marginTop: "20px",
-                    paddingBottom: "20px"
-                }}>
+            <View style={styles.roomInfo}>
+                <Text style={styles.roomInfoHint}>Status of Room </Text>
+                <Text style={styles.roomInfoHintHL}>{roomName}</Text>
+                <Text style={styles.roomInfoHint}> in Building </Text>
+                <Text style={styles.roomInfoHintHL}>{buildingName}</Text>
+                <Text style={styles.roomInfoHint}>, floor </Text>
+                <Text style={styles.roomInfoHintHL}>{floor}</Text>
+            </View>
+            <View style={{ alignItems: "center", justifyContent: "center" }}>
                 <ElevatedCard>
-                <Text style={{ fontSize: 22 }}>Darrin Communication Center 308</Text>
-                <Text>Time: 4:00PM - 6:00PM</Text>
-                <Text>Event: RCOS - MeetUp</Text>
-                <RoomStatusLabel currentStatus={ROOM_STATUS_OCCUPIED}></RoomStatusLabel>
+                    <Text>Test CARD</Text>
+                    <RoomStatusLabel
+                        currentStatus={ROOM_STATUS_OCCUPIED}
+                    ></RoomStatusLabel>
                 </ElevatedCard>
             </View>
         </View>
@@ -97,13 +101,25 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    btn: {
-        height: "20px",
-        // width: "20px",
-        margin: "10px",
-        marginVertical: "10px",
-        marginHorizontal: "20px",
-    }
+
+    roomInfo: {
+        display: "flex",
+        flexDirection: "row",
+        alignContent:"center",
+        justifyContent:"flex-end"
+    },
+    roomInfoHint: {
+        color: THEME_COLOR.subcolor,
+        fontSize: 20,
+        fontStyle: "italic",
+        fontWeight: "bold",
+    },
+    roomInfoHintHL: {
+        color: THEME_COLOR.main,
+        fontSize: 25,
+        fontStyle: "italic",
+        fontWeight: "bold",
+    },
 });
 
 export default RoomStatusPage;
