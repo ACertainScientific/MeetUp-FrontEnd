@@ -18,6 +18,26 @@ const RoomStatusPage = (param) => {
     console.log("Fetched room id: " + roomId);
 
     const MainContent = () => {
+        // Const
+        const [buildingId, setBuildingId] = useState("");
+        const [buildingName, setBuildingName] = useState("");
+        const [floor, setFloor] = useState("");
+        const [roomName, setRoomName] = useState("");
+
+        useEffect(() => {
+            RoomDBHandler.detail_room(roomId, "WanNeng")
+                .then((response) => {
+                    console.log(response);
+                    setBuildingId(response.buildingId);
+                    setBuildingName(response.buildingName);
+                    setFloor(response.floor);
+                    setRoomName(response.name);
+                })
+                .catch((error) => {
+                    console.error("Encountered error in fetching room.");
+                    console.error(error);
+                });
+        });
         return (
             <View>
                 <MeetUpNavBar
