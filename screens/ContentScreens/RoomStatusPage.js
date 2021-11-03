@@ -37,7 +37,7 @@ const RoomStatusPage = (param) => {
                 console.error(error);
             });
     });
-
+    const MainContent = () => {
     return (
         <AutoResizableWindow>
             <MeetUpNavBar
@@ -67,7 +67,6 @@ const RoomStatusPage = (param) => {
                     }}
                 ></Button>
             </MeetUpNavBar>
-
             <View style={styles.roomInfo}>
                 <Text style={styles.roomInfoHint}>Status of Room </Text>
                 <Text style={styles.roomInfoHintHL}>{roomName}</Text>
@@ -76,15 +75,16 @@ const RoomStatusPage = (param) => {
                 <Text style={styles.roomInfoHint}>, floor </Text>
                 <Text style={styles.roomInfoHintHL}>{floor}</Text>
             </View>
+            
             <View style={{ alignItems: "center", justifyContent: "center" }}>
                 <ElevatedCard>
-                    <Text>Test CARD</Text>
+                    <Text>Room status</Text>
                     <RoomStatusLabel
                         currentStatus={ROOM_STATUS_OCCUPIED}
                     ></RoomStatusLabel>
                 </ElevatedCard>
             </View>
-        </View>
+        </AutoResizableWindow>
         )
     }
 
