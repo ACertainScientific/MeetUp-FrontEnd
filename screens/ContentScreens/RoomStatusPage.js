@@ -9,6 +9,7 @@ import RoomStatusLabel from "../../Components/PageLineupComponents/RoomStatusLab
 import {
     ROOM_STATUS_OCCUPIED,
     ROOM_STATUS_SANITIZED,
+    ROOM_STATUS_VACANT,
 } from "../../Constants/RoomStatusConstants";
 import RoomDBHandler from "../../Models/DatabaseRelated/RoomDBHandler";
 
@@ -67,20 +68,24 @@ const RoomStatusPage = (param) => {
                     }}
                 ></Button>
             </MeetUpNavBar>
-            <View style={styles.roomInfo}>
-                <Text style={styles.roomInfoHint}>Status of Room </Text>
-                <Text style={styles.roomInfoHintHL}>{roomName}</Text>
-                <Text style={styles.roomInfoHint}> in Building </Text>
-                <Text style={styles.roomInfoHintHL}>{buildingName}</Text>
-                <Text style={styles.roomInfoHint}>, floor </Text>
-                <Text style={styles.roomInfoHintHL}>{floor}</Text>
-            </View>
             
-            <View style={{ alignItems: "center", justifyContent: "center" }}>
+            
+            <View style = {{
+                    marginTop: "20px",
+                    paddingBottom: "20px"
+                }}>
                 <ElevatedCard>
-                    <Text>Room status</Text>
+                    <View style={styles.roomInfo}>
+                        <Text style={styles.roomInfoHint}>Status of Room </Text>
+                        <Text style={styles.roomInfoHintHL}>[{roomName}]</Text>
+                        <Text style={styles.roomInfoHint}> in Building </Text>
+                        <Text style={styles.roomInfoHintHL}>[{buildingName}]</Text>
+                        <Text style={styles.roomInfoHint}>, floor </Text>
+                        <Text style={styles.roomInfoHintHL}>[{floor}]</Text>
+                    </View>
+
                     <RoomStatusLabel
-                        currentStatus={ROOM_STATUS_OCCUPIED}
+                        currentStatus={ROOM_STATUS_VACANT}
                     ></RoomStatusLabel>
                 </ElevatedCard>
             </View>
