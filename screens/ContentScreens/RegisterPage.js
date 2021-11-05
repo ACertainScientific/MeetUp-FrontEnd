@@ -1,10 +1,25 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { Text, TextInput, View, StyleSheet, Button, Dimensions, TouchableOpacity} from "react-native";
+import React, { useState, useEffect } from "react";
+import {
+    Text,
+    View,
+    StyleSheet,
+    Button,
+    TouchableOpacity,
+    Dimensions,
+} from "react-native";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import THEME_COLOR from "../../Constants/Color";
 
+import { FormProvider, useForm } from 'react-hook-form'
+import styled from 'styled-components/native'
+import { FormInput } from '../../Components/SignInHelpers/FormInput'
 import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
+import UserDBHandler from "../../Models/DatabaseRelated/UserDBHandler";
+
+const Wrapper = styled.View`
+  padding: 5px;
+`
 
 const RegisterPage = param => {
 
@@ -34,20 +49,46 @@ const RegisterPage = param => {
         };
     });
 
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [re_enter_password, setReEnterPassword] = useState('');
+    // keep all constants in variables
+    const LOGIN_FIELDS = {
+        email: 'email',
+        username: 'username',
+        password: 'password',
+        re_enter_password: 'password'
+    };
 
-    function validateForm() {
-        return email.length > 0 
-        && username.length > 0 
-        && password.length > 0
-        && password == re_enter_password;
+    /* form will live inside an object returned by useForm() hook */
+    const formMethods = useForm()
+
+    const onSubmit = (form) => {
+        // takes a whole form as an argument when it is valid
+        console.log(form)
+        // TO DO: Sign Up Post Request
+        // try {
+        //     UserDBHandler.post_signup(form)
+        //         .then((response) => {
+        //             console.log("Post Sign Up response:");
+        //             console.log(response);
+        //             var LoginData = response;
+        //             if (LoginData.status == 200) {
+        //                 console.log("Sign Up succeed");
+        //                 // setLoginStatus(true);
+        //             }
+        //         })
+        //         .catch((error) => {
+        //             // Error handeling in promise
+        //             console.log("Error in post sign up:");
+        //             console.error(error);
+        //         });
+        // } catch {
+        //     // General error handeling
+        //     console.log("Failed handeling post sign up");
+        // }
     }
-
-    function handleSubmit(event) {
-        event.preventDefault();
+  
+    const onErrors = (errors) => {
+        // handle errors in the form
+        console.warn(errors)
     }
 
 
@@ -65,68 +106,93 @@ const RegisterPage = param => {
                 }}
                 >
                     <ElevatedCard>
-                    <Text style={{fontSize: 30}}>Please sign-up</Text>
-                    <View>
-                        <TextInput style={styles.userInput}
-                            placeholder="Email"
-                            onChangeText={email => setEmail(email)}
-                            defaultValue={email}
-                        />
-                    </View>
+                    <View style={styles.centered}>
+                        <Text style={{ fontFamily: "Cochin", fontSize: 22 }}>Let's Sign Up!</Text>
+                        <Wrapper style={styles.centered}> 
+                            {/* pass everything from formMethods to FormProvider using object spread operator */}
+                            <FormProvider {...formMethods}>
+                                <FormInput
+                                    name={LOGIN_FIELDS.email}
+                                    rules={{ 
+                                        required: 'Email can NOT be empty!',
+                                        pattern: {
+                                            value: /\b[\w\\.+-]+@[\w\\.-]+\.\w{2,4}\b/,
+                                            message: 'Must be formatted: abc@email.com',
+                                        },
+                                    }}
+                                    placeholder="Email"
+                                />
+                                <FormInput
+                                    name={LOGIN_FIELDS.username}
+                                    rules={{ 
+                                        required: 'Username can NOT be empty!',
+                                        minLength: {
+                                            message: 'Use at least 3 characters.',
+                                            value: 3,
+                                            },
+                                    }}
+                                    placeholder="Username"
+                                />
+                                <FormInput
+                                    name={LOGIN_FIELDS.password}
+                                    rules={{
+                                        required: 'Password can NOT be empty!',
+                                        minLength: {
+                                        message: 'Use at least 5 characters.',
+                                        value: 5,
+                                        },
+                                    }}
+                                    placeholder="Password"
+                                    secureTextEntry={true}
+                                />
+                                {/* TO DO: Implement Rule Checking for Matching Password and Re-enter Password */}
+                                <FormInput
+                                    name={LOGIN_FIELDS.re_enter_password}
+                                    rules={{
+                                        required: 'Password Re-enter can NOT be empty!',
+                                        minLength: {
+                                        message: 'Use at least 5 characters.',
+                                        value: 5,
+                                        },
+                                    }}
+                                    placeholder="Re-enter Password"
+                                    secureTextEntry={true}
+                                />
+                            </FormProvider>
 
-                    <View>
-                        <TextInput style={styles.userInput}
-                            placeholder="Username"
-                            onChangeText={username => setUsername(username)}
-                            defaultValue={username}
-                        />
-                    </View>
+                            <TouchableOpacity 
+                                onPress={() => param.navigation.navigate("ForgotPasswordPage")}
+                            >
+                                <Text style={styles.terms_button}>
+                                    Terms and conditions
+                                </Text>
+                            </TouchableOpacity>
 
-                    <View>
-                        <TextInput
-                            style={styles.userInput}
-                            placeholder="Password"
-                            secureTextEntry={true}
-                            onChangeText={(password) => setPassword(password)}
-                        />
+                            {/* Not wrapping Button as a child of the FormProvider
+                                Pressing GO Button will submit the whole form interact 
+                                with a button using good old props so it doesn’t have 
+                                to know everything that happens inside the form  */}
+                            <View style={styles.signupbtn}>
+                                <Button
+                                    title="Sign Up"
+                                    color={THEME_COLOR.main}
+                                    // handleSubmit function takes two callbacks as 
+                                    // arguments — onSubmit and onError
+                                    onPress={formMethods.handleSubmit(onSubmit, onErrors)}
+                                />
+                            </View>
+                        </Wrapper>
                     </View>
-                    <View>
-                        <TextInput
-                            style={styles.userInput}
-                            placeholder="Re-enter password"
-                            secureTextEntry={true}
-                            onChangeText={(re_enter_password) => setReEnterPassword(re_enter_password)}
-                        />
-                    </View>
-                    <TouchableOpacity 
-                        style={{
-                            marginTop: "30px"
-                        }}
-                        onPress={() => param.navigation.navigate("ForgotPasswordPage")}
-                    >
-                        <Text style={styles.forgot_button}>
-                            Terms and conditions
-                        </Text>
-                    </TouchableOpacity>
 
                     <View style={styles.backbtn}>
-                        <Button 
-                            title="SIGN UP"
-                            color={THEME_COLOR.main}
-                            onPress={() => {
-                                param.navigation.goBack()
-                            }}
-                        />
-                    </View>
-                        
-                    <View style={styles.backbtn}>
-                        <Button 
+                        <Button
                             title="BACK"
                             onPress={() => {
-                                param.navigation.goBack()
+                                param.navigation.goBack();
                             }}
                         />
                     </View>
+
                     </ElevatedCard>
                 </View>
             </View>
@@ -146,25 +212,19 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
     },
-    userInput: {
-        borderRadius: 10,
-        borderColor: THEME_COLOR.subcolor,
-        borderWidth: 1,
-        height: 45,
+    signupbtn: {
         marginTop: 12,
-        padding: 10,
-        alignSelf: "center",
-        width: '150%'
+        width: "30%",
     },
     backbtn: {
         marginTop: 12,
-        width: '25%'
+        width: "25%",
     },
     cardContainer: {
         alignItems: "center",
         justifyContent: "center"
     },
-    forgot_button: {
+    terms_button: {
         height: 30,
         marginTop: 12,
         textDecorationLine: 'underline'
