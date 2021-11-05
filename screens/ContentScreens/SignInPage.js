@@ -33,7 +33,6 @@ const Wrapper = styled.View`
 
 const SignInPage = (param) => {
     let fetched_param = param.route.params.this_param;
-    // console.log(fetched_param);
 
     const [myWindowWidth, setMyWindowWidth] = useState(
         Dimensions.get("window").width
@@ -58,6 +57,7 @@ const SignInPage = (param) => {
         };
     });
 
+    // Put all constants into Constants/Screens/SignInPageConstants (need to create this file)
     // keep all constants in variables
     const LOGIN_FIELDS = {
         username: 'username',

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import {
-    Text,
     View,
     StyleSheet,
     Button,
-    TouchableOpacity,
     Dimensions,
 } from "react-native";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
@@ -12,7 +10,6 @@ import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindo
 import THEME_COLOR from "../../Constants/Color";
 
 import { FormProvider, useForm } from 'react-hook-form'
-import styled from 'styled-components/native'
 import { FormInput } from '../../Components/SignInHelpers/FormInput'
 import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 
@@ -52,6 +49,27 @@ const ForgotPasswordPage = (param) => {
     const onSubmit = (form) => {
         // takes a whole form as an argument when it is valid
         console.log(form)
+
+        // try {
+        //     UserDBHandler.post_forgotpsw(form)
+        //         .then((response) => {
+        //             console.log("Post Forgot Passsword response:");
+        //             console.log(response);
+        //             var ForgotpswData = response;
+        //             if (ForgotpswDat.status == 200) {
+        //                 console.log("Send password success");
+        //                 // setLoginStatus(true);
+        //             }
+        //         })
+        //         .catch((error) => {
+        //             // Error handeling in promise
+        //             console.log("Error in post forgot password:");
+        //             console.error(error);
+        //         });
+        // } catch {
+        //     // General error handeling
+        //     console.log("Failed handeling post forgot password");
+        // }
     }
   
     const onErrors = (errors) => {

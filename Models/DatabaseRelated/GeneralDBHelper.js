@@ -52,6 +52,8 @@ class GeneralDBHelper {
             console.log(e)
         }
     }
+
+    // TO DO: Write a sign up post request
 }
 
 export default GeneralDBHelper;
