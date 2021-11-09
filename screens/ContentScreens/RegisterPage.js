@@ -51,7 +51,8 @@ const RegisterPage = param => {
         try {
             UserDBHandler.post_sign_up({email: form.email
                                         ,username: form.username
-                                        , password: form.password})
+                                        , password: form.password
+                                        , type: "1"})
                 .then((response) => {
                     console.log("Post Sign Up response:");
                     console.log(response);

@@ -36,6 +36,7 @@ class GeneralDBHelper {
                 body: JSON.stringify({
                     userName: userinputs.username,
                     password: userinputs.password,
+                    type: userinputs.type
                 }),
             });
             // NO errors in case of 404 or 500, must check the response object
@@ -74,6 +75,7 @@ class GeneralDBHelper {
                     email: userinputs.email,
                     userName: userinputs.username,
                     password: userinputs.password,
+                    type: userinputs.type
                 }),
             });
             // NO errors in case of 404 or 500, must check the response object

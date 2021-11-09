@@ -9,6 +9,7 @@ export const loginHandler = (username, password) => {
             const response = await UserDBHandler.post_login({
                 username: username,
                 password: password,
+                type: "1"
                 // username: "test1",
                 // password: "12345678",
             });
@@ -18,8 +19,6 @@ export const loginHandler = (username, password) => {
             //     console.log("Responde not OK")
             //     throw new Error("Failed to log in / HTTP failure");
             // }
-        
-
 
             dispatch({ type: LOGIN_WITH_USERNAME_AND_PASSWORD });
         } catch {
