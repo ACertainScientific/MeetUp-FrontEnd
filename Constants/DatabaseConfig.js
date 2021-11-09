@@ -73,6 +73,10 @@ export const DATABASE_GET_USER_LOGIN = () => {
     return ( DATABASE_HOST + "/login")
 }
 
+export const DATABASE_GET_USER_SIGN_UP = () => {
+    return ( DATABASE_HOST + "/sign-up")
+}
+
 // The Appointment Section
 
 // The Profile Section
