@@ -37,6 +37,7 @@ class UserDBHandler {
         return result;
     }
     
+    // TO DO: Write a sign up post request
 }
   
 export default UserDBHandler;

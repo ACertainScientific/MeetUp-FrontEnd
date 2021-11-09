@@ -8,7 +8,7 @@
         before expo
  */
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
     Text,
     View,
@@ -26,6 +26,8 @@ import styled from 'styled-components/native'
 import { FormInput } from '../../Components/SignInHelpers/FormInput'
 import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 import UserDBHandler from "../../Models/DatabaseRelated/UserDBHandler";
+import { loginHandler } from "../../redux_store/actions/loginStatus";
+import { useDispatch } from "react-redux";
 
 const Wrapper = styled.View`
   padding: 5px;
@@ -33,7 +35,6 @@ const Wrapper = styled.View`
 
 const SignInPage = (param) => {
     let fetched_param = param.route.params.this_param;
-    // console.log(fetched_param);
 
     const [myWindowWidth, setMyWindowWidth] = useState(
         Dimensions.get("window").width
@@ -41,23 +42,10 @@ const SignInPage = (param) => {
     const [myWindowHeight, setMyWindowHeight] = useState(
         Dimensions.get("window").height
     );
+    
+    const dispatch = useDispatch();
 
-    // Auto resizing
-    useEffect(() => {
-        const handleResize = () => {
-            console.log("resizing");
-            setMyWindowWidth(Dimensions.get("window").width);
-            setMyWindowHeight(Dimensions.get("window").height);
-            console.log("resizing");
-        };
-
-        Dimensions.addEventListener("change", handleResize);
-
-        return () => {
-            Dimensions.removeEventListener("change", handleResize);
-        };
-    });
-
+    // Put all constants into Constants/Screens/SignInPageConstants (need to create this file)
     // keep all constants in variables
     const LOGIN_FIELDS = {
         username: 'username',
@@ -73,27 +61,34 @@ const SignInPage = (param) => {
         // takes a whole form as an argument when it is valid
         console.log(form)
         // TO DO: login
-        try {
-            UserDBHandler.post_login(form)
-                .then((response) => {
-                    console.log("Post Login response:");
-                    console.log(response);
-                    var LoginData = response;
-                    if (LoginData.status == 200) {
-                        console.log("Sign in success");
-                        // setLoginStatus(true);
-                    }
-                })
-                .catch((error) => {
-                    // Error handeling in promise
-                    console.log("Error in post login:");
-                    console.error(error);
-                });
-        } catch {
-            // General error handeling
-            console.log("Failed handeling post login");
-        }
+        // try {
+        //     UserDBHandler.post_login(form)
+        //         .then((response) => {
+        //             console.log("Post Login response:");
+        //             console.log(response);
+        //             var LoginData = response;
+        //             if (LoginData.status == 200) {
+        //                 console.log("Sign in success");
+        //                 // setLoginStatus(true);
+        //             }
+        //         })
+        //         .catch((error) => {
+        //             // Error handeling in promise
+        //             console.log("Error in post login:");
+        //             console.error(error);
+        //         });
+        // } catch {
+        //     // General error handeling
+        //     console.log("Failed handeling post login");
+        // }
+        fetchLoginStatus(form.username, form.password)
+        
     }
+
+    const fetchLoginStatus = useCallback(async (username, password) => {
+        // await dispatch(loginHandler("test1", "12345678"));
+        await dispatch(loginHandler(username, password));
+    }, [dispatch]);
   
     const onErrors = (errors) => {
         // handle errors in the form

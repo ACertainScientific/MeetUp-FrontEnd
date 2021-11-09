@@ -1,6 +1,7 @@
 // http://us-la-cn2-1.natfrp.cloud:23553/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/Building
 
-export const DATABASE_HOST = "http://us-la-cn2-1.natfrp.cloud:23553";
+// export const DATABASE_HOST = "http://us-la-cn2-1.natfrp.cloud:23553";
+export const DATABASE_HOST = "http://pi.jackhe.online:41474";
 
 
 // The Building Section
