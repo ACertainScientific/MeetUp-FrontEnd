@@ -12,6 +12,7 @@ import {
     ROOM_STATUS_VACANT,
 } from "../../Constants/RoomStatusConstants";
 import RoomDBHandler from "../../Models/DatabaseRelated/RoomDBHandler";
+import StylableButton from "../../Components/StylableButton";
 
 const RoomStatusPage = (param) => {
     // Fetcing room id by the navigation param
@@ -47,26 +48,28 @@ const RoomStatusPage = (param) => {
                     param.navigation.navigate("MainPage");
                 }}
             >
-                <Button
+                <StylableButton
                     color={THEME_COLOR.subcolor}
                     title="SIGN UP"
-                    style={styles.btn}
+                    btnStyle={styles.btn}
+                    style={{marginLeft:"10px"}}
                     onPress={() => {
                         param.navigation.navigate("RegisterPage", {
                             this_param: "SIGN UP!",
                         });
                     }}
-                ></Button>
-                <Button
+                ></StylableButton>
+                <StylableButton
                     color={THEME_COLOR.main}
                     title="SIGN IN"
-                    style={styles.btn}
+                    btnStyle={styles.btn}
+                    style={{marginLeft:"10px"}}
                     onPress={() => {
                         param.navigation.navigate("SignInPage", {
                             this_param: "HI!",
                         });
                     }}
-                ></Button>
+                ></StylableButton>
             </MeetUpNavBar>
             
             
