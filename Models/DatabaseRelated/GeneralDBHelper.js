@@ -1,5 +1,5 @@
 class GeneralDBHelper {
-    static async GET_REQUEST(url = "", authToken = "WanNeng") {
+    static async GET_REQUEST(url = "", authToken) {
         // Default options are marked with *
         try {
             const response = await fetch(
@@ -31,7 +31,6 @@ class GeneralDBHelper {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "X-Authorization": "WanNeng",
                 },
                 body: JSON.stringify({
                     userName: userinputs.username,
@@ -69,7 +68,6 @@ class GeneralDBHelper {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "X-Authorization": "WanNeng",
                 },
                 body: JSON.stringify({
                     email: userinputs.email,

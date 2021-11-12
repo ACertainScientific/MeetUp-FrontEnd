@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
+import { useSelector } from "react-redux";
 import { View, StyleSheet, Button, Text } from "react-native";
 import {
     DUMMYDATA,
@@ -22,6 +23,8 @@ const GroupedSelector = (param) => {
         return result;
     }
 
+    const userLoginStatus = useSelector((state) => state.loginStatus);
+
     // Building
     const [buildingFullList, setBuildingFullList] = useState([]);
     const [buildingListItems, setBuildingListItems] = useState([]);
@@ -41,13 +44,17 @@ const GroupedSelector = (param) => {
     // Hint Bar
     const [touched, setTouched] = useState(false);
 
-    const DUMMY_TOKEN = "WanNeng";
+    // const DUMMY_TOKEN = "WanNeng";
 
     useEffect(() => {
         // TODO: FETCH token from user state
 
         try {
-            BuildingDBHandler.list_all_buildings(DUMMY_TOKEN)
+            if (userLoginStatus.token == null) {
+                param.navigation.navigate("SignInPage", {});
+            }
+
+            BuildingDBHandler.list_all_buildings(userLoginStatus.token)
                 .then((response) => {
                     console.log("Fetch building response:");
                     console.log(response);
@@ -95,7 +102,7 @@ const GroupedSelector = (param) => {
             floorListValues,
             1,
             100,
-            DUMMY_TOKEN
+            userLoginStatus.token
         )
             .then((response) => {
                 var RoomData = response.list;
@@ -207,7 +214,7 @@ const GroupedSelector = (param) => {
                         title="Submit!"
                         onPress={() => {
                             if (roomListValues.length == 0) {
-                                setTouched(true)
+                                setTouched(true);
                                 console.log("Must select a room");
                                 return;
                             }
