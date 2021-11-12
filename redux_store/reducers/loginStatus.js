@@ -13,14 +13,17 @@ const loginStatusReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOGIN_WITH_USERNAME_AND_PASSWORD: {
             console.log("LOGIN REDUCER GETTING RESPONSE:");
-            const myToken = action.response["data"]["auth"];
+            const myToken = action.response[0]["data"]["auth"];
             console.log("Getting token", myToken);
-            return {
+            const newState = {
                 ...state,
-                token: myToken,
                 logged_in: true,
+                token: myToken,
+                token_valid_through: null,
                 username: action.username,
             };
+            console.log("new State:", newState)
+            return newState
         }
 
         // case TOGGLE_LOGIN_STATUS:

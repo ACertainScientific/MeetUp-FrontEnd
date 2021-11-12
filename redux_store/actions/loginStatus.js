@@ -19,13 +19,17 @@ export const loginHandler = (username, password) => {
             //     console.log("Responde not OK")
             //     throw new Error("Failed to log in / HTTP failure");
             // }
+            
 
             dispatch({
                 type: LOGIN_WITH_USERNAME_AND_PASSWORD,
                 response: response,
                 username: username
             });
-        } catch {}
+
+        } catch {(error)=>{
+            console.error(error)
+        }}
     };
 };
 
