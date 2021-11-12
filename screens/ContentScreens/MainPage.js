@@ -7,6 +7,8 @@ import THEME_COLOR from "../../Constants/Color";
 import BuildingDBHandler from "../../Models/DatabaseRelated/BuildingDBHandler";
 import GroupedSelector from "../../Components/Selectors/GroupedSelector";
 import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard"
+import StylableButton from "../../Components/StylableButton";
+
 
 const dummyItems = [
     //name key is must.It is to show the text in front
@@ -58,37 +60,40 @@ const MainPage = (param) => {
                         param.navigation.navigate("MainPage");
                     }}
                 >
-                    <Button
+                    <StylableButton
                         color={THEME_COLOR.subcolor}
                         title="AnotherPage"
-                        style={styles.btn}
+                        btnStyle={styles.btn}
+                        style={{marginLeft:"10px"}}
                         onPress={() => {
                             param.navigation.navigate("AnotherPage", {
                                 this_param: "AnotherPage",
                             });
                         }}
-                    ></Button>
-                    <Button
+                    ></StylableButton>
+                    <StylableButton
                         color={THEME_COLOR.subcolor}
                         title="RoomStatusPage"
-                        style={styles.btn}
+                        btnStyle={styles.btn}
+                        style={{marginLeft:"10px"}}
                         onPress={() => {
                             param.navigation.navigate("RoomStatusPage", {
                                 this_param: "RoomStatusPage",
                             });
                         }}
-                    ></Button>
+                    ></StylableButton>
 
-                    <Button
+                    <StylableButton
                         color={THEME_COLOR.main}
                         title="SIGN IN"
-                        style={styles.btn}
+                        btnStyle={styles.btn}
+                        style={{marginLeft:"10px"}}
                         onPress={() => {
                             param.navigation.navigate("SignInPage", {
                                 this_param: "HI!",
                             });
                         }}
-                    ></Button>
+                    ></StylableButton>
                 </MeetUpNavBar>
                 {/* End of the tool bar */}
 
@@ -139,7 +144,6 @@ const styles = StyleSheet.create({
     btn: {
         height: "20px",
         // width: "20px",
-        margin: "10px",
         marginVertical: "10px",
         marginHorizontal: "20px",
     },

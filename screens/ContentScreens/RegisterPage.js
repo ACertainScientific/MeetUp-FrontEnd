@@ -24,7 +24,7 @@ const Wrapper = styled.View`
 const RegisterPage = param => {
 
     let fetched_param = param.route.params.this_param
-    console.log(fetched_param)  
+    // console.log(fetched_param)  
 
     const [myWindowWidth, setMyWindowWidth] = useState(
         Dimensions.get("window").width
@@ -32,22 +32,6 @@ const RegisterPage = param => {
     const [myWindowHeight, setMyWindowHeight] = useState(
         Dimensions.get("window").height
     );
-
-    // Auto resizing
-    useEffect(() => {
-        const handleResize = () => {
-            console.log("resizing");
-            setMyWindowWidth(Dimensions.get("window").width);
-            setMyWindowHeight(Dimensions.get("window").height);
-            console.log("resizing");
-        };
-
-        Dimensions.addEventListener("change", handleResize);
-
-        return () => {
-            Dimensions.removeEventListener("change", handleResize);
-        };
-    });
 
     // keep all constants in variables
     const LOGIN_FIELDS = {
@@ -64,26 +48,28 @@ const RegisterPage = param => {
         // takes a whole form as an argument when it is valid
         console.log(form)
         // TO DO: Sign Up Post Request
-        // try {
-        //     UserDBHandler.post_signup(form)
-        //         .then((response) => {
-        //             console.log("Post Sign Up response:");
-        //             console.log(response);
-        //             var LoginData = response;
-        //             if (LoginData.status == 200) {
-        //                 console.log("Sign Up succeed");
-        //                 // setLoginStatus(true);
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             // Error handeling in promise
-        //             console.log("Error in post sign up:");
-        //             console.error(error);
-        //         });
-        // } catch {
-        //     // General error handeling
-        //     console.log("Failed handeling post sign up");
-        // }
+        try {
+            UserDBHandler.post_sign_up({email: form.email
+                                        ,username: form.username
+                                        , password: form.password
+                                        , type: "1"})
+                .then((response) => {
+                    console.log("Post Sign Up response:");
+                    console.log(response);
+                    var SignUpData = response;
+                    if (SignUpData.status == 200) {
+                        console.log("Sign Up succeed");
+                    }
+                })
+                .catch((error) => {
+                    // Error handeling in promise
+                    console.log("Error in post sign up:");
+                    console.error(error);
+                });
+        } catch {
+            // General error handeling
+            console.log("Failed handeling post sign up");
+        }
     }
   
     const onErrors = (errors) => {

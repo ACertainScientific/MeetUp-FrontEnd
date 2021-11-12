@@ -52,35 +52,12 @@ const SignInPage = (param) => {
         password: 'password',
     };
 
-    const [loginStatus, setLoginStatus] = useState(false);
-
     /* form will live inside an object returned by useForm() hook */
     const formMethods = useForm()
 
     const onSubmit = (form) => {
         // takes a whole form as an argument when it is valid
         console.log(form)
-        // TO DO: login
-        // try {
-        //     UserDBHandler.post_login(form)
-        //         .then((response) => {
-        //             console.log("Post Login response:");
-        //             console.log(response);
-        //             var LoginData = response;
-        //             if (LoginData.status == 200) {
-        //                 console.log("Sign in success");
-        //                 // setLoginStatus(true);
-        //             }
-        //         })
-        //         .catch((error) => {
-        //             // Error handeling in promise
-        //             console.log("Error in post login:");
-        //             console.error(error);
-        //         });
-        // } catch {
-        //     // General error handeling
-        //     console.log("Failed handeling post login");
-        // }
         fetchLoginStatus(form.username, form.password)
         
     }

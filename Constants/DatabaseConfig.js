@@ -1,7 +1,7 @@
 // http://us-la-cn2-1.natfrp.cloud:23553/swagger-ui/index.html?configUrl=/v3/api-docs/swagger-config#/Building
 
-// export const DATABASE_HOST = "http://us-la-cn2-1.natfrp.cloud:23553";
-export const DATABASE_HOST = "http://pi.jackhe.online:41474";
+export const DATABASE_HOST = "http://us-la-cn2-1.natfrp.cloud:23553";
+//export const DATABASE_HOST = "http://pi.jackhe.online:41474";
 
 
 // The Building Section
@@ -71,6 +71,10 @@ export const DATABASE_GET_LIST_USER = (
 
 export const DATABASE_GET_USER_LOGIN = () => {
     return ( DATABASE_HOST + "/login")
+}
+
+export const DATABASE_GET_USER_SIGN_UP = () => {
+    return ( DATABASE_HOST + "/sign-up")
 }
 
 // The Appointment Section

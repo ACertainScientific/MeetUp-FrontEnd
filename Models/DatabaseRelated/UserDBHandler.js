@@ -1,6 +1,7 @@
 import { 
     DATABASE_GET_LIST_USER, 
-    DATABASE_GET_USER_LOGIN } 
+    DATABASE_GET_USER_LOGIN,
+    DATABASE_GET_USER_SIGN_UP } 
 from "../../Constants/DatabaseConfig";
 
 import GeneralDBHelper from "./GeneralDBHelper";
@@ -26,9 +27,7 @@ class UserDBHandler {
     }
 
     
-    // Post Handler
-    // username : test1
-    // password: 12345678
+    // Login Post Handler
     static post_login(userinputs) {
         const result = GeneralDBHelper.LOGIN_POST_REQUEST(
             userinputs,
@@ -38,6 +37,13 @@ class UserDBHandler {
     }
     
     // TO DO: Write a sign up post request
+    static post_sign_up(userinputs) {
+        const result = GeneralDBHelper.SIGN_UP_POST_REQUEST(
+            userinputs,
+            DATABASE_GET_USER_SIGN_UP()
+        );
+        return result;
+    }
 }
   
 export default UserDBHandler;
