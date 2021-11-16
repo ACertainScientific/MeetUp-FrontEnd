@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Button, View, StyleSheet, Text } from "react-native";
-import AvailableTimes from 'react-available-times';
 
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
