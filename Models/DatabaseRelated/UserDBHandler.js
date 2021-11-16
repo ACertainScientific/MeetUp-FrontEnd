@@ -29,7 +29,7 @@ class UserDBHandler {
     
     // Login Post Handler
     static post_login(userinputs) {
-        const result = GeneralDBHelper.LOGIN_POST_REQUEST(
+        const result = GeneralDBHelper.POST_REQUEST(
             userinputs,
             DATABASE_GET_USER_LOGIN()
         );
@@ -38,7 +38,7 @@ class UserDBHandler {
     
     // TO DO: Write a sign up post request
     static post_sign_up(userinputs) {
-        const result = GeneralDBHelper.SIGN_UP_POST_REQUEST(
+        const result = GeneralDBHelper.POST_REQUEST(
             userinputs,
             DATABASE_GET_USER_SIGN_UP()
         );
