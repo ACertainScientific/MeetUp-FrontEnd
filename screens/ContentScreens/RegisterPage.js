@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
     Text,
     View,
@@ -50,7 +50,7 @@ const RegisterPage = param => {
         // TO DO: Sign Up Post Request
         try {
             UserDBHandler.post_sign_up({email: form.email
-                                        ,username: form.username
+                                        ,userName: form.username
                                         , password: form.password
                                         , type: "1"})
                 .then((response) => {

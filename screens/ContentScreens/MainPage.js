@@ -6,25 +6,23 @@ import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindo
 import THEME_COLOR from "../../Constants/Color";
 import BuildingDBHandler from "../../Models/DatabaseRelated/BuildingDBHandler";
 import GroupedSelector from "../../Components/Selectors/GroupedSelector";
-import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard"
+import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 import StylableButton from "../../Components/StylableButton";
+import { useSelector } from "react-redux";
 
-
-const dummyItems = [
-    //name key is must.It is to show the text in front
-    { id: 1, name: 'angellist' },
-    { id: 2, name: 'codepen' },
-    { id: 3, name: 'envelope' },
-    { id: 4, name: 'etsy' },
-    { id: 5, name: 'facebook' },
-    { id: 6, name: 'foursquare' },
-    { id: 7, name: 'github-alt' },
-    { id: 8, name: 'github' },
-    { id: 9, name: 'gitlab' },
-    { id: 10, name: 'instagram' },
-];
-
-
+// const dummyItems = [
+//     //name key is must.It is to show the text in front
+//     { id: 1, name: 'angellist' },
+//     { id: 2, name: 'codepen' },
+//     { id: 3, name: 'envelope' },
+//     { id: 4, name: 'etsy' },
+//     { id: 5, name: 'facebook' },
+//     { id: 6, name: 'foursquare' },
+//     { id: 7, name: 'github-alt' },
+//     { id: 8, name: 'github' },
+//     { id: 9, name: 'gitlab' },
+//     { id: 10, name: 'instagram' },
+// ];
 
 const MainPage = (param) => {
     const [open, setOpen] = useState(false);
@@ -42,15 +40,14 @@ const MainPage = (param) => {
         const [serverData, setServerData] = useState([]);
 
         useEffect(() => {
-            let buildingList = BuildingDBHandler.list_all_buildings("WanNeng")
+            let buildingList = BuildingDBHandler.list_all_buildings("WanNeng");
             buildingList.then((data) => {
-                console.log(data)
+                console.log(data);
                 setServerData(data);
-            })
-
-
+            });
         }, []);
-
+        
+        
         return (
             <View>
                 {/* The tool bar at the very top */}
@@ -64,7 +61,7 @@ const MainPage = (param) => {
                         color={THEME_COLOR.subcolor}
                         title="AnotherPage"
                         btnStyle={styles.btn}
-                        style={{marginLeft:"10px"}}
+                        style={{ marginLeft: "10px" }}
                         onPress={() => {
                             param.navigation.navigate("AnotherPage", {
                                 this_param: "AnotherPage",
@@ -75,7 +72,7 @@ const MainPage = (param) => {
                         color={THEME_COLOR.subcolor}
                         title="RoomStatusPage"
                         btnStyle={styles.btn}
-                        style={{marginLeft:"10px"}}
+                        style={{ marginLeft: "10px" }}
                         onPress={() => {
                             param.navigation.navigate("RoomStatusPage", {
                                 this_param: "RoomStatusPage",
@@ -87,7 +84,7 @@ const MainPage = (param) => {
                         color={THEME_COLOR.main}
                         title="SIGN IN"
                         btnStyle={styles.btn}
-                        style={{marginLeft:"10px"}}
+                        style={{ marginLeft: "10px" }}
                         onPress={() => {
                             param.navigation.navigate("SignInPage", {
                                 this_param: "HI!",
@@ -116,11 +113,8 @@ const MainPage = (param) => {
                 {/* The selection bar */}
                 <View style={styles.selectionBar}>
                     <ElevatedCard style={{ height: "80px" }}>
-                        <GroupedSelector
-                        navigation={param.navigation}                        
-                        />
+                        <GroupedSelector navigation={param.navigation} />
                     </ElevatedCard>
-
                 </View>
             </View>
         );
@@ -184,7 +178,7 @@ const styles = StyleSheet.create({
     selectionBar: {
         flexDirection: "row",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
     },
     space: {
         width: 10,
