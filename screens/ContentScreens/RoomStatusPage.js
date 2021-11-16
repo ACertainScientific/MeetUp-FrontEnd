@@ -13,6 +13,7 @@ import {
 } from "../../Constants/RoomStatusConstants";
 import RoomDBHandler from "../../Models/DatabaseRelated/RoomDBHandler";
 import StylableButton from "../../Components/StylableButton";
+import AvailableTimes from "react-available-times";
 
 const RoomStatusPage = (param) => {
     // Fetcing room id by the navigation param
@@ -58,34 +59,55 @@ const RoomStatusPage = (param) => {
                             this_param: "SIGN UP!",
                         });
                     }}
-                ></StylableButton>
-                <StylableButton
-                    color={THEME_COLOR.main}
-                    title="SIGN IN"
-                    btnStyle={styles.btn}
-                    style={{marginLeft:"10px"}}
-                    onPress={() => {
-                        param.navigation.navigate("SignInPage", {
-                            this_param: "HI!",
-                        });
+                />
+                    <StylableButton
+                        color={THEME_COLOR.subcolor}
+                        title="SIGN UP"
+                        btnStyle={styles.btn}
+                        style={{ marginLeft: "10px" }}
+                        onPress={() => {
+                            param.navigation.navigate("RegisterPage", {
+                                this_param: "SIGN UP!",
+                            });
+                        }}
+                    ></StylableButton>
+                    <StylableButton
+                        color={THEME_COLOR.main}
+                        title="SIGN IN"
+                        btnStyle={styles.btn}
+                        style={{ marginLeft: "10px" }}
+                        onPress={() => {
+                            param.navigation.navigate("SignInPage", {
+                                this_param: "HI!",
+                            });
+                        }}
+                    ></StylableButton>
+                </MeetUpNavBar>
+
+                <View
+                    style={{
+                        marginTop: "20px",
+                        paddingBottom: "20px",
                     }}
-                ></StylableButton>
-            </MeetUpNavBar>
-            
-            
-            <View style = {{
-                    marginTop: "20px",
-                    paddingBottom: "20px"
-                }}>
-                <ElevatedCard>
-                    <View style={styles.roomInfo}>
-                        <Text style={styles.roomInfoHint}>Status of Room </Text>
-                        <Text style={styles.roomInfoHintHL}>[{roomName}]</Text>
-                        <Text style={styles.roomInfoHint}> in Building </Text>
-                        <Text style={styles.roomInfoHintHL}>[{buildingName}]</Text>
-                        <Text style={styles.roomInfoHint}>, floor </Text>
-                        <Text style={styles.roomInfoHintHL}>[{floor}]</Text>
-                    </View>
+                >
+                    <ElevatedCard>
+                        <View style={styles.roomInfo}>
+                            <Text style={styles.roomInfoHint}>
+                                Status of Room{" "}
+                            </Text>
+                            <Text style={styles.roomInfoHintHL}>
+                                [{roomName}]
+                            </Text>
+                            <Text style={styles.roomInfoHint}>
+                                {" "}
+                                in Building{" "}
+                            </Text>
+                            <Text style={styles.roomInfoHintHL}>
+                                [{buildingName}]
+                            </Text>
+                            <Text style={styles.roomInfoHint}>, floor </Text>
+                            <Text style={styles.roomInfoHintHL}>[{floor}]</Text>
+                        </View>
 
                     <RoomStatusLabel
                         currentStatus={ROOM_STATUS_VACANT}
@@ -106,8 +128,8 @@ const styles = StyleSheet.create({
     roomInfo: {
         display: "flex",
         flexDirection: "row",
-        alignContent:"center",
-        justifyContent:"flex-end"
+        alignContent: "center",
+        justifyContent: "flex-end",
     },
     roomInfoHint: {
         color: THEME_COLOR.subcolor,

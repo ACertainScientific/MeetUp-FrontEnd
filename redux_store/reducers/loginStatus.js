@@ -1,6 +1,6 @@
 // import { TOGGLE_LOGIN_STATUS } from "../actions/loginStatus";
 // import { FETCH_AND_UPDATE_LOGIN_STATUS } from "../actions/loginStatus";
-import { LOGIN_WITH_USERNAME_AND_PASSWORD } from "../actions/loginStatus";
+import { LOGIN_WITH_USERNAME_AND_PASSWORD, UPDATE_TOKEN } from "../actions/loginStatus";
 
 const initialState = {
     logged_in: false,
@@ -22,7 +22,15 @@ const loginStatusReducer = (state = initialState, action) => {
                 token_valid_through: null,
                 username: action.username,
             };
-            console.log("new State:", newState)
+            console.log("new State:", newState);
+            return newState;
+        }
+
+        case UPDATE_TOKEN: {
+            const newState = {
+                ...state,
+                token: action.newToken
+            }
             return newState
         }
 

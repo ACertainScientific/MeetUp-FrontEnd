@@ -37,15 +37,18 @@ const MainPage = (param) => {
     ]);
 
     const MainContent = () => {
-        const [serverData, setServerData] = useState([]);
+        // const [serverData, setServerData] = useState([]);
 
-        useEffect(() => {
-            let buildingList = BuildingDBHandler.list_all_buildings("WanNeng");
-            buildingList.then((data) => {
-                console.log(data);
-                setServerData(data);
-            });
-        }, []);
+        // const userLoginStatus = useSelector((state)=>state.loginStatus)
+
+
+        // useEffect(() => {
+        //     let buildingList = BuildingDBHandler.list_all_buildings("WanNeng");
+        //     buildingList.then((data) => {
+        //         console.log(data);
+        //         setServerData(data);
+        //     });
+        // }, []);
         
         
         return (

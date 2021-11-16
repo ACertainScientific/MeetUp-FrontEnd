@@ -64,6 +64,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+        overflow: "visible",
+        minHeight: "800px"
     },
 });
 

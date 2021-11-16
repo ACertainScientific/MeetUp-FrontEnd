@@ -114,6 +114,9 @@ const AnotherPage = (param) => {
                         }}
                     ></Button>
                 </View>
+                <View style={styles.centered}>
+                    
+                </View>
             </View>
         );
     };
