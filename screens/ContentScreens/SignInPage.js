@@ -29,6 +29,8 @@ import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 import { loginHandler } from "../../redux_store/actions/loginStatus";
 import { useDispatch } from "react-redux";
 
+
+
 const Wrapper = styled.View`
     padding: 5px;
 `;

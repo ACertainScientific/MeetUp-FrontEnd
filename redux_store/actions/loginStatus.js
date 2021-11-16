@@ -1,5 +1,7 @@
 export const LOGIN_WITH_USERNAME_AND_PASSWORD =
     "LOGIN_WITH_USERNAME_AND_PASSWORD";
+export const UPDATE_TOKEN = "UPDATE_TOKEN"
+
 import UserDBHandler from "../../Models/DatabaseRelated/UserDBHandler";
 
 export const loginHandler = (username, password) => {
@@ -27,6 +29,16 @@ export const loginHandler = (username, password) => {
         }}
     };
 };
+
+export const updateTokenHandler = (token) =>{
+
+    return async (dispatch)=>{
+        dispatch({
+            type: UPDATE_TOKEN,
+            newToken: token
+        })
+    }
+}
 
 // export const TOGGLE_LOGIN_STATUS = "TOGGLE_LOGIN_STATUS";
 // export const FETCH_AND_UPDATE_LOGIN_STATUS = "FETCH_AND_UPDATE_LOGIN_STATUS";

@@ -54,6 +54,8 @@ const GroupedSelector = (param) => {
                 param.navigation.navigate("SignInPage", {});
             }
 
+            console.log("Using token to fetch:", userLoginStatus.token)
+            
             BuildingDBHandler.list_all_buildings(userLoginStatus.token)
                 .then((response) => {
                     console.log("Fetch building response:");
@@ -79,7 +81,7 @@ const GroupedSelector = (param) => {
             // General error handeling
             console.log("Failed loading available building.");
         }
-    }, [DUMMYDATA_BUILDING]);
+    }, [userLoginStatus]);
 
     const floorHandler = (value) => {
         for (var build of buildingFullList) {
