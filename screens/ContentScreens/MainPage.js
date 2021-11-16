@@ -102,7 +102,17 @@ const MainPage = (param) => {
                     <Text>Which room would you like to use today?</Text>
                 </View>
                 {/* End of the slogan bar */}
-
+                <StylableButton
+                    color={THEME_COLOR.subcolor}
+                    title="RoomSelectPage"
+                    btnStyle={styles.btn}
+                    style={{marginLeft:"10px"}}
+                    onPress={() => {
+                        param.navigation.navigate("RoomSelectPage", {
+                            this_param: "RoomSelectPage",
+                        });
+                    }}
+                ></StylableButton>
                 {/* The selection bar */}
                 <View style={styles.selectionBar}>
                     <ElevatedCard style={{ height: "80px" }}>

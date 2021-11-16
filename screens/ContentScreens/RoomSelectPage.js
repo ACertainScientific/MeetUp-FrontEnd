@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { View, Button, StyleSheet, Text } from "react-native";
+import { Button, View, StyleSheet, Text } from "react-native";
+import AvailableTimes from 'react-available-times';
+
 import AutoResizableWindow from "../../Components/PageStyling/AutoResizableWindow";
 import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 import THEME_COLOR from "../../Constants/Color";
 import RoomStatusLabel from "../../Components/PageLineupComponents/RoomStatusLabel";
-
 import {
     ROOM_STATUS_OCCUPIED,
     ROOM_STATUS_SANITIZED,
@@ -14,7 +15,7 @@ import {
 import RoomDBHandler from "../../Models/DatabaseRelated/RoomDBHandler";
 import StylableButton from "../../Components/StylableButton";
 
-const RoomStatusPage = (param) => {
+const RoomSelectPage = (param) => {
     // Fetcing room id by the navigation param
     const roomId = param.route.params.roomId;
     console.log("Fetched room id: " + roomId);
@@ -24,6 +25,16 @@ const RoomStatusPage = (param) => {
     const [buildingName, setBuildingName] = useState("");
     const [floor, setFloor] = useState("");
     const [roomName, setRoomName] = useState("");
+
+    const [date, setDate] = useState(new Date(1598051730000));
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        //setShow(Platform.OS === 'ios');
+        setDate(currentDate);
+    };
 
     useEffect(() => {
         RoomDBHandler.detail_room(roomId, "WanNeng")
@@ -39,10 +50,10 @@ const RoomStatusPage = (param) => {
                 console.error(error);
             });
     });
-
+    const MainContent = () => {
     return (
-        <AutoResizableWindow resizing_max_width="800">
-             <MeetUpNavBar
+        <AutoResizableWindow>
+            <MeetUpNavBar
                 navigation={param.navigation}
                 navigateTo={() => {
                     param.navigation.navigate("MainPage");
@@ -79,7 +90,7 @@ const RoomStatusPage = (param) => {
                 }}>
                 <ElevatedCard>
                     <View style={styles.roomInfo}>
-                        <Text style={styles.roomInfoHint}>Status of Room </Text>
+                        <Text style={styles.roomInfoHint}>Scheduling an event at room</Text>
                         <Text style={styles.roomInfoHintHL}>[{roomName}]</Text>
                         <Text style={styles.roomInfoHint}> in Building </Text>
                         <Text style={styles.roomInfoHintHL}>[{buildingName}]</Text>
@@ -92,6 +103,13 @@ const RoomStatusPage = (param) => {
                     ></RoomStatusLabel>
                 </ElevatedCard>
             </View>
+        </AutoResizableWindow>
+        )
+    }
+
+    return (
+        <AutoResizableWindow resizing_max_width="800">
+            {MainContent()}
         </AutoResizableWindow>
     );
 };
@@ -123,4 +141,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default RoomStatusPage;
+export default RoomSelectPage;

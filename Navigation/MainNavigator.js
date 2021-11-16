@@ -7,6 +7,7 @@ import RegisterPage from "../screens/ContentScreens/RegisterPage";
 import SignInPage from "../screens/ContentScreens/SignInPage";
 import ForgotPasswordPage from "../screens/ContentScreens/ForgotPasswordPage";
 import RoomStatusPage from "../screens/ContentScreens/RoomStatusPage";
+import RoomSelectPage from "../screens/ContentScreens/RoomSelectPage";
 
 const ContentNavigator = (param) => {
     const ContantStack = createNativeStackNavigator();
@@ -47,6 +48,12 @@ const ContentNavigator = (param) => {
                 name="RoomStatusPage"
                 component={RoomStatusPage}
             />
+            <ContantStack.Screen
+                styles={styles.centered}
+                name="RoomSelectPage"
+                component={RoomSelectPage}
+            />
+            
         </ContantStack.Navigator>
     );
 };
