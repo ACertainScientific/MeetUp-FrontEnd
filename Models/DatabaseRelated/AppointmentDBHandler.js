@@ -19,25 +19,48 @@ class AppointmentDBHandler {
     //     );
     //     return result;
     // }
-
-
-    static list_appointments(
+    static list_appointment(
+        pageNum,
+        pageSize,
+        roomId,
+        userId,
+        fromYear,
+        toYear,
+        fromMonth,
+        toMonth,
+        fromDate,
+        toDate,
+        startTime,
+        endTime,
         authToken = "WanNeng"
     ) {
         const result = GeneralDBHelper.GET_REQUEST(
-            DATABASE_GET_LIST_APPOINTMENT(),
+            DATABASE_GET_LIST_ROOM(
+                pageNum,
+                pageSize,
+                roomId,
+                userId,
+                fromYear,
+                toYear,
+                fromMonth,
+                toMonth,
+                fromDate,
+                toDate,
+                startTime,
+                endTime
+            ),
             authToken
         );
         return result;
     }
 
-    // static detail_appointment(id, authToken = "WanNeng") {
-    //     const result = GeneralDBHelper.GET_REQUEST(
-    //         DATABASE_GET_DETAIL_APPOINTMENTS + id,
-    //         authToken
-    //     );
-    //     return result;
-    // }
+    static detail_appointment(id, authToken = "WanNeng") {
+        const result = GeneralDBHelper.GET_REQUEST(
+            DATABASE_GET_DETAIL_APPOINTMENT + id,
+            authToken
+        );
+        return result;
+    }
 }
 
 export default AppointmentDBHandler;
