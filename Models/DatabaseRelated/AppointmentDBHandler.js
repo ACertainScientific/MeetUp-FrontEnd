@@ -1,8 +1,6 @@
-// import {
-//     DATABASE_GET_LIST_ALL_APPOINTMENTS,
-//     DATABASE_GET_LIST_APPOINTMENTS,
-//     DATABASE_GET_DETAIL_APPOINTMENTS
-// } from "../../Constants/DatabaseConfig";
+import {
+    DATABASE_GET_LIST_APPOINTMENT,
+} from "../../Constants/DatabaseConfig";
 import GeneralDBHelper from "./GeneralDBHelper";
 
 class AppointmentDBHandler {
@@ -23,15 +21,15 @@ class AppointmentDBHandler {
     // }
 
 
-    // static list_appointments(
-    //     authToken = "WanNeng"
-    // ) {
-    //     const result = GeneralDBHelper.GET_REQUEST(
-    //         DATABASE_GET_LIST_APPOINTMENTS(),
-    //         authToken
-    //     );
-    //     return result;
-    // }
+    static list_appointments(
+        authToken = "WanNeng"
+    ) {
+        const result = GeneralDBHelper.GET_REQUEST(
+            DATABASE_GET_LIST_APPOINTMENT(),
+            authToken
+        );
+        return result;
+    }
 
     // static detail_appointment(id, authToken = "WanNeng") {
     //     const result = GeneralDBHelper.GET_REQUEST(
