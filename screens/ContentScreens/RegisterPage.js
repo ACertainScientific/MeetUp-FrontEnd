@@ -140,9 +140,9 @@ const RegisterPage = param => {
                                         message: 'Use at least 5 characters.',
                                         value: 5,
                                         },
-                                        validate: {
-                                            match: v => String(v) === String(LOGIN_FIELDS.password) || "Password does NOT match"
-                                        }
+                                        // validate: {
+                                        //     match: v => v === 
+                                        // }
                                     }}
                                     placeholder="Re-enter Password"
                                     secureTextEntry={true}

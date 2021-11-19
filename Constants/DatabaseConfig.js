@@ -78,6 +78,27 @@ export const DATABASE_GET_USER_SIGN_UP = () => {
 }
 
 // The Appointment Section
+export const DATABASE_GET_LIST_APPOINTMENT = (
+    pageNum = 1,
+    pageSize = 10,
+    roomId,
+    userId,
+    fromYear,
+    endYear,
+    fromMonth,
+    toMonth,
+    fromDate,
+    toDate,
+    startTime,
+    endTime
+
+) => {
+    return (
+        DATABASE_HOST + 
+        `/listAppointment?page=${pageNum}&page-size=${pageSize}&room-id=${roomId}&start-time=${startTime}
+                                         &end-time=${endTime}&user-id=${userId}&from-month=${fromMonth}`
+    );
+}
 
 // The Profile Section
 
