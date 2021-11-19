@@ -81,16 +81,16 @@ export const DATABASE_GET_USER_SIGN_UP = () => {
 export const DATABASE_GET_LIST_APPOINTMENT = (
     pageNum = 1,
     pageSize = 10,
-    roomId,
-    userId,
-    fromYear,
-    toYear,
-    fromMonth,
-    toMonth,
-    fromDate,
-    toDate,
-    startTime,
-    endTime
+    roomId = 1,
+    userId = 1,
+    fromYear = 2021,
+    toYear = 2021,
+    fromMonth = 9,
+    toMonth = 11,
+    fromDate = 1,
+    toDate = 20,
+    startTime = 1,
+    endTime = 1000
 
 ) => {
     return (
