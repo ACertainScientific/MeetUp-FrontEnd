@@ -4,10 +4,10 @@ class SomeModel{
         this.param2 = param2
     }
 
-    hello(params) {
+    static hello(params) {
         console.log("Hello! " + this.param1)
     }
 }
 
-sample = new SomeModel("123",123)
+// sample = new SomeModel("123",123)
 sample.hello()
