@@ -84,7 +84,7 @@ export const DATABASE_GET_LIST_APPOINTMENT = (
     roomId,
     userId,
     fromYear,
-    endYear,
+    toYear,
     fromMonth,
     toMonth,
     fromDate,
@@ -96,7 +96,9 @@ export const DATABASE_GET_LIST_APPOINTMENT = (
     return (
         DATABASE_HOST + 
         `/listAppointment?page=${pageNum}&page-size=${pageSize}&room-id=${roomId}&start-time=${startTime}
-                                         &end-time=${endTime}&user-id=${userId}&from-month=${fromMonth}`
+                                         &end-time=${endTime}&user-id=${userId}&from-month=${fromMonth}
+                                         &from-year=${fromYear}&from-date=${fromDate}&to-month=${toMonth}
+                                         &to-year=${toYear}&to-date=${toDate}`
     );
 }
 
