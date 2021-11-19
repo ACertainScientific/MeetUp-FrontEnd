@@ -91,7 +91,6 @@ export const DATABASE_GET_LIST_APPOINTMENT = (
     toDate = 20,
     startTime = 1,
     endTime = 1000
-
 ) => {
     return (
         DATABASE_HOST + 
@@ -101,6 +100,9 @@ export const DATABASE_GET_LIST_APPOINTMENT = (
                                          &to-year=${toYear}&to-date=${toDate}`
     );
 }
+
+export const DATABASE_GET_DETAIL_APPOINTMENT =
+    DATABASE_HOST + "/appointment/detail?id=";
 
 // The Profile Section
 
