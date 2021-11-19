@@ -36,7 +36,7 @@ class UserDBHandler {
         return result;
     }
     
-    // TO DO: Write a sign up post request
+    // Sign Up Post Handler
     static post_sign_up(userinputs) {
         const result = GeneralDBHelper.POST_REQUEST(
             userinputs,

@@ -1,24 +1,14 @@
 import {
     DATABASE_GET_LIST_APPOINTMENT,
+    DATABASE_GET_DETAIL_APPOINTMENT,
+    DATABASE_GET_APPOINTMENT_ADD,
+    DATABASE_GET_APPOINTMENT_UPDATE
 } from "../../Constants/DatabaseConfig";
 import GeneralDBHelper from "./GeneralDBHelper";
 
 class AppointmentDBHandler {
     constructor() {}
-    // static list_all_appointments(authToken = "WanNeng") {
-    //     const result = GeneralDBHelper.GET_REQUEST(
-    //         DATABASE_GET_LIST_ALL_APPOINTMENTS,
-    //         authToken
-    //     );
-    //     return result;
-    // }
-    // static list_all_appointments_like(pattern, authToken = "WanNeng") {
-    //     const result = GeneralDBHelper.GET_REQUEST(
-    //         DATABASE_GET_LIST_ALL_APPOINTMENTS + pattern,
-    //         authToken
-    //     );
-    //     return result;
-    // }
+
     static list_appointment(
         pageNum,
         pageSize,
@@ -35,7 +25,7 @@ class AppointmentDBHandler {
         authToken = "WanNeng"
     ) {
         const result = GeneralDBHelper.GET_REQUEST(
-            DATABASE_GET_LIST_ROOM(
+            DATABASE_GET_LIST_APPOINTMENT(
                 pageNum,
                 pageSize,
                 roomId,
@@ -58,6 +48,22 @@ class AppointmentDBHandler {
         const result = GeneralDBHelper.GET_REQUEST(
             DATABASE_GET_DETAIL_APPOINTMENT + id,
             authToken
+        );
+        return result;
+    }
+
+    static post_add_appointment(userinputs) {
+        const result = GeneralDBHelper.POST_REQUEST(
+            userinputs,
+            DATABASE_GET_APPOINTMENT_ADD()
+        );
+        return result;
+    }
+
+    static post_update_appointment(userinputs) {
+        const result = GeneralDBHelper.POST_REQUEST(
+            userinputs,
+            DATABASE_GET_APPOINTMENT_UPDATE()
         );
         return result;
     }
