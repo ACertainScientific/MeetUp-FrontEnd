@@ -32,7 +32,6 @@ class GeneralDBHelper {
             // }
 
             // console.log(resdata["data"]);
-
             return resdata["data"];
         } catch {
             console.log("Failed in GET request, check DB status");
