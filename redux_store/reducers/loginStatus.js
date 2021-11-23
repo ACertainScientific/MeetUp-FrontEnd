@@ -20,7 +20,7 @@ const loginStatusReducer = (state = initialState, action) => {
                 logged_in: true,
                 token: myToken,
                 token_valid_through: null,
-                username: action.username,
+                username: action.userName,
             };
             console.log("new State:", newState);
             return newState;

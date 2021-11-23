@@ -2,7 +2,7 @@ import {
     DATABASE_GET_LIST_APPOINTMENT,
     DATABASE_GET_DETAIL_APPOINTMENT,
     DATABASE_GET_APPOINTMENT_ADD,
-    DATABASE_GET_APPOINTMENT_UPDATE
+    DATABASE_GET_APPOINTMENT_UPDATE,
 } from "../../Constants/DatabaseConfig";
 import GeneralDBHelper from "./GeneralDBHelper";
 
@@ -10,6 +10,7 @@ class AppointmentDBHandler {
     constructor() {}
 
     static list_appointment(
+        authToken,
         pageNum,
         pageSize,
         roomId,
@@ -21,8 +22,7 @@ class AppointmentDBHandler {
         fromDate,
         toDate,
         startTime,
-        endTime,
-        authToken = "WanNeng"
+        endTime
     ) {
         const result = GeneralDBHelper.GET_REQUEST(
             DATABASE_GET_LIST_APPOINTMENT(

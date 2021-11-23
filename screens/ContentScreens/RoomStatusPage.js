@@ -16,7 +16,8 @@ import RoomDBHandler from "../../Models/DatabaseRelated/RoomDBHandler";
 import StylableButton from "../../Components/StylableButton";
 import AvailableTimes from "react-available-times";
 import DateHandler from "../../Models/DateHandler";
-
+import AppointmentDBHandler from "../../Models/DatabaseRelated/AppointmentDBHandler";
+import { compose } from "redux";
 
 const RoomStatusPage = (param) => {
     // Fetcing room id by the navigation param
@@ -38,13 +39,38 @@ const RoomStatusPage = (param) => {
     }) => {
         // eslint-disable-next-line no-console
         console.log("Fetching exsting event from ", s, " to ", e);
-        console.log("Parsed S:")
-        console.log(DateHandler.getNumbericYMDSecondInDay(s))
-        console.log(DateHandler.getNumbericYMDSecondInDay(new Date()))
+        console.log("Parsed S:");
 
-        const events = [];
+        const start = DateHandler.getNumbericYMDSecondInDay(s);
+        const end = DateHandler.getNumbericYMDSecondInDay(e);
 
-        callback(events);
+        console.log(start)
+        console.log(end)
+
+        AppointmentDBHandler.list_appointment(
+            userLoginStatus.token,
+            1,
+            10,
+            2,
+            "",
+            start.Year,
+            end.Year,
+            start.Month,
+            end.Month,
+            start.Day,
+            end.Day,
+            0,
+            86400
+        ).then((result) => {
+            console.log(result);
+
+            const events = [];
+
+            callback(events);
+
+        });
+
+        
     };
 
     useEffect(() => {
