@@ -13,6 +13,7 @@ import {
 } from "../../Constants/RoomStatusConstants";
 import RoomDBHandler from "../../Models/DatabaseRelated/RoomDBHandler";
 import StylableButton from "../../Components/StylableButton";
+import { useSelector } from "react-redux";
 
 const RoomSelectPage = (param) => {
     // Fetcing room id by the navigation param
@@ -58,28 +59,6 @@ const RoomSelectPage = (param) => {
                     param.navigation.navigate("MainPage");
                 }}
             >
-                <StylableButton
-                    color={THEME_COLOR.subcolor}
-                    title="SIGN UP"
-                    btnStyle={styles.btn}
-                    style={{marginLeft:"10px"}}
-                    onPress={() => {
-                        param.navigation.navigate("RegisterPage", {
-                            this_param: "SIGN UP!",
-                        });
-                    }}
-                ></StylableButton>
-                <StylableButton
-                    color={THEME_COLOR.main}
-                    title="SIGN IN"
-                    btnStyle={styles.btn}
-                    style={{marginLeft:"10px"}}
-                    onPress={() => {
-                        param.navigation.navigate("SignInPage", {
-                            this_param: "HI!",
-                        });
-                    }}
-                ></StylableButton>
             </MeetUpNavBar>
             
             
