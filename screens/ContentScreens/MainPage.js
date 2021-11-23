@@ -37,14 +37,16 @@ const MainPage = (param) => {
     ]);
 
     const userLoginStatus = useSelector((state) => state.loginStatus);
-    //console.log(userLoginStatus.username)
+
+    useEffect(() => {
+        console.log(userLoginStatus);
+    }, [userLoginStatus]);
 
 
     const MainContent = () => {
         // const [serverData, setServerData] = useState([]);
 
         // const userLoginStatus = useSelector((state)=>state.loginStatus)
-
 
         // useEffect(() => {
         //     let buildingList = BuildingDBHandler.list_all_buildings("WanNeng");
@@ -53,8 +55,7 @@ const MainPage = (param) => {
         //         setServerData(data);
         //     });
         // }, []);
-        
-        
+
         return (
             <View>
                 {/* The tool bar at the very top */}
@@ -89,7 +90,7 @@ const MainPage = (param) => {
                     color={THEME_COLOR.subcolor}
                     title="RoomSelectPage"
                     btnStyle={styles.btn}
-                    style={{marginLeft:"10px"}}
+                    style={{ marginLeft: "10px" }}
                     onPress={() => {
                         param.navigation.navigate("RoomSelectPage", {
                             this_param: "RoomSelectPage",
