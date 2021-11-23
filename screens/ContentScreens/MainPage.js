@@ -42,6 +42,7 @@ const MainPage = (param) => {
         console.log(userLoginStatus);
     }, [userLoginStatus]);
 
+
     const MainContent = () => {
         // const [serverData, setServerData] = useState([]);
 
@@ -64,40 +65,19 @@ const MainPage = (param) => {
                         param.navigation.navigate("MainPage");
                     }}
                 >
-                    <StylableButton
-                        color={THEME_COLOR.subcolor}
-                        title="AnotherPage"
-                        btnStyle={styles.btn}
-                        style={{ marginLeft: "10px" }}
-                        onPress={() => {
-                            param.navigation.navigate("AnotherPage", {
-                                this_param: "AnotherPage",
-                            });
-                        }}
-                    ></StylableButton>
-                    <StylableButton
-                        color={THEME_COLOR.subcolor}
-                        title="RoomStatusPage"
-                        btnStyle={styles.btn}
-                        style={{ marginLeft: "10px" }}
-                        onPress={() => {
-                            param.navigation.navigate("RoomStatusPage", {
-                                this_param: "RoomStatusPage",
-                            });
-                        }}
-                    ></StylableButton>
+                <Text>{userLoginStatus.username}</Text>
 
                     <StylableButton
                         color={THEME_COLOR.main}
-                        title="SIGN IN"
+                        title="LOG OUT"
                         btnStyle={styles.btn}
                         style={{ marginLeft: "10px" }}
                         onPress={() => {
                             param.navigation.navigate("SignInPage", {
-                                this_param: "HI!",
                             });
                         }}
                     ></StylableButton>
+
                 </MeetUpNavBar>
                 {/* End of the tool bar */}
 

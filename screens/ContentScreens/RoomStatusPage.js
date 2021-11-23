@@ -96,36 +96,15 @@ const RoomStatusPage = (param) => {
                     param.navigation.navigate("MainPage");
                 }}
             >
-                <StylableButton
-                    color={THEME_COLOR.subcolor}
-                    title="SIGN UP"
-                    btnStyle={styles.btn}
-                    style={{ marginLeft: "10px" }}
-                    onPress={() => {
-                        param.navigation.navigate("RegisterPage", {
-                            this_param: "SIGN UP!",
-                        });
-                    }}
-                />
-                <StylableButton
-                    color={THEME_COLOR.subcolor}
-                    title="SIGN UP"
-                    btnStyle={styles.btn}
-                    style={{ marginLeft: "10px" }}
-                    onPress={() => {
-                        param.navigation.navigate("RegisterPage", {
-                            this_param: "SIGN UP!",
-                        });
-                    }}
-                ></StylableButton>
+                <Text>{userLoginStatus.username}</Text>
+
                 <StylableButton
                     color={THEME_COLOR.main}
-                    title="SIGN IN"
+                    title="LOG OUT"
                     btnStyle={styles.btn}
                     style={{ marginLeft: "10px" }}
                     onPress={() => {
                         param.navigation.navigate("SignInPage", {
-                            this_param: "HI!",
                         });
                     }}
                 ></StylableButton>
