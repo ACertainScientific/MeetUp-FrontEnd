@@ -59,6 +59,18 @@ const RoomSelectPage = (param) => {
                     param.navigation.navigate("MainPage");
                 }}
             >
+            <Text>{userLoginStatus.username}</Text>
+
+            <StylableButton
+                color={THEME_COLOR.main}
+                title="LOG OUT"
+                btnStyle={styles.btn}
+                style={{ marginLeft: "10px" }}
+                onPress={() => {
+                    param.navigation.navigate("SignInPage", {
+                    });
+                }}
+            ></StylableButton>
             </MeetUpNavBar>
             
             
