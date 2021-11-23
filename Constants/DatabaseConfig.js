@@ -70,14 +70,46 @@ export const DATABASE_GET_LIST_USER = (
 }
 
 export const DATABASE_GET_USER_LOGIN = () => {
-    return ( DATABASE_HOST + "/login")
+    return ( DATABASE_HOST + "/login" )
 }
 
 export const DATABASE_GET_USER_SIGN_UP = () => {
-    return ( DATABASE_HOST + "/sign-up")
+    return ( DATABASE_HOST + "/sign-up" )
 }
 
 // The Appointment Section
+export const DATABASE_GET_LIST_APPOINTMENT = (
+    pageNum = 1,
+    pageSize = 10,
+    roomId = 1,
+    userId = 1,
+    fromYear = 2021,
+    toYear = 2021,
+    fromMonth = 9,
+    toMonth = 11,
+    fromDate = 1,
+    toDate = 20,
+    startTime = 1,
+    endTime = 1000
+) => {
+    return (
+        DATABASE_HOST + 
+        `/listAppointment?page=${pageNum}&page-size=${pageSize}&room-id=${roomId}&start-time=${startTime}
+                                         &end-time=${endTime}&user-id=${userId}&from-month=${fromMonth}
+                                         &from-year=${fromYear}&from-date=${fromDate}&to-month=${toMonth}
+                                         &to-year=${toYear}&to-date=${toDate}`
+    );
+}
 
+export const DATABASE_GET_DETAIL_APPOINTMENT =
+    DATABASE_HOST + "/appointment/detail?id=";
+
+export const DATABASE_GET_APPOINTMENT_ADD = () => {
+    return ( DATABASE_HOST + "/appointment/add" )
+}
+
+export const DATABASE_GET_APPOINTMENT_UPDATE = () => {
+    return ( DATABASE_HOST + "/appointment/update" )
+}
 // The Profile Section
 

@@ -15,6 +15,7 @@ import {
 import RoomDBHandler from "../../Models/DatabaseRelated/RoomDBHandler";
 import StylableButton from "../../Components/StylableButton";
 import AvailableTimes from "react-available-times";
+import DateHandler from "../../Models/DateHandler";
 
 
 const RoomStatusPage = (param) => {
@@ -29,6 +30,23 @@ const RoomStatusPage = (param) => {
 
     const userLoginStatus = useSelector((state) => state.loginStatus);
 
+    const handleEventsRequested = ({
+        start: s,
+        end: e,
+        calendarId,
+        callback,
+    }) => {
+        // eslint-disable-next-line no-console
+        console.log("Fetching exsting event from ", s, " to ", e);
+        console.log("Parsed S:")
+        console.log(DateHandler.getNumbericYMDSecondInDay(s))
+        console.log(DateHandler.getNumbericYMDSecondInDay(new Date()))
+
+        const events = [];
+
+        callback(events);
+    };
+
     useEffect(() => {
         RoomDBHandler.detail_room(roomId, userLoginStatus.token)
             .then((response) => {
@@ -42,7 +60,7 @@ const RoomStatusPage = (param) => {
                 console.error("Encountered error in fetching room.");
                 console.error(error);
             });
-    },[userLoginStatus]);
+    }, [userLoginStatus]);
 
     return (
         <AutoResizableWindow resizing_max_width="800">
@@ -121,15 +139,12 @@ const RoomStatusPage = (param) => {
                             backgroundColor: "#f0f0f0",
                             selected: true,
                         },
-                        
                     ]}
                     onChange={(selections) => {
                         selections.forEach(({ start, end }) => {
                             console.log("Start:", start, "End:", end);
                         });
                     }}
-              
-               
                     height={400}
                     recurring={false}
                     availableDays={[
@@ -140,6 +155,7 @@ const RoomStatusPage = (param) => {
                         "friday",
                     ]}
                     availableHourRange={{ start: 9, end: 19 }}
+                    onEventsRequested={handleEventsRequested}
                 />
             </View>
         </AutoResizableWindow>
