@@ -59,18 +59,22 @@ const RoomSelectPage = (param) => {
                     param.navigation.navigate("MainPage");
                 }}
             >
-            <Text>{userLoginStatus.username}</Text>
+                <Text>{userLoginStatus.username}</Text>
 
-            <StylableButton
-                color={THEME_COLOR.main}
-                title="LOG OUT"
-                btnStyle={styles.btn}
-                style={{ marginLeft: "10px" }}
-                onPress={() => {
-                    param.navigation.navigate("SignInPage", {
-                    });
-                }}
-            ></StylableButton>
+                <StylableButton
+                    color={THEME_COLOR.main}
+                    title="SIGN OUT"
+                    btnStyle={styles.btn}
+                    style={{ marginLeft: "10px" }}
+                    onPress={() => {
+                        userLoginStatus.logged_in = false;
+                        userLoginStatus.token = null;
+                        userLoginStatus.token_valid_through = null;
+                        userLoginStatus.username = null;
+                        param.navigation.navigate("SignInPage", {});
+                    }}
+                ></StylableButton>
+
             </MeetUpNavBar>
             
             

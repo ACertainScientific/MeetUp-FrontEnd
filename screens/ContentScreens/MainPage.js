@@ -65,16 +65,19 @@ const MainPage = (param) => {
                         param.navigation.navigate("MainPage");
                     }}
                 >
-                <Text>{userLoginStatus.username}</Text>
+                    <Text>{userLoginStatus.username}</Text>
 
                     <StylableButton
                         color={THEME_COLOR.main}
-                        title="LOG OUT"
+                        title="SIGN OUT"
                         btnStyle={styles.btn}
                         style={{ marginLeft: "10px" }}
                         onPress={() => {
-                            param.navigation.navigate("SignInPage", {
-                            });
+                            userLoginStatus.logged_in = false;
+                            userLoginStatus.token = null;
+                            userLoginStatus.token_valid_through = null;
+                            userLoginStatus.username = null;
+                            param.navigation.navigate("SignInPage", {});
                         }}
                     ></StylableButton>
 
@@ -86,7 +89,7 @@ const MainPage = (param) => {
                     <Text>Which room would you like to use today?</Text>
                 </View>
                 {/* End of the slogan bar */}
-                <StylableButton
+                {/*<StylableButton
                     color={THEME_COLOR.subcolor}
                     title="RoomSelectPage"
                     btnStyle={styles.btn}
@@ -96,7 +99,7 @@ const MainPage = (param) => {
                             this_param: "RoomSelectPage",
                         });
                     }}
-                ></StylableButton>
+                ></StylableButton>*/}
                 {/* The selection bar */}
                 <View style={styles.selectionBar}>
                     <ElevatedCard style={{ height: "80px" }}>

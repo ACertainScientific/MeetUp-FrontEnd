@@ -6,6 +6,7 @@ import MeetUpNavBar from "../../Components/MeetUpNavBar";
 import ElevatedCard from "../../Components/PageLineupComponents/ElevatedCard";
 import THEME_COLOR from "../../Constants/Color";
 import RoomStatusLabel from "../../Components/PageLineupComponents/RoomStatusLabel";
+import StylableButton from "../../Components/StylableButton";
 
 import {
     ROOM_STATUS_OCCUPIED,
@@ -13,7 +14,6 @@ import {
     ROOM_STATUS_VACANT,
 } from "../../Constants/RoomStatusConstants";
 import RoomDBHandler from "../../Models/DatabaseRelated/RoomDBHandler";
-import StylableButton from "../../Components/StylableButton";
 import AvailableTimes from "react-available-times";
 import DateHandler from "../../Models/DateHandler";
 import AppointmentDBHandler from "../../Models/DatabaseRelated/AppointmentDBHandler";
@@ -100,14 +100,18 @@ const RoomStatusPage = (param) => {
 
                 <StylableButton
                     color={THEME_COLOR.main}
-                    title="LOG OUT"
+                    title="SIGN OUT"
                     btnStyle={styles.btn}
                     style={{ marginLeft: "10px" }}
                     onPress={() => {
-                        param.navigation.navigate("SignInPage", {
-                        });
+                        userLoginStatus.logged_in = false;
+                        userLoginStatus.token = null;
+                        userLoginStatus.token_valid_through = null;
+                        userLoginStatus.username = null;
+                        param.navigation.navigate("SignInPage", {});
                     }}
                 ></StylableButton>
+
             </MeetUpNavBar>
 
             <View
@@ -162,6 +166,19 @@ const RoomStatusPage = (param) => {
                     availableHourRange={{ start: 9, end: 19 }}
                     onEventsRequested={handleEventsRequested}
                 />
+                <StylableButton
+                    color={THEME_COLOR.main}
+                    title="BOOK THIS TIME RANGE"
+                    btnStyle={styles.btn}
+                    style={{ marginLeft: "10px" }}
+                    onPress={() => {
+                        userLoginStatus.logged_in = false;
+                        userLoginStatus.token = null;
+                        userLoginStatus.token_valid_through = null;
+                        userLoginStatus.username = null;
+                        param.navigation.navigate("SignInPage", {});
+                    }}
+                ></StylableButton>
             </View>
         </AutoResizableWindow>
     );
@@ -191,6 +208,12 @@ const styles = StyleSheet.create({
         fontSize: 25,
         fontStyle: "italic",
         fontWeight: "bold",
+    },
+    btn: {
+        height: "20px",
+        // width: "20px",
+        marginVertical: "10px",
+        marginHorizontal: "20px",
     },
 });
 
